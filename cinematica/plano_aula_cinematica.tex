@@ -1,0 +1,873 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=azulphysics}
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ---------------------------------------------------------------
+% Cores
+% ---------------------------------------------------------------
+\definecolor{azulphysics}{RGB}{0, 82, 155}
+\definecolor{verdeok}{RGB}{0, 128, 64}
+\definecolor{laranjaalerta}{RGB}{200, 100, 0}
+\definecolor{vermelhocorte}{RGB}{180, 30, 30}
+\definecolor{roxoprojetor}{RGB}{100, 0, 160}
+\definecolor{cinzafundo}{RGB}{245, 245, 245}
+
+% ---------------------------------------------------------------
+% Boxes
+% ---------------------------------------------------------------
+\tcbset{
+  blocobox/.style={
+    colback=azulphysics!8!white,
+    colframe=azulphysics,
+    fonttitle=\bfseries\large,
+    title={#1},
+    arc=3mm,
+    left=6pt, right=6pt, top=6pt, bottom=6pt,
+    breakable
+  },
+  quadrobox/.style={
+    colback=white,
+    colframe=black!60,
+    fonttitle=\bfseries\small,
+    title={\faChalkboard\ Quadro branco},
+    arc=2mm,
+    left=5pt, right=5pt, top=4pt, bottom=4pt,
+    breakable
+  },
+  projetorbox/.style={
+    colback=roxoprojetor!6!white,
+    colframe=roxoprojetor!70!black,
+    fonttitle=\bfseries\small,
+    title={\faProjectDiagram\ Projetor},
+    arc=2mm,
+    left=5pt, right=5pt, top=4pt, bottom=4pt,
+    breakable
+  },
+  perguntabox/.style={
+    colback=verdeok!8!white,
+    colframe=verdeok!70!black,
+    fonttitle=\bfseries\small,
+    title={\faComments\ Perguntas para a turma},
+    arc=2mm,
+    left=5pt, right=5pt, top=4pt, bottom=4pt
+  },
+  dicabox/.style={
+    colback=laranjaalerta!8!white,
+    colframe=laranjaalerta!70!black,
+    fonttitle=\bfseries\small,
+    title={\faLightbulb\ Dica did\'atica},
+    arc=2mm,
+    left=5pt, right=5pt, top=4pt, bottom=4pt
+  },
+  cortebox/.style={
+    colback=vermelhocorte!6!white,
+    colframe=vermelhocorte!70!black,
+    fonttitle=\bfseries\small,
+    title={\faClock\ Se o tempo apertar},
+    arc=2mm,
+    left=5pt, right=5pt, top=4pt, bottom=4pt
+  }
+}
+
+% Marcador de tempo
+\newcommand{\tempo}[1]{%
+  \begin{flushright}
+    \colorbox{azulphysics!20}{\small\textbf{\faClock\ \textasciitilde{}#1 min}}
+  \end{flushright}\vspace{-0.5em}
+}
+
+% ---------------------------------------------------------------
+\title{
+  \textbf{\large Cursinho Solid\'ario --- F\'isica}\\[0.5em]
+  \textbf{\Huge Plano de Aula}\\[0.3em]
+  \textbf{\Large Cinem\'atica}\\[0.5em]
+  \normalsize \textit{Guia do Professor}
+}
+\author{}
+\date{2026}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+\maketitle
+\thispagestyle{empty}
+
+% ---------------------------------------------------------------
+% VISÃO GERAL
+% ---------------------------------------------------------------
+\begin{tcolorbox}[
+  colback=cinzafundo, colframe=azulphysics!50,
+  arc=3mm, left=8pt, right=8pt, top=8pt, bottom=8pt
+]
+\begin{center}
+  \textbf{\large Vis\~ao Geral da Aula}
+\end{center}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{lX}
+  \toprule
+  \textbf{Disciplina} & F\'isica --- Cinem\'atica \\
+  \textbf{P\'ublico} & Vestibulandos (ENEM e UTFPR) \\
+  \textbf{Formato} & Expositivo dialogado no quadro + projetor para figuras \\
+  \textbf{Estrutura} & 6 blocos modulares independentes \\
+  \midrule
+  \textbf{Tempo total (todos os blocos)} & $\approx 3$h \\
+  \textbf{Vers\~ao reduzida (blocos obrigat\'orios)} & $\approx 1$h45 \\
+  \midrule
+  \multicolumn{2}{l}{\textbf{Materiais}} \\
+  \multicolumn{2}{l}{%
+    \begin{minipage}{\linewidth}
+    \begin{itemize}[nosep, leftmargin=1.5em]
+      \item Quadro branco e marcadores (pelo menos 2 cores)
+      \item Projetor + notebook com o arquivo
+        \texttt{notas\_aula\_cinematica.pdf}
+      \item Apostila impressa para os alunos (opcional)
+    \end{itemize}
+    \end{minipage}
+  } \\
+  \bottomrule
+\end{tabularx}
+
+\medskip
+\textbf{Como usar este plano:}
+Cada bloco indica o tempo estimado no canto superior direito.
+Os blocos marcados com \colorbox{verdeok!30}{\small ESSENCIAL} cobrem o m\'inimo
+necess\'ario para ENEM. Os demais s\~ao importantes mas cortáveis se o
+hor\'ario apertar.
+\end{tcolorbox}
+
+\vspace{0.8em}
+
+% ---------------------------------------------------------------
+% CRONOGRAMA RESUMO
+% ---------------------------------------------------------------
+\begin{tcolorbox}[colback=white, colframe=azulphysics!40, arc=2mm,
+  fonttitle=\bfseries, title={Cronograma Resumido}]
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\linewidth}{clXc}
+  \toprule
+  \textbf{Bloco} & \textbf{T\'opico} & \textbf{Foco principal} & \textbf{Tempo} \\
+  \midrule
+  0 & Abertura & Nivelamento + contrato did\'atico
+    & 10--15 min \\
+  1 & Conceitos fundamentais & Referencial, deslocamento, $\bar{v}$, $\bar{a}$
+    & 20--25 min \\
+  2 & MRU & Equa\c{c}\~ao hor\'aria, gr\'aficos, exemplo de encontro
+    & 25--35 min \\
+  3 & MRUV & Dedu\c{c}\~ao das 3 equa\c{c}\~oes, gr\'aficos, frenagem
+    & 40--50 min \\
+  4 & Queda livre e lan\c{c}. vertical & Galileu, equa\c{c}\~oes, simetria
+    & 20--25 min \\
+  5 & Lan\c{c}amento obl\'iquo & Decomposi\c{c}\~ao, R, H, T
+    & 35--40 min \\
+  6 & Fixação com ENEM & 3--4 quest\~oes comentadas
+    & 20--25 min \\
+  \midrule
+  & \textbf{Total} & & \textbf{2h50--3h15} \\
+  \bottomrule
+\end{tabularx}
+\end{tcolorbox}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ===================================================================
+\section*{Bloco 0 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 0 --- Abertura e Nivelamento}
+\section*{\hspace{1.2em}Abertura e Nivelamento}
+% ===================================================================
+\tempo{10--15}
+
+\begin{tcolorbox}[blocobox={Objetivo}]
+  Quebrar o gelo, identificar o n\'ivel da turma e estabelecer como a aula
+  vai funcionar (quadro + projetor, participa\c{c}\~ao ativa).
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Lance estas perguntas oralmente e deixe os alunos responderem antes de
+  formalizar qualquer coisa:
+  \begin{enumerate}[nosep]
+    \item ``O que \'e velocidade para voc\^es?''
+    \item ``Como voc\^es saberiam dizer se um objeto est\'a em movimento?''
+    \item ``Algu\'em sabe o que \'e acelera\c{c}\~ao? D\^e um exemplo do dia a dia.''
+  \end{enumerate}
+  \textit{N\~ao corrija erros agora. Apenas ouça e anote no quadro as ideias
+  que surgem --- voc\^e vai retomar no Bloco 1.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  Escreva as ideias que os alunos trouxeram nas perguntas acima (mesmo as
+  erradas). Isso cria um ``painel de ideias pr\'evias'' que voc\^e vai
+  refinando ao longo da aula.
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  \textbf{Contrato did\'atico:} Explique que a aula ser\'a no quadro.
+  Vocês vão deduzir as fórmulas juntos --- não é para copiar antes de
+  entender. Encoraje perguntas a qualquer momento.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 1 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 1 --- Conceitos Fundamentais}
+\section*{\hspace{1.2em}Conceitos Fundamentais}
+% ===================================================================
+\tempo{20--25}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Alunos devem sair sabendo distinguir:
+  deslocamento vs.\ dist\^ancia percorrida,
+  velocidade m\'edia vs.\ velocidade instant\^anea,
+  e o papel do referencial.
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{1. Referencial e posi\c{c}\~ao} (3--4 min)
+  \begin{itemize}[nosep]
+    \item Desenhe um eixo horizontal no quadro. Marque um ponto O
+          (referencial) e uma posi\c{c}\~ao $x$.
+    \item Escreva: \textbf{posi\c{c}\~ao} $= x$; positivo \`a direita,
+          negativo \`a esquerda.
+  \end{itemize}
+
+  \medskip
+  \textbf{2. Deslocamento vs.\ dist\^ancia} (5 min)
+  \begin{itemize}[nosep]
+    \item Desenhe: carro vai de $x_i = 2$ m at\'e $x_f = 8$ m e volta para
+          $x = 5$ m.
+    \item Quadro: $\Delta x = x_f - x_i = 5 - 2 = 3$ m
+          (deslocamento $\neq$ dist\^ancia percorrida $= 9$ m).
+    \item Conclua: \textbf{deslocamento} tem sinal; \textbf{dist\^ancia}
+          \'e sempre positiva.
+  \end{itemize}
+
+  \medskip
+  \textbf{3. Velocidade m\'edia e acelera\c{c}\~ao m\'edia} (5--7 min)
+  \begin{itemize}[nosep]
+    \item Escreva as defini\c{c}\~oes lado a lado:
+    \[
+      \bar{v} = \frac{\Delta x}{\Delta t} \qquad
+      \bar{a} = \frac{\Delta v}{\Delta t}
+    \]
+    \item Destaque a convers\~ao: $1$ m/s $= 3{,}6$ km/h.
+    \item Exemplo r\'apido: carro percorre 200 m em 10 s $\to$
+          $\bar{v} = 20$ m/s $= 72$ km/h.
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  \textbf{Figura 1:} Eixo com referencial, posi\c{c}\~oes positivas e
+  negativas, e seta de deslocamento.
+  Use a p\'agina 3 das notas de aula (\texttt{notas\_aula\_cinematica.pdf}).
+
+  \medskip
+  Projete \textbf{apenas quando precisar que os alunos visualizem o eixo
+  com clareza} --- prefira desenhar no quadro sempre que possível.
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  ``Se um carro vai do km 10 ao km 30 e volta ao km 20 da rodovia,
+  qual o deslocamento? Qual a dist\^ancia percorrida?''
+
+  \textit{Resposta esperada: $\Delta x = 10$ km; $d = 30$ km.
+  Corrija quem confundir os dois conceitos.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  O erro mais comum nos primeiros contatos com cinem\'atica \'e usar
+  dist\^ancia no lugar de deslocamento (e vice-versa). Frise isso agora
+  para evitar erros em todo o resto da aula.
+\end{tcolorbox}
+
+\begin{tcolorbox}[cortebox]
+  Se precisar de tempo: suprima o exemplo num\'erico de $\bar{v}$ ---
+  ele vai reaparecer no Bloco 2.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 2 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 2 --- MRU}
+\section*{\hspace{1.2em}MRU --- Movimento Retil\'ineo Uniforme}
+% ===================================================================
+\tempo{25--35}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Deduzir a equação horária a partir da definição de $\bar v$.
+  Ler e interpretar gráficos $x \times t$ e $v \times t$.
+  Resolver o problema clássico de encontro de dois móveis.
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{1. Defini\c{c}\~ao e dedu\c{c}\~ao} (5--7 min)
+  \begin{itemize}[nosep]
+    \item Escreva no quadro: ``No MRU, $a = 0$ e $v = $ cte.''
+    \item Dedu\c{c}\~ao ao vivo (escreva cada passo):
+    \[
+      v = \frac{x - x_0}{t} \implies vt = x - x_0 \implies
+      \boxed{x = x_0 + vt}
+    \]
+    \item Reforce: \'e uma equa\c{c}\~ao de \textbf{reta} ($x$ em fun\c{c}\~ao de $t$).
+  \end{itemize}
+
+  \medskip
+  \textbf{2. Gr\'aficos} (5--7 min)
+  \begin{itemize}[nosep]
+    \item Desenhe no quadro (use cor diferente para cada curva):
+      \begin{itemize}[nosep]
+        \item $x \times t$: reta com inclina\c{c}\~ao $v$ (positiva ou negativa).
+        \item $v \times t$: reta horizontal.
+      \end{itemize}
+    \item Peça \`a turma: ``o que \'e a \'area sob o gr\'afico $v \times t$?''
+          Guie at\'e chegarem em: \'area $=$ deslocamento.
+  \end{itemize}
+
+  \medskip
+  \textbf{3. Exemplo: encontro de dois m\'oveis} (10--12 min)
+  \begin{itemize}[nosep]
+    \item Enunciado (dite ou projete):
+          Dois carros partem de cidades A e B (distância 240 km)
+          em sentidos opostos, com $v_1 = 80$ km/h e $v_2 = 40$ km/h.
+          Quando e onde se encontram?
+    \item Construa no quadro com os alunos:
+    \[
+      x_1 = 80t \qquad x_2 = 240 - 40t
+    \]
+    \[
+      x_1 = x_2 \implies 120t = 240 \implies t = 2 \text{ h}
+      \implies x = 160 \text{ km de A}
+    \]
+    \item Destaque: ``montar as equa\c{c}\~oes hor\'arias \'e o primeiro
+          passo em qualquer problema de encontro.''
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  \textbf{Se o quadro ficar poluído com os gráficos:}
+  projete a p\'agina de gr\'aficos do MRU das notas de aula.
+  Aponte para cada curva enquanto explica o significado.
+
+  \medskip
+  \textbf{Alternativa:} manter o projetor desligado neste bloco e
+  trabalhar s\'o no quadro --- o MRU \'e simples o suficiente para isso.
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Ap\'os o exemplo de encontro:
+  \begin{itemize}[nosep]
+    \item ``O que mudaria se os carros partissem no mesmo sentido?''
+    \item ``Qual \'e a inclina\c{c}\~ao do gr\'afico $x \times t$ de um
+          carro parado?''
+  \end{itemize}
+  \textit{Respostas: equa\c{c}\~ao de afastamento, n\~ao de encontro;
+  inclina\c{c}\~ao zero ($v = 0$).}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  No ENEM, quest\~oes de MRU frequentemente vêm na forma de gr\'aficos
+  $v \times t$ ou $x \times t$ para interpretar --- n\~ao como conta direta.
+  Treine a leitura gr\'afica tanto quanto a equa\c{c}\~ao.
+\end{tcolorbox}
+
+\begin{tcolorbox}[cortebox]
+  Corte o exemplo de encontro se precisar --- ele reaparece nas
+  quest\~oes do Bloco 6. Mantenha pelo menos a dedu\c{c}\~ao e os gr\'aficos.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 3 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 3 --- MRUV}
+\section*{\hspace{1.2em}MRUV --- Movimento Retil\'ineo Uniformemente Variado}
+% ===================================================================
+\tempo{40--50}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Deduzir as tr\^es equa\c{c}\~oes do MRUV usando \'algebra pura
+  (sem c\'alculo). Interpretar gr\'aficos. Resolver problema de frenagem.
+  Este \'e o bloco mais denso --- planeje o tempo com cuidado.
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{1. Defini\c{c}\~ao e 1\textordfeminine{} equa\c{c}\~ao} (5 min)
+  \begin{itemize}[nosep]
+    \item ``No MRUV, $a = $ cte $\neq 0$.''
+    \item Dedução ao vivo:
+    \[
+      a = \frac{v - v_0}{t} \implies \boxed{v = v_0 + at}
+    \]
+  \end{itemize}
+
+  \medskip
+  \textbf{2. 2\textordfeminine{} equa\c{c}\~ao: via \'area do trap\'ezio}
+  (10--12 min) \textit{[momento central da aula]}
+  \begin{enumerate}[nosep]
+    \item Desenhe o gr\'afico $v \times t$ no quadro com dois eixos e
+          uma reta de $v_0$ at\'e $v$ (cor viva).
+    \item Preencha a \'area sob a reta e diga: ``essa \'area \'e o
+          deslocamento --- vamos calcular.''
+    \item A figura \'e um trap\'ezio de bases $v_0$ e $v$ e altura $t$:
+    \[
+      \Delta x = \frac{v_0 + v}{2} \cdot t
+    \]
+    \item Substitua $v = v_0 + at$:
+    \[
+      \Delta x = \frac{v_0 + v_0 + at}{2}\cdot t = v_0 t + \tfrac{1}{2}at^2
+    \]
+    \[
+      \boxed{x = x_0 + v_0 t + \tfrac{1}{2}at^2}
+    \]
+    \item Reforce: ``n\~ao memorizamos --- deduzimos. E a dedu\c{c}\~ao
+          usa apenas \'area de trap\'ezio.''
+  \end{enumerate}
+
+  \medskip
+  \textbf{3. 3\textordfeminine{} equa\c{c}\~ao: Torricelli} (7--8 min)
+  \begin{enumerate}[nosep]
+    \item ``Queremos $v$ em fun\c{c}\~ao de $\Delta x$, sem $t$.''
+    \item Da 1\textordfeminine{}: $t = (v - v_0)/a$.
+    \item Substitua em $\Delta x = \tfrac{v_0+v}{2}\cdot t$:
+    \[
+      \Delta x = \frac{v_0+v}{2}\cdot\frac{v-v_0}{a}
+               = \frac{v^2-v_0^2}{2a}
+    \]
+    \[
+      \boxed{v^2 = v_0^2 + 2a\,\Delta x}
+    \]
+  \end{enumerate}
+
+  \medskip
+  \textbf{4. Gr\'aficos do MRUV} (5 min)
+  \begin{itemize}[nosep]
+    \item Desenhe rapidamente os 3 gr\'aficos lado a lado:
+          $x\times t$ (par\'abola), $v\times t$ (reta inclinada),
+          $a\times t$ (constante).
+    \item Inclina\c{c}\~ao do $v\times t$ \'e $a$.
+    \item Raiz da par\'abola no $x\times t$ \'e quando o m\'ovel para.
+  \end{itemize}
+
+  \medskip
+  \textbf{5. Exemplo: frenagem} (7--8 min)
+  \begin{itemize}[nosep]
+    \item Enunciado: carro a 72 km/h freia com $a = -5$ m/s\textsuperscript{2}.
+          Qual a distância até parar?
+    \item Convers\~ao ao vivo: 72 km/h $= 20$ m/s.
+    \item Torricelli ($v = 0$):
+    \[
+      0 = 400 + 2(-5)\Delta x \implies \Delta x = 40\text{ m}
+    \]
+    \item Coment\'ario: ``esse \'e o tipo de problema que aparece no
+          ENEM com contexto de seguran\c{c}a no tr\^ansito.''
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  \textbf{Momentos-chave para usar o projetor neste bloco:}
+  \begin{enumerate}[nosep]
+    \item \textbf{O trap\'ezio no $v \times t$:} se o desenho no quadro
+          n\~ao ficar claro, projete o gr\'afico da p\'agina de MRUV
+          das notas de aula.
+          Aponte para as bases $v_0$ e $v$, a altura $t$, e a \'area
+          destacada.
+    \item \textbf{Os 3 gr\'aficos lado a lado:} projete-os ap\'os
+          desenhá-los no quadro, para os alunos conferirem.
+  \end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Ap\'os deduzir a 1\textordfeminine{} equa\c{c}\~ao:
+  \begin{itemize}[nosep]
+    \item ``Se $a > 0$ e $v_0 > 0$, o que acontece com a velocidade?
+          E se $a < 0$ e $v_0 > 0$?''
+  \end{itemize}
+  Antes de Torricelli:
+  \begin{itemize}[nosep]
+    \item ``Por que \'e \'util ter uma equa\c{c}\~ao sem o tempo?
+          Em que situa\c{c}\~ao voc\^es n\~ao sabem o tempo?''
+  \end{itemize}
+  Ap\'os a frenagem:
+  \begin{itemize}[nosep]
+    \item ``Se a velocidade dobrar (144 km/h), a dist\^ancia de
+          frenagem dobra tamb\'em?''
+          \textit{N\~ao! Quadruplica. Deixe os alunos calcularem.}
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  \textbf{A dedu\c{c}\~ao pela \'area \'e o coração deste bloco.}
+  N\~ao pule para a f\'ormula diretamente. Quando os alunos entendem
+  que $\Delta x$ \'e uma \'area, eles nunca mais confundem as equa\c{c}\~oes
+  do MRUV.
+
+  \medskip
+  Se a turma parecer perdida no trap\'ezio: fa\c{c}a primeiro para
+  velocidade constante (ret\^angulo) e depois generalize para MRUV
+  (trap\'ezio). A progress\~ao ajuda.
+\end{tcolorbox}
+
+\begin{tcolorbox}[cortebox]
+  Se precisar cortar: elimine o exemplo de frenagem deste bloco ---
+  ele aparece como Quest\~ao 4 no Bloco 6.
+  Mantenha \textbf{todas} as tr\^es dedu\c{c}\~oes.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 4 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 4 --- Queda Livre e Lançamento Vertical}
+\section*{\hspace{1.2em}Queda Livre e Lan\c{c}amento Vertical}
+% ===================================================================
+\tempo{20--25}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Mostrar que queda livre \'e MRUV com $a = g$.
+  Deduzir as equa\c{c}\~oes e a simetria do lan\c{c}amento vertical.
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{1. Galileu e a queda livre} (3--4 min)
+  \begin{itemize}[nosep]
+    \item Conte brevemente: Galileu derrubou objetos de massas diferentes
+          da Torre de Pisa e chegou \`a conclus\~ao de que todos caem com
+          a mesma acelera\c{c}\~ao (na aus\^encia do ar).
+    \item Escreva: $a = g \approx 10$ m/s\textsuperscript{2}, para baixo.
+    \item ``\'E apenas MRUV com $v_0 = 0$ e $a = g$.''
+    \item Escreva as equa\c{c}\~oes simplificadas (eixo positivo para baixo):
+    \[
+      v = gt \qquad h = \tfrac{1}{2}gt^2 \qquad v^2 = 2gh
+    \]
+  \end{itemize}
+
+  \medskip
+  \textbf{2. Exemplo: penhasco} (5 min)
+  \begin{itemize}[nosep]
+    \item Pedra cai de 80 m. Calcule tempo e velocidade de impacto.
+    \[
+      80 = 5t^2 \implies t = 4\text{ s} \qquad v = 10\times4 = 40\text{ m/s}
+    \]
+  \end{itemize}
+
+  \medskip
+  \textbf{3. Lan\c{c}amento vertical para cima} (8--10 min)
+  \begin{itemize}[nosep]
+    \item ``E se jogarmos para cima com $v_0 > 0$? Gravidade ainda \'e para
+          baixo.'' Eixo positivo agora para cima $\to a = -g$.
+    \item Escreva as equa\c{c}\~oes e destaque no quadro:
+    \[
+      v = v_0 - gt \qquad y = v_0 t - \tfrac{1}{2}gt^2
+    \]
+    \item Ponto mais alto ($v = 0$):
+    \[
+      t_{\text{sub}} = \frac{v_0}{g} \qquad H = \frac{v_0^2}{2g}
+    \]
+    \item Desenhe a trajet\'oria no quadro: seta para cima, desacelera,
+          para no topo, acelera de volta.
+    \item Simetria: $t_{\text{sub}} = t_{\text{des}}$; velocidade de
+          retorno tem mesmo m\'odulo.
+    \item Exemplo: bola com $v_0 = 30$ m/s $\to H = 45$ m, $T = 6$ s.
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  \textbf{Opcional:} projete o gr\'afico $v \times t$ do lan\c{c}amento
+  vertical (reta de inclina\c{c}\~ao $-g$, cruzando zero no ponto mais
+  alto e ficando negativa na descida). Isso ajuda os alunos a visualizarem
+  a simetria.
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Antes do lan\c{c}amento para cima:
+  \begin{itemize}[nosep]
+    \item ``Se jogarmos uma bola para cima, ela fica quanto tempo no ar?
+          Depende da massa?''
+  \end{itemize}
+  Ap\'os a simetria:
+  \begin{itemize}[nosep]
+    \item ``Se a bola passa pela posi\c{c}\~ao $y = 20$ m subindo, com
+          que velocidade ela passa por $y = 20$ m descendo?''
+          \textit{Mesmo m\'odulo, sinal oposto.}
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  Muitos alunos acham que no ponto mais alto o objeto ``para'' e a
+  gravidade ``para de agir''. Reforce: $v = 0$ mas $a = g \neq 0$.
+  Um exemplo bom: o carro ao frear --- diminui a velocidade mas a
+  acelera\c{c}\~ao (desacelera\c{c}\~ao) n\~ao \'e zero.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 5 \hfill\colorbox{laranjaalerta!40}{\small AVAN\c{C}ADO}}
+\addcontentsline{toc}{section}{Bloco 5 --- Lançamento Oblíquo}
+\section*{\hspace{1.2em}Lan\c{c}amento Obl\'iquo}
+% ===================================================================
+\tempo{35--40}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Decompor o movimento em horizontal (MRU) e vertical (MRUV).
+  Deduzir tempo de voo, alcance e altura m\'axima.
+  Este bloco usa mais o projetor --- a decomposi\c{c}\~ao vetorial
+  \'e dif\'icil de ilustrar bem s\'o no quadro.
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  \textbf{Use o projetor desde o in\'icio deste bloco.}
+
+  \begin{enumerate}[nosep]
+    \item \textbf{Figura da decomposi\c{c}\~ao de $v_0$:} mostre o vetor
+          $v_0$ com \^angulo $\theta$, e as componentes $v_{0x} = v_0\cos\theta$
+          e $v_{0y} = v_0\operatorname{sen}\theta$.
+          Use a figura das notas de aula ou desenhe no quadro enquanto
+          projeta.
+    \item \textbf{Trajet\'oria parab\'olica:} projete a curva com as
+          setas de $v_x$ (constante) e $v_y$ (que diminui e inverte).
+          Isso \'e cr\'itico para a intui\c{c}\~ao.
+    \item \textbf{Ponto mais alto:} destaque que $v_y = 0$ (mas $v_x$
+          continua!) e a velocidade n\~ao \'e zero --- apenas vertical.
+  \end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{1. Princ\'ipio da independ\^encia} (5 min)
+  \begin{itemize}[nosep]
+    \item ``O movimento horizontal e o vertical n\~ao interferem um no
+          outro.''
+    \item Escreva lado a lado no quadro:
+
+    \medskip
+    \begin{tabular}{ll}
+      \textbf{Horizontal (MRU)} & \textbf{Vertical (MRUV)} \\
+      $v_x = v_0\cos\theta$ & $v_y = v_0\operatorname{sen}\theta - gt$ \\
+      $x = v_0\cos\theta\cdot t$ &
+        $y = v_0\operatorname{sen}\theta\cdot t - \tfrac{1}{2}gt^2$ \\
+    \end{tabular}
+  \end{itemize}
+
+  \medskip
+  \textbf{2. Tempo de voo $T$} (7 min)
+  \begin{itemize}[nosep]
+    \item ``O proj\'etil cai quando $y = 0$ de novo.'' Fatore:
+    \[
+      0 = v_0\operatorname{sen}\theta\cdot T
+          - \tfrac{1}{2}g T^2
+        = T\!\left(v_0\operatorname{sen}\theta - \tfrac{g}{2}T\right)
+    \]
+    \item Como $T \neq 0$: $T = 2v_0\operatorname{sen}\theta/g$.
+  \end{itemize}
+
+  \medskip
+  \textbf{3. Alcance $R$} (5 min)
+  \[
+    R = v_0\cos\theta\cdot T = \frac{v_0^2\cdot 2\operatorname{sen}\theta\cos\theta}{g}
+      = \frac{v_0^2\operatorname{sen}(2\theta)}{g}
+  \]
+  Conclua: m\'aximo em $\theta = 45^\circ$.
+
+  \medskip
+  \textbf{4. Altura m\'axima $H$} (5 min)
+  \begin{itemize}[nosep]
+    \item $v_y = 0 \implies t_H = v_0\operatorname{sen}\theta/g$.
+    \item Torricelli na vertical:
+    $H = (v_0\operatorname{sen}\theta)^2/(2g)$.
+  \end{itemize}
+
+  \medskip
+  \textbf{5. Exemplo} (8--10 min)
+  \begin{itemize}[nosep]
+    \item Bola chutada: $v_0 = 20$ m/s, $\theta = 30^\circ$.
+          Calcule $H$, $R$ e $T$ ao vivo com a turma.
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Antes de calcular o alcance:
+  \begin{itemize}[nosep]
+    \item ``Para qual \^angulo o alcance \'e maior? Por qu\^e?''
+    \item ``O que acontece com o alcance se dobrarmos $v_0$?''
+          \textit{Quadruplica: $R \propto v_0^2$.}
+  \end{itemize}
+  Ap\'os calcular $R$ para $30^\circ$:
+  \begin{itemize}[nosep]
+    \item ``Para $60^\circ$ (complementar de $30^\circ$), o alcance
+          muda?'' \textit{N\~ao --- mostre pelo $\operatorname{sen}(2\times60^\circ)
+          = \operatorname{sen}(120^\circ) = \operatorname{sen}(60^\circ)$.}
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  O ponto mais dif\'icil aqui \'e convencer os alunos de que
+  horizontal e vertical s\~ao \textbf{realmente independentes}.
+  Uma boa imagem: imagine dois caminh\~oes na mesma estrada, um
+  deles acelerando (vertical) e o outro na velocidade constante
+  (horizontal) --- nenhum interfere no outro.
+\end{tcolorbox}
+
+\begin{tcolorbox}[cortebox]
+  Se precisar cortar: elimine a dedu\c{c}\~ao de $H$ (fique s\'o com
+  $T$ e $R$) e reduza o exemplo para s\'o $R$ e $T$.
+  O lan\c{c}amento obl\'iquo \'e menos frequente no ENEM do que
+  queda livre e MRUV.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Bloco 6 \hfill\colorbox{verdeok!30}{\small ESSENCIAL}}
+\addcontentsline{toc}{section}{Bloco 6 --- Fixação com Questões ENEM}
+\section*{\hspace{1.2em}Fixa\c{c}\~ao com Quest\~oes de ENEM}
+% ===================================================================
+\tempo{20--25}
+
+\begin{tcolorbox}[blocobox={Objetivos}]
+  Conectar o conte\'udo ao formato ENEM. Mostrar que as quest\~oes
+  pedem leitura e interpreta\c{c}\~ao, n\~ao apenas aplica\c{c}\~ao direta.
+\end{tcolorbox}
+
+\begin{tcolorbox}[projetorbox]
+  Projete as quest\~oes uma de cada vez a partir do arquivo
+  \texttt{notas\_aula\_cinematica.pdf}, Se\c{c}\~ao 7 (\'ultimas p\'aginas).
+
+  \medskip
+  \textbf{Din\^amica sugerida para cada quest\~ao:}
+  \begin{enumerate}[nosep, label=\arabic*.]
+    \item Projete o enunciado. D\^e 2--3 minutos para os alunos tentarem.
+    \item Pergunte quem marcou qual alternativa.
+    \item Resolva \textbf{no quadro} (n\~ao apenas leia a resposta).
+    \item Aponte qual habilidade/equa\c{c}\~ao aquela quest\~ao testou.
+  \end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[quadrobox]
+  \textbf{Quest\~oes sugeridas para este bloco} (selecione conforme o tempo):
+
+  \medskip
+  \begin{tabular}{lll}
+    \toprule
+    \# & T\'opico & Tempo estimado \\
+    \midrule
+    Q2 & Leitura de gr\'afico $v\times t$ & 5 min \\
+    Q3 & MRUV + Torricelli & 5 min \\
+    Q5 & Queda livre & 4 min \\
+    Q6 & MRUV: dist. de frenagem & 4 min \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  Resolva cada uma no quadro, passo a passo, como faria numa prova.
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  \textbf{N\~ao resolva todas de uma vez.} Prefira resolver 3 quest\~oes
+  com discuss\~ao a correr por 8 sem conversa. O erro mais comum no
+  ENEM de f\'isica \'e leitura errada do enunciado, n\~ao erro de conta
+  --- treine isso.
+\end{tcolorbox}
+
+\begin{tcolorbox}[cortebox]
+  Se sobrou menos de 10 min: fa\c{c}a apenas Q2 (gr\'afico) --- \'e a
+  habilidade mais testada no ENEM e a mais descuidada nas revis\~oes.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+\section*{Encerramento e Pr\'oximos Passos}
+\addcontentsline{toc}{section}{Encerramento}
+% ===================================================================
+\tempo{5}
+
+\begin{tcolorbox}[quadrobox]
+  Deixe no quadro (ou projete) o resumo das f\'ormulas da Se\c{c}\~ao 6
+  das notas de aula. Aponte cada equa\c{c}\~ao e reforce:
+  \begin{itemize}[nosep]
+    \item ``Voc\^es sabem de onde todas essas equa\c{c}\~oes v\^em.''
+    \item ``N\~ao precisam memorizar Torricelli --- s\'o precisam saber
+          o que \'e \'area de trap\'ezio.''
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[perguntabox]
+  Encerramento r\'apido com a turma:
+  \begin{itemize}[nosep]
+    \item ``Qual equa\c{c}\~ao voc\^es acham que vai aparecer mais no ENEM?''
+    \item ``Qual parte ainda ficou com d\'uvida?''
+  \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[dicabox]
+  \textbf{Tarefa sugerida (se houver):} resolver as Quest\~oes 1, 7 e 8
+  das notas de aula (MRU, lan\c{c}. obl\'iquo e \^angulos complementares)
+  que n\~ao foram vistas em sala.
+\end{tcolorbox}
+
+\newpage
+
+% ===================================================================
+% GUIA RÁPIDO DE ADAPTAÇÃO
+% ===================================================================
+\section*{Guia R\'apido de Adapta\c{c}\~ao por Tempo Dispon\'ivel}
+\addcontentsline{toc}{section}{Guia de Adaptação por Tempo}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\linewidth}{lX}
+  \toprule
+  \textbf{Tempo dispon\'ivel} & \textbf{Blocos a incluir} \\
+  \midrule
+  $\approx 1$h &
+    B0 (10 min) + B1 (20 min) + B3 s\'o equa\c{c}\~oes (15 min)
+    + 2 quest\~oes do B6 (15 min) \\
+  $\approx 1$h30 &
+    B0 + B1 + B2 (compacto) + B3 + 2 quest\~oes do B6 \\
+  $\approx 2$h &
+    B0 + B1 + B2 + B3 + B4 + 3 quest\~oes do B6 \\
+  $\approx 2$h30 &
+    Todos os blocos, com ritmo normal \\
+  $\approx 3$h &
+    Todos os blocos, com tempo para perguntas e mais exerc\'icios \\
+  \bottomrule
+\end{tabularx}
+
+\bigskip
+
+\begin{tcolorbox}[colback=azulphysics!5!white, colframe=azulphysics, arc=3mm,
+  fonttitle=\bfseries, title={Prioridade dos t\'opicos para ENEM}]
+  \begin{enumerate}[nosep]
+    \item \textbf{Leitura de gr\'aficos} $v \times t$ e $x \times t$
+          (muito frequente)
+    \item \textbf{MRUV} --- Torricelli e dist\^ancia de frenagem
+    \item \textbf{Queda livre} e lan\c{c}amento vertical
+    \item \textbf{MRU} --- encontro de m\'oveis e velocidade relativa
+    \item \textbf{Lan\c{c}amento obl\'iquo} (menos frequente, mas cai)
+  \end{enumerate}
+\end{tcolorbox}
+
+\end{document}

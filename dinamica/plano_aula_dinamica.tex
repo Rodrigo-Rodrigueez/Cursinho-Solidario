@@ -1,0 +1,675 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% Tipografia: Palatino, versalete, uma cor de destaque (bordô)
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{microtype}
+\usepackage[top=2.4cm, bottom=2.6cm, left=2.6cm, right=2.6cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{hyperref}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+\hypersetup{colorlinks=true, linkcolor=vinho, urlcolor=vinho}
+
+\linespread{1.06}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% ---------------------------------------------------------------
+% Cabeçalhos de bloco e seção
+% ---------------------------------------------------------------
+\newcommand{\bloco}[3]{%
+  \needspace{7\baselineskip}
+  \vspace{1.8em}
+  {\scshape\color{vinho}bloco #1}\hfill
+    {\small\itshape\color{grafite}\textasciitilde\,#3 min}\\[0.1em]
+  {\Large\bfseries #2}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\secao}[1]{%
+  \needspace{6\baselineskip}
+  \vspace{1.8em}
+  {\Large\bfseries #1}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\objetivo}[1]{{\itshape\color{grafite}Objetivo: #1}\par\smallskip}
+
+% ---------------------------------------------------------------
+% Painéis: barra fina à esquerda + rótulo em versalete
+% ---------------------------------------------------------------
+\newtcolorbox{quadro}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}no quadro}\par\smallskip}}
+
+\newtcolorbox{perguntas}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}perguntar \`a turma}\par\smallskip}}
+
+\newtcolorbox{obs}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{black!30},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{black!55}observa\c{c}\~oes}\par\smallskip}}
+
+\newtcolorbox{corte}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho!70, dashed},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}se o tempo apertar}\par\smallskip}}
+
+\newtcolorbox{projetor}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  borderline west={1.4pt}{3.2pt}{black!25},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}projetor}\par\smallskip}}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+% ---------------------------------------------------------------
+% TÍTULO
+% ---------------------------------------------------------------
+\thispagestyle{empty}
+
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
+{\huge\bfseries Din\^amica}\\[0.35em]
+{\LARGE As Tr\^es Leis de Newton}\\[0.7em]
+{\itshape\color{grafite}Plano de aula \,\textperiodcentered\, 2h
+ \,\textperiodcentered\, ENEM e vestibular UTFPR}
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\linewidth}{0.5pt}}
+
+\vspace{1.2em}
+
+% ---------------------------------------------------------------
+% VISÃO GERAL
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}X@{}}
+  \multicolumn{2}{@{}l}{{\scshape\color{vinho}vis\~ao geral}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Objetivo} & Enunciar as tr\^es Leis de Newton e apresentar as
+    principais for\c{c}as (peso, normal, atrito e tra\c{c}\~ao),
+    aplicando em quest\~oes de ENEM e UTFPR. \\
+  \textbf{Formato} & Aula no quadro do in\'icio ao fim. O projetor s\'o
+    entra no Bloco 5, para mostrar as quest\~oes e resolver ao vivo no
+    quadro. \\
+  \textbf{Materiais} & Quadro branco e canet\~oes (2 cores ou mais; uma
+    s\'o para as for\c{c}as) \,\textperiodcentered\, projetor + notebook
+    com o arquivo \texttt{lista\_questoes\_dinamica.pdf}
+    \,\textperiodcentered\, livro, folha e caneta para as
+    demonstra\c{c}\~oes \,\textperiodcentered\, lista de quest\~oes
+    impressa para os alunos. \\
+  \textbf{Obs.} & Esse plano junta duas aulas do planejamento original
+    (Leis de Newton + For\c{c}as) em uma aula s\'o de 2h, ent\~ao o
+    tempo \'e apertado. As caixas \textit{``se o tempo apertar''}
+    mostram o que d\'a para cortar. \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{1.4em}
+
+% ---------------------------------------------------------------
+% CRONOGRAMA
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}clX r@{}}
+  \multicolumn{4}{@{}l}{{\scshape\color{vinho}cronograma}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Bloco} & \textbf{T\'opico} & \textbf{Foco principal} & \textbf{Tempo} \\
+  \midrule
+  0 & Abertura & Situa\c{c}\~ao-problema: o carro que freia & 10 min \\
+  1 & 1\textordfeminine{} Lei & In\'ercia, equil\'ibrio, exemplos do dia a dia & 15 min \\
+  2 & 2\textordfeminine{} Lei + for\c{c}as & $F_R = ma$; peso, normal, atrito, tra\c{c}\~ao & 30 min \\
+  3 & 3\textordfeminine{} Lei & A\c{c}\~ao e rea\c{c}\~ao em corpos diferentes & 15 min \\
+  4 & Aplica\c{c}\~ao & Diagrama de for\c{c}as + exemplo resolvido & 15 min \\
+  5 & Quest\~oes & 5 quest\~oes ENEM/UTFPR ao vivo (projetor) & 25 min \\
+  6 & Encerramento & Resumo das 3 leis + tarefa & 10 min \\
+  \midrule
+  & \textbf{Total} & & \textbf{120 min} \\
+  \bottomrule
+\end{tabularx}}
+
+% ===================================================================
+\bloco{0}{Abertura e Situa\c{c}\~ao-Problema}{10}
+% ===================================================================
+
+\objetivo{come\c{c}ar com uma situa\c{c}\~ao do dia a dia (o carro que
+freia e o passageiro que vai para a frente) antes de entrar na teoria.}
+
+\begin{perguntas}
+Lan\c{c}ar as perguntas oralmente e deixar os alunos responderem, sem
+corrigir nada ainda:
+\begin{enumerate}[nosep]
+  \item ``Um carro freia bruscamente e o passageiro sem cinto vai para
+        a frente. \textbf{Quem empurrou o passageiro para a frente?}''
+  \item ``O que \'e preciso para um corpo ficar em movimento? Precisa
+        de for\c{c}a o tempo todo?''
+  \item ``Um corpo mais pesado cai mais r\'apido?''
+\end{enumerate}
+\textit{N\~ao dar as respostas ainda. Anotar as ideias no canto do
+quadro, porque v\'arias delas aparecem como alternativas erradas nas
+quest\~oes do ENEM.}
+\end{perguntas}
+
+\begin{quadro}
+\begin{itemize}[nosep]
+  \item Separar uma \textbf{faixa do lado direito} do quadro para ir
+        montando o resumo das 3 leis durante a aula (apagar s\'o no
+        final).
+  \item Escrever o t\'itulo no espa\c{c}o principal:
+        \textbf{Din\^amica --- por que as coisas se movem?}
+  \item Anotar o que os alunos responderem sobre a pergunta do carro
+        (mesmo as respostas erradas).
+\end{itemize}
+\end{quadro}
+
+\begin{obs}
+\textbf{Come\c{c}o da aula:} situar a turma. Na cinem\'atica a gente
+s\'o descreveu o movimento, sem perguntar a causa. Agora a pergunta \'e
+outra: \textbf{o que faz o movimento mudar?} A resposta s\~ao as 3 leis
+de Newton, que caem muito no ENEM e na UTFPR.
+
+\textbf{Demonstra\c{c}\~ao:} puxar uma folha de papel \textit{devagar}
+com uma caneta em cima (a caneta vai junto) e depois puxar
+\textit{r\'apido} (a caneta fica). \'E a mesma ideia do carro que
+freia.
+\end{obs}
+
+% ===================================================================
+\bloco{1}{1\textordfeminine{} Lei --- Princ\'ipio da In\'ercia}{15}
+% ===================================================================
+
+\objetivo{enunciar a 1\textordfeminine{} Lei, ligar com a
+situa\c{c}\~ao do come\c{c}o e mostrar que o movimento n\~ao precisa de
+for\c{c}a para continuar.}
+
+\begin{quadro}
+\textbf{1. Enunciado} (5 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo e ler em voz alta:
+  \begin{center}
+    \textbf{1\textordfeminine{} Lei:} se $\vec{F}_R = \vec{0}$, o corpo
+    permanece \textbf{em repouso} ou em \textbf{MRU}.
+  \end{center}
+  \item Chamar aten\c{c}\~ao para o ``ou'': repouso e MRU s\~ao a mesma
+        coisa do ponto de vista da din\^amica. Nenhum dos dois precisa
+        de for\c{c}a para se manter.
+  \item Definir \textbf{in\'ercia}: tend\^encia de manter o estado de
+        movimento. Quanto mais massa, mais in\'ercia.
+\end{itemize}
+
+\medskip
+\textbf{2. Voltar no carro do come\c{c}o} (5 min)
+\begin{itemize}[nosep]
+  \item Responder a pergunta inicial: \textbf{ningu\'em empurrou o
+        passageiro}. O carro freou e o passageiro continuou em MRU por
+        in\'ercia. Quem mudou de estado foi o carro.
+  \item Desenhar as duas cenas: antes (carro e passageiro com
+        velocidade $v$) e depois (carro parado, passageiro ainda com
+        $v$).
+  \item Citar outros exemplos: cinto de seguran\c{c}a, encosto de
+        cabe\c{c}a, \^onibus arrancando (o passageiro ``vai para
+        tr\'as'', mas na verdade ele fica).
+\end{itemize}
+
+\medskip
+\textbf{3. Equil\'ibrio} (3--4 min)
+\begin{itemize}[nosep]
+  \item Deixar claro: $\vec{F}_R = \vec{0}$ n\~ao quer dizer que n\~ao
+        tem for\c{c}a nenhuma, quer dizer que as for\c{c}as
+        \textbf{se cancelam}.
+  \item Exemplos no quadro: livro na mesa (peso $\downarrow$ e
+        normal $\uparrow$); carro em MRU na estrada
+        (motor $\rightarrow$ e atrito+ar $\leftarrow$).
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Um avi\~ao voa em linha reta com velocidade constante. A
+        for\c{c}a resultante nele \'e maior, menor ou igual \`a de
+        quando ele est\'a parado no p\'atio?''
+        \textit{(Resposta: igual, nula nos dois casos. Muita gente
+        erra.)}
+  \item ``Por que na freada brusca a gente `continua' e na curva a
+        gente `sai reto'?''
+        \textit{(In\'ercia: o corpo tende a seguir em linha reta.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Erro mais comum no ENEM: achar que in\'ercia \'e \textbf{for\c{c}a}
+(``a for\c{c}a da in\'ercia jogou o passageiro''). In\'ercia \'e
+propriedade do corpo, n\~ao for\c{c}a, ent\~ao n\~ao entra no diagrama
+de for\c{c}as. Falar isso claramente e escrever no quadro:
+\textbf{``in\'ercia n\~ao \'e for\c{c}a''}.
+\end{obs}
+
+\begin{corte}
+Cortar o exemplo do avi\~ao e deixar s\'o o carro e o livro na mesa.
+N\~ao cortar o enunciado nem a parte do ``ou'' (repouso/MRU).
+\end{corte}
+
+% ===================================================================
+\bloco{2}{2\textordfeminine{} Lei --- $F_R = ma$ e as Principais For\c{c}as}{30}
+% ===================================================================
+
+\objetivo{enunciar a 2\textordfeminine{} Lei e apresentar as quatro
+for\c{c}as que aparecem em quase toda quest\~ao de mec\^anica: peso,
+normal, atrito e tra\c{c}\~ao. \'E o bloco mais pesado da aula.}
+
+\begin{quadro}
+\textbf{1. Enunciado e sentido f\'isico} (8 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{\vec{F}_R = m\,\vec{a}}
+  \]
+  \item Ler com a turma: for\c{c}a resultante produz
+        \textbf{acelera\c{c}\~ao} (mudan\c{c}a de velocidade), na mesma
+        dire\c{c}\~ao e sentido da for\c{c}a.
+  \item Escrever as duas leituras da f\'ormula:
+    \begin{itemize}[nosep]
+      \item mesma for\c{c}a, massa maior $\Rightarrow$
+            acelera\c{c}\~ao menor (carrinho de supermercado vazio
+            vs.\ cheio);
+      \item mesma massa, for\c{c}a maior $\Rightarrow$
+            acelera\c{c}\~ao maior.
+    \end{itemize}
+  \item Unidade: $1\ \text{N} = 1\ \text{kg}\cdot\text{m/s}^2$
+        (mais ou menos o peso de uma ma\c{c}\~a pequena).
+  \item Ligar com a 1\textordfeminine{} Lei: se $F_R = 0$, ent\~ao
+        $a = 0$. Ou seja, a 1\textordfeminine{} \'e um caso particular
+        da 2\textordfeminine{}.
+\end{itemize}
+
+\medskip
+\textbf{2. Peso} (5 min)
+\begin{itemize}[nosep]
+  \item $\vec{P} = m\vec{g}$, sempre vertical para baixo,
+        $g \approx 10\ \text{m/s}^2$.
+  \item \textbf{Peso $\neq$ massa}: massa \'e em kg (quantidade de
+        mat\'eria, a mesma em qualquer lugar); peso \'e em N (for\c{c}a,
+        depende de $g$). Na Lua o peso diminui, a massa n\~ao.
+  \item Conta r\'apida com a turma: pessoa de 60 kg $\Rightarrow$
+        $P = 600$ N.
+\end{itemize}
+
+\medskip
+\textbf{3. Normal} (5 min)
+\begin{itemize}[nosep]
+  \item For\c{c}a de contato da superf\'icie, sempre
+        \textbf{perpendicular} \`a superf\'icie.
+  \item Desenhar 3 casos lado a lado: livro na mesa (N para cima),
+        quadro na parede (N horizontal), bloco na rampa
+        (N perpendicular \`a rampa, \textbf{n\~ao} vertical!).
+  \item Jogar a pergunta e deixar no ar: ``a normal \'e a rea\c{c}\~ao
+        do peso?''. Responder s\'o na 3\textordfeminine{} Lei.
+\end{itemize}
+
+\medskip
+\textbf{4. Atrito} (8 min)
+\begin{itemize}[nosep]
+  \item For\c{c}a de contato \textbf{paralela} \`a superf\'icie, contra
+        o deslizamento (ou contra a tend\^encia de deslizar).
+  \item F\'ormula: $f_{at} = \mu N$ (cin\'etico); no est\'atico vale
+        $f_{at} \leq \mu_e N$, ou seja, o atrito est\'atico s\'o faz a
+        for\c{c}a necess\'aria.
+  \item Destacar que $\mu_e > \mu_c$: \'e mais dif\'icil come\c{c}ar a
+        deslizar do que continuar deslizando. \'E assim que funciona o
+        freio ABS, que j\'a caiu no ENEM (Quest\~ao 12 da lista).
+  \item Lembrar que atrito n\~ao \'e sempre ruim: sem atrito n\~ao d\'a
+        para andar. Isso liga com a 3\textordfeminine{} Lei e com a
+        Quest\~ao 9, que vai ser feita em sala.
+\end{itemize}
+
+\medskip
+\textbf{5. Tra\c{c}\~ao} (4 min)
+\begin{itemize}[nosep]
+  \item For\c{c}a transmitida por fio/corda/cabo esticado, sempre
+        \textbf{puxando} na dire\c{c}\~ao do fio.
+  \item Desenhar: lumin\'aria pendurada (T para cima, P para baixo,
+        equil\'ibrio $\Rightarrow T = P$); corda de reboque.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item Depois do peso: ``a balan\c{c}a de farm\'acia mede massa ou
+        peso?'' \textit{(Ela mede for\c{c}a --- peso/normal --- mas
+        mostra em kg. Gera boa discuss\~ao.)}
+  \item Depois do atrito: ``se n\~ao existisse atrito nenhum, o que
+        acontece quando a pessoa tenta dar um passo?''
+        \textit{(Desliza no lugar, n\~ao tem no que se apoiar.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Usar uma cor de canet\~ao s\'o para os vetores de for\c{c}a em todos os
+desenhos. Assim os alunos j\'a identificam as setas coloridas como
+for\c{c}as, o que ajuda no Bloco 4.
+
+N\~ao entrar em plano inclinado com decomposi\c{c}\~ao de vetores. S\'o
+citar que a normal muda de dire\c{c}\~ao e seguir. Plano inclinado fica
+para outra aula.
+\end{obs}
+
+\begin{corte}
+Cortar a tra\c{c}\~ao (item 5), ela aparece de novo quando algum
+exerc\'icio pedir. N\~ao cortar o atrito: tem 3 quest\~oes de atrito na
+lista e \'e o assunto de din\^amica que mais cai no ENEM.
+\end{corte}
+
+% ===================================================================
+\bloco{3}{3\textordfeminine{} Lei --- A\c{c}\~ao e Rea\c{c}\~ao}{15}
+% ===================================================================
+
+\objetivo{enunciar a 3\textordfeminine{} Lei e deixar claro que o par
+a\c{c}\~ao--rea\c{c}\~ao atua em corpos diferentes, que \'e onde os
+alunos mais erram. Resolver tamb\'em a d\'uvida da normal que ficou do
+Bloco 2.}
+
+\begin{quadro}
+\textbf{1. Enunciado} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \begin{center}
+    \textbf{3\textordfeminine{} Lei:} se A empurra B com $\vec{F}$,
+    B empurra A com $-\vec{F}$.\\
+    \small (mesma intensidade, mesma dire\c{c}\~ao, sentidos opostos,
+    \textbf{corpos diferentes})
+  \end{center}
+  \item Sublinhar \textbf{corpos diferentes} duas vezes. \'E por isso
+        que a\c{c}\~ao e rea\c{c}\~ao \textbf{nunca se cancelam}: cada
+        uma age em um corpo.
+\end{itemize}
+
+\medskip
+\textbf{2. Tr\^es exemplos no quadro} (6 min)
+\begin{itemize}[nosep]
+  \item \textbf{Empurrar a parede} (exemplo do planejamento original):
+        m\~ao empurra parede $\rightarrow$, parede empurra m\~ao
+        $\leftarrow$ (de patins, a pessoa recua).
+  \item \textbf{Caminhar}: p\'e empurra o ch\~ao para tr\'as, ch\~ao
+        (atrito!) empurra a pessoa para a frente. Quem anda \'e movido
+        pelo ch\~ao. (Quest\~ao 9 da lista, ENEM 2013, vai ser feita em
+        sala.)
+  \item \textbf{Foguete}: expele g\'as para baixo, g\'as empurra o
+        foguete para cima. Funciona at\'e no v\'acuo, n\~ao precisa de
+        ``apoio no ar'' (Quest\~ao 11 da lista, UTFPR 2023).
+\end{itemize}
+
+\medskip
+\textbf{3. Resolver a d\'uvida da normal} (5 min)
+\begin{itemize}[nosep]
+  \item Livro na mesa: desenhar \textbf{dois} diagramas separados
+        (livro / mesa).
+  \item Peso do livro = Terra puxa livro. Rea\c{c}\~ao: \textbf{livro
+        puxa a Terra} (age na Terra!).
+  \item Normal = mesa empurra livro. Rea\c{c}\~ao: livro empurra a
+        mesa.
+  \item Concluir no quadro: \textbf{peso e normal N\~AO s\~ao par
+        a\c{c}\~ao--rea\c{c}\~ao} (agem no mesmo corpo e t\^em
+        naturezas diferentes). Eles s\'o se equilibram nesse caso.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Se a for\c{c}a que o cavalo faz na carro\c{c}a \'e igual \`a
+        que a carro\c{c}a faz no cavalo, como a carro\c{c}a sai do
+        lugar?''
+        \textit{(Cada for\c{c}a age em um corpo. A carro\c{c}a acelera
+        porque a resultante NELA --- tra\c{c}\~ao menos atrito --- \'e
+        positiva.)}
+  \item ``A Terra puxa uma pessoa com 600 N. Com quanto a pessoa puxa a
+        Terra?''
+        \textit{(600 N tamb\'em. S\'o que a acelera\c{c}\~ao da Terra
+        \'e desprez\'ivel, porque a massa dela \'e enorme ---
+        2\textordfeminine{} Lei.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+A armadilha cl\'assica do ENEM \'e ``a\c{c}\~ao e rea\c{c}\~ao se
+anulam, logo nada se move''. \'E exatamente o argumento do garoto na
+Quest\~ao 10 da lista (ENEM PPL 2012), que vai ser feita em sala. Se a
+discuss\~ao do cavalo j\'a tiver aparecido aqui, essa quest\~ao fica
+f\'acil.
+\end{obs}
+
+\begin{corte}
+Cortar o exemplo do foguete (a Quest\~ao 11 cobre a mesma ideia como
+tarefa). N\~ao cortar a parte da normal, que \'e a mais importante do
+bloco.
+\end{corte}
+
+% ===================================================================
+\bloco{4}{Aplica\c{c}\~ao: Diagrama de For\c{c}as + Exemplo}{15}
+% ===================================================================
+
+\objetivo{transformar as tr\^es leis em m\'etodo (isolar o corpo,
+desenhar as for\c{c}as, aplicar $F_R = ma$) e resolver um exemplo
+num\'erico completo no quadro.}
+
+\begin{quadro}
+\textbf{1. Passo a passo (escrever no quadro e numerar)} (4 min)
+\begin{enumerate}[nosep]
+  \item Isolar o corpo (desenhar s\'o ele);
+  \item Desenhar \textbf{todas} as for\c{c}as que agem \textbf{nele}
+        (peso? contato? fio?);
+  \item Escolher o eixo positivo no sentido do movimento;
+  \item Aplicar $F_R = ma$ em cada eixo.
+\end{enumerate}
+
+\medskip
+\textbf{2. Treino r\'apido de diagrama (a turma vai ditando)} (4 min)
+\begin{itemize}[nosep]
+  \item Livro parado na mesa: $\vec{P}$, $\vec{N}$.
+  \item Bloco puxado por corda no ch\~ao com atrito:
+        $\vec{P}$, $\vec{N}$, $\vec{T}$, $\vec{f}_{at}$.
+  \item Pergunta-armadilha: ``e a `for\c{c}a do movimento'?''
+        \textit{(N\~ao existe. Movimento n\~ao \'e for\c{c}a.)}
+\end{itemize}
+
+\medskip
+\textbf{3. Exemplo resolvido (estilo UTFPR)} (7 min)
+\begin{itemize}[nosep]
+  \item Ditar o enunciado: bloco de $4{,}0$ kg no ch\~ao, puxado na
+        horizontal com $F = 16{,}0$ N, atrito desprez\'ivel.
+        (a) acelera\c{c}\~ao? (b) velocidade depois de 5 s, partindo de
+        $18$ km/h?
+  \item Resolver no quadro seguindo o passo a passo:
+  \[
+    a = \frac{F_R}{m} = \frac{16}{4} = 4\ \text{m/s}^2
+  \]
+  \[
+    18\ \text{km/h} = 5\ \text{m/s} \qquad
+    v = v_0 + at = 5 + 4\cdot 5 = 25\ \text{m/s}
+  \]
+  \item Comentar que esse exemplo \'e a Quest\~ao 4 da lista, que caiu
+        exatamente assim na UTFPR Ver\~ao 2025, e que ela vai ser
+        refeita completa no Bloco 5 (com o item do espa\c{c}o
+        percorrido).
+\end{itemize}
+\end{quadro}
+
+\begin{obs}
+Revisar r\'apido a convers\~ao km/h $\to$ m/s (dividir por 3,6) aqui,
+para n\~ao travar o Bloco 5.
+\end{obs}
+
+\begin{corte}
+Se o Bloco 2 estourou o tempo: pular o item 2 (treino de diagramas) e
+ir direto para o exemplo resolvido. Os diagramas aparecem de novo nas
+quest\~oes de sala.
+\end{corte}
+
+% ===================================================================
+\bloco{5}{Quest\~oes ENEM/UTFPR ao vivo}{25}
+% ===================================================================
+
+\objetivo{terminar a aula resolvendo quest\~oes de verdade do ENEM e da
+UTFPR, projetadas uma por uma e resolvidas ao vivo no quadro. \'Unico
+bloco que usa projetor. As quest\~oes est\~ao no arquivo
+\texttt{lista\_questoes\_dinamica.pdf} (as marcadas com
+{\scshape\color{vinho}[fazer em sala]}).}
+
+\begin{projetor}
+Ligar o projetor (primeira vez na aula) com o arquivo
+\texttt{lista\_questoes\_dinamica.pdf}.
+
+\smallskip
+\textbf{Para cada quest\~ao:}
+\begin{enumerate}[nosep]
+  \item Projetar o enunciado e ler em voz alta. Dar uns 2 min para
+        tentarem sozinhos.
+  \item Votar: ``quem marcou A? B?...'' (anotar no canto do quadro).
+  \item Resolver \textbf{no quadro}, come\c{c}ando pelo diagrama de
+        for\c{c}as quando fizer sentido.
+  \item Fechar falando \textbf{qual lei} a quest\~ao cobrou (e marcar
+        na faixa de resumo).
+\end{enumerate}
+\end{projetor}
+
+\begin{quadro}
+\textbf{Roteiro de quest\~oes} (n\'umeros da lista):
+
+\medskip
+\begin{tabular}{@{}clll@{}}
+  \toprule
+  \# & Fonte & Cobra & Tempo \\
+  \midrule
+  Q1  & ENEM PPL 2012 & 1\textordfeminine{} Lei (bola no vag\~ao)   & 4 min \\
+  Q10 & ENEM PPL 2012 & 3\textordfeminine{} Lei (m\~ae e o m\'ovel) & 3 min \\
+  Q9  & ENEM 2013     & 3\textordfeminine{} Lei + atrito (rampa)    & 4 min \\
+  Q4  & UTFPR Ver\~ao 2025 & 2\textordfeminine{} Lei num\'erica     & 6 min \\
+  Q5  & ENEM 2017     & 2\textordfeminine{} Lei + gr\'afico (cinto) & 5 min \\
+  \midrule
+  Q6  & UTFPR Ver\~ao 2026 & Frenagem (b\^onus, se der tempo)       & 5 min \\
+  \bottomrule
+\end{tabular}
+
+\medskip
+A ordem \'e essa de prop\'osito: come\c{c}ar pelas duas conceituais,
+que s\~ao r\'apidas, depois a cl\'assica do atrito ao andar, depois a
+num\'erica da UTFPR (que \'e o exemplo do Bloco 4) e por \'ultimo a do
+gr\'afico, que \'e o estilo t\'ipico do ENEM.
+\end{quadro}
+
+\begin{obs}
+Melhor fazer 5 quest\~oes com calma do que 6 correndo. No ENEM o erro
+mais comum \'e de leitura, n\~ao de conta, ent\~ao vale gastar tempo no
+enunciado.
+\end{obs}
+
+\begin{corte}
+Menos de 15 min? Fazer Q1, Q9 e Q4, que cobrem as tr\^es leis.
+Menos de 10? Q9 e Q4.
+\end{corte}
+
+% ===================================================================
+\bloco{6}{Encerramento e Tarefa}{10}
+% ===================================================================
+
+\begin{quadro}
+\textbf{1. Resumo} (5 min) --- conferir a faixa de resumo do quadro e
+completar a coluna de exemplos com a turma ditando:
+
+\medskip
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Lei & Frase-chave & Exemplo \\
+  \midrule
+  1\textordfeminine{} & $F_R=0 \Rightarrow$ repouso ou MRU & passageiro sem cinto \\
+  2\textordfeminine{} & $F_R = ma$                          & carrinho vazio/cheio \\
+  3\textordfeminine{} & $\vec{F}_{AB} = -\vec{F}_{BA}$, corpos diferentes & andar, foguete \\
+  \bottomrule
+\end{tabular}
+
+\medskip
+\textbf{2. Tarefa} (3 min) --- distribuir/enviar a lista de quest\~oes:
+\begin{itemize}[nosep]
+  \item Resolver as quest\~oes que sobraram da lista (as sem marca de
+        sala);
+  \item Come\c{c}ar por Q2, Q3 e Q11 (uma de cada lei);
+  \item Q15 e Q16 s\~ao desafios. Vale tentar; elas voltam nas
+        pr\'oximas aulas (energia e colis\~oes).
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+Para fechar:
+\begin{itemize}[nosep]
+  \item ``Qual das 3 leis voc\^es acham que mais cai?''
+        \textit{(Todas caem. A 1\textordfeminine{} e a
+        3\textordfeminine{} caem como conceito/pegadinha e a
+        2\textordfeminine{} como conta.)}
+  \item ``Qual pergunta do come\c{c}o da aula a gente respondeu hoje?''
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Avisar qual \'e a pr\'oxima aula (conforme o plano dos 5 encontros) e
+falar que plano inclinado e sistemas de blocos v\~ao aparecer l\'a,
+para ningu\'em achar que esse conte\'udo ficou faltando.
+\end{obs}
+
+% ===================================================================
+\secao{Adapta\c{c}\~ao por Tempo Dispon\'ivel}
+% ===================================================================
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+  \toprule
+  \textbf{Tempo} & \textbf{O que fazer} \\
+  \midrule
+  $\approx 1$h30 &
+    B0 (5 min) + B1 (12 min) + B2 sem tra\c{c}\~ao (25 min) +
+    B3 (12 min) + B4 s\'o exemplo (8 min) + 4 quest\~oes (20 min) +
+    fechamento (5 min) \\
+  $\approx 2$h &
+    Plano completo como descrito \\
+  $\approx 2$h30 &
+    Plano completo + Q6 garantida + mais treino de diagramas no B4 +
+    discutir a Q11 (astronauta) em sala \\
+  \bottomrule
+\end{tabularx}}
+
+\bigskip
+
+{\scshape\color{vinho}prioridade dos t\'opicos para enem/utfpr}
+\begin{enumerate}[nosep]
+  \item \textbf{3\textordfeminine{} Lei como conceito} (pares em corpos
+        diferentes, atrito ao andar) --- o ENEM cobra muito isso
+  \item \textbf{Atrito} (est\'atico vs.\ cin\'etico, ABS)
+  \item \textbf{2\textordfeminine{} Lei num\'erica} ($F=ma$ +
+        cinem\'atica) --- estilo UTFPR
+  \item \textbf{1\textordfeminine{} Lei / in\'ercia} (frenagens, curvas)
+  \item \textbf{Peso $\times$ massa} e a d\'uvida peso--normal
+\end{enumerate}
+
+\end{document}

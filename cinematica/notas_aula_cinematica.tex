@@ -1,0 +1,969 @@
+\documentclass[12pt,a4paper]{article}
+
+% Codificação e língua
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+
+% Matemática
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Layout
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+% Gráficos
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, patterns}
+
+% Caixas coloridas
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% Listas e tabelas
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+% Outros
+\usepackage{xcolor}
+\usepackage{multicol}
+
+% ---------------------------------------------------------------
+% Cores
+% ---------------------------------------------------------------
+\definecolor{azulphysics}{RGB}{0, 82, 155}
+\definecolor{verdedef}{RGB}{0, 128, 64}
+\definecolor{vermelhoatencao}{RGB}{180, 30, 30}
+\definecolor{laranjaexemplo}{RGB}{200, 100, 0}
+\definecolor{cinzaenem}{RGB}{80, 80, 80}
+
+% ---------------------------------------------------------------
+% Estilos de caixas
+% ---------------------------------------------------------------
+\tcbset{
+  defbox/.style={
+    colback=verdedef!10!white,
+    colframe=verdedef!70!black,
+    fonttitle=\bfseries,
+    title={#1},
+    arc=2mm,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+  },
+  formulabox/.style={
+    colback=azulphysics!10!white,
+    colframe=azulphysics!80!black,
+    fonttitle=\bfseries,
+    title={#1},
+    arc=2mm,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+  },
+  atencaobox/.style={
+    colback=vermelhoatencao!10!white,
+    colframe=vermelhoatencao!80!black,
+    fonttitle=\bfseries,
+    title={$\bigtriangleup$\ Aten\c{c}\~{a}o},
+    arc=2mm,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+  },
+  exemplobox/.style={
+    colback=laranjaexemplo!8!white,
+    colframe=laranjaexemplo!70!black,
+    fonttitle=\bfseries,
+    title={#1},
+    arc=2mm,
+    breakable,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+  },
+  enembox/.style={
+    colback=cinzaenem!8!white,
+    colframe=cinzaenem!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    arc=2mm,
+    breakable,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+  }
+}
+
+% ---------------------------------------------------------------
+% Título
+% ---------------------------------------------------------------
+\title{
+  \textbf{\large Cursinho Solid\'ario --- F\'isica}\\[0.5em]
+  \textbf{\Huge Cinem\'atica}\\[0.3em]
+  \large Notas de Aula
+}
+\author{}
+\date{2026}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=azulphysics!5!white, colframe=azulphysics, arc=3mm]
+  \textbf{Conte\'udo:} MRU, MRUV, Queda Livre, Lan\c{c}amento Vertical e
+  Lan\c{c}amento Obl\'iquo.\\
+  \textbf{P\'ublico:} Vestibulandos (ENEM e UTFPR).\\
+  \textbf{Matem\'atica:} \'{A}lgebra de n\'ivel m\'edio --- nenhuma derivada ou integral.
+\end{tcolorbox}
+
+\tableofcontents
+\newpage
+
+% ===================================================================
+\section{Conceitos Fundamentais}
+% ===================================================================
+
+\subsection{Referencial e Posi\c{c}\~ao}
+
+Para descrever o movimento de um objeto, precisamos escolher um
+\textbf{referencial}: um ponto fixo em rela\c{c}\~ao ao qual medimos a posi\c{c}\~ao.
+
+\begin{tcolorbox}[defbox={Defini\c{c}\~ao: Posi\c{c}\~ao}]
+  A \textbf{posi\c{c}\~ao} $x$ de um objeto \'e a sua dist\^ancia ao referencial,
+  com um sinal que indica o sentido
+  (positivo ou negativo, conforme a orienta\c{c}\~ao escolhida).
+\end{tcolorbox}
+
+\textbf{Exemplo:} Um carro est\'a a 5~km do centro da cidade, na dire\c{c}\~ao
+leste. Se o centro \'e o referencial e leste \'e positivo, ent\~ao $x = +5$~km.
+
+\subsection{Trajet\'oria}
+
+\begin{tcolorbox}[defbox={Defini\c{c}\~ao: Trajet\'oria}]
+  A \textbf{trajet\'oria} \'e o conjunto de todos os pontos pelos quais um objeto
+  passa durante o seu movimento.
+\end{tcolorbox}
+
+Quando a trajet\'oria \'e uma linha reta, o movimento \'e chamado de
+\textbf{retil\'ineo}.
+
+\subsection{Deslocamento e Dist\^ancia Percorrida}
+
+\begin{tcolorbox}[formulabox={Deslocamento}]
+  \[
+    \Delta x = x_f - x_i
+  \]
+  onde $x_f$ \'e a posi\c{c}\~ao final e $x_i$ \'e a posi\c{c}\~ao inicial.
+\end{tcolorbox}
+
+O deslocamento pode ser \textbf{negativo} (movimento no sentido negativo) ou zero
+(volta ao ponto de partida).
+
+A \textbf{dist\^ancia percorrida} $d$ \'e o comprimento total do caminho ---
+sempre positiva ou nula.
+
+\begin{tcolorbox}[atencaobox]
+  Deslocamento $\boldsymbol{\neq}$ dist\^ancia percorrida. Se um carro vai de A
+  at\'e B e volta para A, o \emph{deslocamento} \'e zero, mas a
+  \emph{dist\^ancia percorrida} \'e $2\,d_{AB}$.
+\end{tcolorbox}
+
+\subsection{Velocidade M\'edia}
+
+\begin{tcolorbox}[formulabox={Velocidade M\'edia}]
+  \[
+    \bar{v} = \frac{\Delta x}{\Delta t} = \frac{x_f - x_i}{t_f - t_i}
+  \]
+  Unidade: m/s ou km/h.\quad
+  Convers\~ao: $1\,\text{m/s} = 3{,}6\,\text{km/h}$.
+\end{tcolorbox}
+
+A \textbf{velocidade escalar m\'edia} (rapidez m\'edia) usa a dist\^ancia percorrida:
+$\bar{e} = d / \Delta t$. Ela n\~ao pode ser negativa.
+
+\subsection{Acelera\c{c}\~ao M\'edia}
+
+\begin{tcolorbox}[formulabox={Acelera\c{c}\~ao M\'edia}]
+  \[
+    \bar{a} = \frac{\Delta v}{\Delta t} = \frac{v_f - v_i}{t_f - t_i}
+  \]
+  Unidade: m/s\textsuperscript{2}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[atencaobox]
+  Um veículo \textbf{desacelera} quando a acelaração e a velocidade têm sinais
+  \emph{opostos} --- não é necessário que $a$ seja negativa.
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Movimento Retil\'ineo Uniforme (MRU)}
+% ===================================================================
+
+\begin{tcolorbox}[defbox={Defini\c{c}\~ao: MRU}]
+  Um movimento \'e \textbf{Retil\'ineo Uniforme} quando:
+  \begin{itemize}[nosep]
+    \item A trajet\'oria \'e uma reta;
+    \item A velocidade \'e \textbf{constante} ($a = 0$).
+  \end{itemize}
+\end{tcolorbox}
+
+\subsection{Equa\c{c}\~ao Hor\'aria do MRU}
+
+\textbf{Dedu\c{c}\~ao:} Partindo da defini\c{c}\~ao de velocidade m\'edia, e
+sabendo que no MRU $\bar{v} = v = \text{cte}$:
+
+\[
+  v = \frac{x - x_0}{t} \implies x - x_0 = v\,t
+\]
+
+\begin{tcolorbox}[formulabox={Equa\c{c}\~ao Hor\'aria do MRU}]
+  \[
+    \boxed{x = x_0 + v\,t}
+  \]
+  \begin{itemize}[nosep]
+    \item $x_0$ = posi\c{c}\~ao inicial ($t = 0$)
+    \item $v$ = velocidade (constante)
+    \item $t$ = tempo
+  \end{itemize}
+\end{tcolorbox}
+
+\subsection{Gr\'aficos do MRU}
+
+\begin{center}
+\begin{tikzpicture}
+  % Gráfico x x t
+  \begin{scope}
+  \begin{axis}[
+    name=plot1,
+    width=6.5cm, height=5cm,
+    xlabel={$t$ (s)}, ylabel={$x$ (m)},
+    title={Gr\'afico $x \times t$},
+    xmin=0, xmax=5, ymin=0, ymax=7,
+    xtick={0,1,2,3,4,5}, ytick={0,1,2,3,4,5,6},
+    grid=both,
+    grid style={line width=0.3pt, draw=gray!30},
+    axis lines=left,
+    tick style={draw=none}
+  ]
+    \addplot[color=azulphysics, thick, domain=0:5]{1 + x};
+    \node[anchor=west] at (axis cs:3,4.5) {\small $x = 1 + t$};
+  \end{axis}
+  \end{scope}
+  %
+  % Gráfico v x t
+  \begin{scope}[xshift=8cm]
+  \begin{axis}[
+    name=plot2,
+    width=6.5cm, height=5cm,
+    xlabel={$t$ (s)}, ylabel={$v$ (m/s)},
+    title={Gr\'afico $v \times t$},
+    xmin=0, xmax=5, ymin=0, ymax=4,
+    xtick={0,1,2,3,4,5}, ytick={0,1,2,3},
+    grid=both,
+    grid style={line width=0.3pt, draw=gray!30},
+    axis lines=left,
+    tick style={draw=none}
+  ]
+    \addplot[fill=azulphysics!20, draw=none]
+      coordinates {(0,0)(0,2)(4,2)(4,0)};
+    \addplot[color=azulphysics, thick, domain=0:5]{2};
+    \node at (axis cs:2,1) {\small \'Area $= \Delta x$};
+    \node[anchor=west] at (axis cs:3.2,2.3) {\small $v = 2$ m/s};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[atencaobox]
+  A \textbf{\'area sob o gr\'afico $v \times t$} \'e igual ao
+  \textbf{deslocamento} do objeto. Esse resultado vale para \emph{qualquer}
+  tipo de movimento.
+\end{tcolorbox}
+
+\textbf{Interpreta\c{c}\~ao dos gr\'aficos do MRU:}
+\begin{itemize}
+  \item $x \times t$: reta com inclinação igual a $v$. Se $v > 0$, sobe; se $v < 0$, desce.
+  \item $v \times t$: linha horizontal (velocidade constante).
+\end{itemize}
+
+\subsection{Exemplos Resolvidos}
+
+\begin{tcolorbox}[exemplobox={Exemplo 1 --- Equa\c{c}\~ao hor\'aria}]
+  Um autom\'ovel parte da posi\c{c}\~ao $x_0 = 20$~m e move-se com velocidade
+  constante $v = 15$~m/s. Qual a posi\c{c}\~ao do carro ap\'os $t = 4$~s?
+
+  \medskip
+  \textbf{Dados:} $x_0 = 20$~m,\; $v = 15$~m/s,\; $t = 4$~s.
+
+  \medskip
+  \textbf{Resolu\c{c}\~ao:}
+  \[
+    x = x_0 + v\,t = 20 + 15 \times 4 = 20 + 60 = \mathbf{80\,\text{m}}
+  \]
+\end{tcolorbox}
+
+\begin{tcolorbox}[exemplobox={Exemplo 2 --- Encontro de dois m\'oveis}]
+  Dois carros partem simultaneamente em sentidos opostos de cidades A e B,
+  distantes 240~km. O carro 1 vai de A para B com $v_1 = 80$~km/h e o carro 2
+  vai de B para A com $v_2 = 40$~km/h. Quando e onde eles se encontram?
+
+  \medskip
+  Tomando A como referencial e o sentido A\,$\to$\,B como positivo:
+  \[
+    x_1 = 80\,t \qquad x_2 = 240 - 40\,t
+  \]
+
+  \textbf{Encontro} ($x_1 = x_2$):
+  \[
+    80\,t = 240 - 40\,t \implies 120\,t = 240 \implies t = 2\,\text{h}
+  \]
+  \[
+    x = 80 \times 2 = \mathbf{160\,\text{km de A}}
+  \]
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Movimento Retil\'ineo Uniformemente Variado (MRUV)}
+% ===================================================================
+
+\begin{tcolorbox}[defbox={Defini\c{c}\~ao: MRUV}]
+  Um movimento \'e \textbf{Retil\'ineo Uniformemente Variado} quando:
+  \begin{itemize}[nosep]
+    \item A trajet\'oria \'e uma reta;
+    \item A acelera\c{c}\~ao \'e \textbf{constante e n\~ao nula} ($a = \text{cte} \neq 0$).
+  \end{itemize}
+  Se $a$ e $v$ t\^em o \emph{mesmo} sinal: movimento \textbf{acelerado}.\\
+  Se $a$ e $v$ t\^em \emph{sinais opostos}: movimento \textbf{retardado}.
+\end{tcolorbox}
+
+\subsection{Equa\c{c}\~ao da Velocidade}
+
+\textbf{Dedu\c{c}\~ao:} da defini\c{c}\~ao de acelera\c{c}\~ao m\'edia, com
+$a$ constante e $v_0$ a velocidade em $t = 0$:
+
+\[
+  a = \frac{v - v_0}{t} \implies a\,t = v - v_0
+\]
+
+\begin{tcolorbox}[formulabox={1\textordfeminine{} Equa\c{c}\~ao do MRUV}]
+  \[
+    \boxed{v = v_0 + a\,t}
+  \]
+\end{tcolorbox}
+
+\subsection{Equa\c{c}\~ao Hor\'aria --- Dedu\c{c}\~ao pela \'Area}
+
+No gr\'afico $v \times t$ do MRUV, a velocidade varia linearmente.
+O deslocamento \'e a \'area sob essa reta --- um \textbf{trap\'ezio}:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=8cm, height=6cm,
+  xlabel={$t$ (s)},
+  ylabel={$v$ (m/s)},
+  title={Gr\'afico $v \times t$ do MRUV},
+  xmin=0, xmax=5, ymin=0, ymax=10,
+  xtick={0,4}, xticklabels={$0$, $t$},
+  ytick={2,8}, yticklabels={$v_0$, $v$},
+  grid=both,
+  grid style={line width=0.3pt, draw=gray!30},
+  axis lines=left,
+  tick style={draw=none},
+  clip=false
+]
+  \addplot[fill=azulphysics!20, draw=none]
+    coordinates {(0,0)(0,2)(4,8)(4,0)};
+  \addplot[color=azulphysics, thick, domain=0:4]{2 + 1.5*x};
+  \draw[dashed, gray] (axis cs:4,0) -- (axis cs:4,8);
+  \draw[dashed, gray] (axis cs:0,8) -- (axis cs:4,8);
+  \draw[dashed, gray] (axis cs:0,2) -- (axis cs:4,2);
+  \node at (axis cs:2,3.5) {\'Area $= \Delta x$};
+  \node[anchor=west] at (axis cs:4.1,8) {$v = v_0 + at$};
+  % braces
+  \draw[<->] (axis cs:4.5,0) -- (axis cs:4.5,2)
+    node[midway, right] {$v_0$};
+  \draw[<->] (axis cs:4.5,2) -- (axis cs:4.5,8)
+    node[midway, right] {$at$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+O trap\'ezio tem bases $v_0$ (base inferior) e $v$ (base superior) e altura $t$:
+
+\[
+  \Delta x = \frac{(v_0 + v)}{2}\cdot t
+\]
+
+Substituindo $v = v_0 + at$:
+
+\[
+  \Delta x = \frac{(v_0 + v_0 + at)}{2}\cdot t
+           = \frac{(2v_0 + at)}{2}\cdot t
+           = v_0\,t + \tfrac{1}{2}a\,t^2
+\]
+
+Como $\Delta x = x - x_0$:
+
+\begin{tcolorbox}[formulabox={2\textordfeminine{} Equa\c{c}\~ao do MRUV (equa\c{c}\~ao hor\'aria)}]
+  \[
+    \boxed{x = x_0 + v_0\,t + \tfrac{1}{2}\,a\,t^2}
+  \]
+\end{tcolorbox}
+
+\subsection{Equa\c{c}\~ao de Torricelli --- Dedu\c{c}\~ao}
+
+\'{A}s vezes n\~ao sabemos o tempo e precisamos relacionar diretamente
+velocidade e deslocamento. Eliminamos $t$ algebricamente:
+
+Da 1\textordfeminine{} equa\c{c}\~ao:\quad $t = \dfrac{v - v_0}{a}$
+
+Substituindo em $\Delta x = \dfrac{(v_0 + v)}{2}\cdot t$:
+
+\[
+  \Delta x = \frac{(v_0 + v)}{2}\cdot\frac{(v - v_0)}{a}
+           = \frac{v^2 - v_0^2}{2a}
+\]
+
+Isolando $v^2$:
+
+\begin{tcolorbox}[formulabox={3\textordfeminine{} Equa\c{c}\~ao do MRUV (Torricelli)}]
+  \[
+    \boxed{v^2 = v_0^2 + 2\,a\,\Delta x}
+  \]
+\end{tcolorbox}
+
+\subsection{Gr\'aficos do MRUV}
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{scope}
+  \begin{axis}[
+    width=4.8cm, height=4.2cm,
+    xlabel={\small $t$}, ylabel={\small $x$},
+    title={\small $x \times t$ (par\'abola)},
+    xmin=0, xmax=4, ymin=0, ymax=15,
+    xtick=\empty, ytick=\empty,
+    axis lines=left
+  ]
+    \addplot[color=azulphysics, thick, domain=0:4]{1 + x + 0.5*x^2};
+  \end{axis}
+  \end{scope}
+  %
+  \begin{scope}[xshift=5.2cm]
+  \begin{axis}[
+    width=4.8cm, height=4.2cm,
+    xlabel={\small $t$}, ylabel={\small $v$},
+    title={\small $v \times t$ (reta inclinada)},
+    xmin=0, xmax=4, ymin=0, ymax=7,
+    xtick=\empty, ytick=\empty,
+    axis lines=left
+  ]
+    \addplot[color=azulphysics, thick, domain=0:4]{1 + 1.5*x};
+  \end{axis}
+  \end{scope}
+  %
+  \begin{scope}[xshift=10.4cm]
+  \begin{axis}[
+    width=4.8cm, height=4.2cm,
+    xlabel={\small $t$}, ylabel={\small $a$},
+    title={\small $a \times t$ (constante)},
+    xmin=0, xmax=4, ymin=0, ymax=3,
+    xtick=\empty, ytick={1.5}, yticklabels={$a$},
+    axis lines=left
+  ]
+    \addplot[color=azulphysics, thick, domain=0:4]{1.5};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Exemplos Resolvidos}
+
+\begin{tcolorbox}[exemplobox={Exemplo 3 --- MRUV completo}]
+  Um carro parte do repouso ($v_0 = 0$) e acelera uniformemente com
+  $a = 4$~m/s\textsuperscript{2}. Determine:
+  \begin{enumerate}[label=(\alph*), nosep]
+    \item a velocidade ap\'os $t = 5$~s;
+    \item o espa\c{c}o percorrido em $t = 5$~s;
+    \item a velocidade quando tiver percorrido 50~m.
+  \end{enumerate}
+
+  \medskip
+  \textbf{Dados:} $v_0 = 0$,\; $a = 4$~m/s\textsuperscript{2},\; $x_0 = 0$.
+
+  \medskip
+  \textbf{(a)} $v = v_0 + at = 0 + 4 \times 5 = \mathbf{20}$~\textbf{m/s}
+
+  \textbf{(b)} $x = \tfrac{1}{2}at^2 = \tfrac{1}{2}(4)(25) = \mathbf{50}$~\textbf{m}
+
+  \textbf{(c)} $v^2 = v_0^2 + 2a\Delta x = 0 + 2(4)(50) = 400
+              \implies v = \mathbf{20}$~\textbf{m/s}
+\end{tcolorbox}
+
+\begin{tcolorbox}[exemplobox={Exemplo 4 --- Frenagem}]
+  Um carro trafega a 72~km/h e freia com desacelera\c{c}\~ao de
+  $5$~m/s\textsuperscript{2}. Qual a dist\^ancia percorrida at\'e parar?
+
+  \medskip
+  \textbf{Dados:} $v_0 = 72\,\text{km/h} = 20$~m/s,\; $v = 0$,\; $a = -5$~m/s\textsuperscript{2}.
+
+  \medskip
+  \textbf{Resolu\c{c}\~ao} (Torricelli):
+  \[
+    0 = 20^2 + 2(-5)\,\Delta x \implies 10\,\Delta x = 400
+    \implies \Delta x = \mathbf{40\,\text{m}}
+  \]
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Queda Livre e Lan\c{c}amento Vertical}
+% ===================================================================
+
+\subsection{Queda Livre}
+
+Galileu Galilei demonstrou que, sem resist\^encia do ar,
+\textbf{todos os corpos caem com a mesma acelera\c{c}\~ao}, independentemente
+da massa.
+
+\begin{tcolorbox}[defbox={Queda Livre}]
+  A \textbf{queda livre} \'e um MRUV na vertical com:
+  \[
+    a = g \approx 10\,\text{m/s}^2 \quad \text{(para baixo)}
+  \]
+  Condi\c{c}\~ao: objeto parte do \emph{repouso} ($v_0 = 0$).
+\end{tcolorbox}
+
+Adotando eixo positivo para \textbf{baixo} e $y_0 = 0$:
+
+\begin{tcolorbox}[formulabox={Equa\c{c}\~oes da Queda Livre}]
+  \[
+    v = g\,t \qquad h = \tfrac{1}{2}g\,t^2 \qquad v^2 = 2g\,h
+  \]
+  onde $h$ \'e a altura de queda.
+\end{tcolorbox}
+
+\begin{tcolorbox}[exemplobox={Exemplo 5 --- Queda de uma pedra}]
+  Uma pedra \'e solta do alto de um edif\'icio de 80~m. ($g = 10$~m/s\textsuperscript{2})
+  \begin{enumerate}[label=(\alph*), nosep]
+    \item Qual o tempo de queda?
+    \item Qual a velocidade ao atingir o solo?
+  \end{enumerate}
+
+  \medskip
+  \textbf{(a)}\quad $h = \tfrac{1}{2}g\,t^2 \implies 80 = 5\,t^2
+    \implies t^2 = 16 \implies t = \mathbf{4}$~\textbf{s}
+
+  \textbf{(b)}\quad $v = g\,t = 10 \times 4 = \mathbf{40}$~\textbf{m/s}
+
+  \smallskip
+  \textit{Verifica\c{c}\~ao:} $v^2 = 2(10)(80) = 1600 \implies v = 40$~m/s.\ \checkmark
+\end{tcolorbox}
+
+\subsection{Lan\c{c}amento Vertical para Cima}
+
+Quando um objeto \'e lan\c{c}ado \emph{para cima} com velocidade inicial
+$v_0 > 0$, a gravidade age para baixo (desacelera na subida, acelera na
+descida). Adotando eixo positivo para \textbf{cima}:
+
+\begin{tcolorbox}[formulabox={Lan\c{c}amento Vertical para Cima}]
+  \[
+    v = v_0 - g\,t \qquad y = y_0 + v_0\,t - \tfrac{1}{2}g\,t^2
+    \qquad v^2 = v_0^2 - 2g\,\Delta y
+  \]
+\end{tcolorbox}
+
+\textbf{Ponto mais alto} ($v = 0$):
+\[
+  0 = v_0 - g\,t_{\text{sub}} \implies
+  \boxed{t_{\text{sub}} = \frac{v_0}{g}} \qquad
+  \boxed{H_{\max} = \frac{v_0^2}{2g}}
+\]
+
+\textbf{Simetria do movimento:}
+\begin{itemize}
+  \item Tempo de subida $=$ tempo de descida: $t_{\text{sub}} = t_{\text{des}}$.
+  \item A velocidade ao retornar ao ponto de lan\c{c}amento tem o mesmo
+        m\'odulo de $v_0$, por\'em sentido contr\'ario.
+  \item Tempo total de voo: $T = 2\,v_0/g$.
+\end{itemize}
+
+\begin{tcolorbox}[exemplobox={Exemplo 6 --- Lan\c{c}amento vertical}]
+  Uma bola \'e lan\c{c}ada para cima com $v_0 = 30$~m/s. ($g = 10$~m/s\textsuperscript{2})
+  Calcule a altura m\'axima e o tempo total de voo.
+
+  \medskip
+  \textbf{Altura m\'axima:}
+  \[
+    H = \frac{v_0^2}{2g} = \frac{900}{20} = \mathbf{45\,\text{m}}
+  \]
+
+  \textbf{Tempo de subida:}
+  \[
+    t_{\text{sub}} = \frac{v_0}{g} = \frac{30}{10} = 3\,\text{s}
+  \]
+
+  \textbf{Tempo total:}
+  \[
+    T = 2 \times 3 = \mathbf{6\,\text{s}}
+  \]
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Lan\c{c}amento Obl\'iquo}
+% ===================================================================
+
+\begin{tcolorbox}[defbox={Princ\'ipio da Independ\^encia dos Movimentos}]
+  No lan\c{c}amento obl\'iquo, o movimento se decompõe em duas componentes
+  \textbf{independentes}:
+  \begin{itemize}[nosep]
+    \item \textbf{Horizontal:} MRU (sem aceleração horizontal,
+          desprezando a resist\^encia do ar).
+    \item \textbf{Vertical:} MRUV com $a = -g$ (gravidade).
+  \end{itemize}
+\end{tcolorbox}
+
+\subsection{Decomposi\c{c}\~ao da Velocidade Inicial}
+
+Um proj\'etil lan\c{c}ado com velocidade $v_0$ e \^angulo $\theta$ em rela\c{c}\~ao \`a
+horizontal tem:
+
+\[
+  v_{0x} = v_0 \cos\theta \qquad v_{0y} = v_0 \operatorname{sen}\theta
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  \draw[->, thick] (0,0) -- (4,0) node[right] {horizontal};
+  \draw[->, thick] (0,0) -- (0,2.5) node[above] {vertical};
+  \draw[->, very thick, azulphysics] (0,0) -- (3,2)
+    node[midway, above left] {$v_0$};
+  \draw[->, thick, red!70!black] (0,0) -- (3,0)
+    node[midway, below] {$v_{0x} = v_0\cos\theta$};
+  \draw[->, thick, verdedef] (3,0) -- (3,2)
+    node[midway, right] {$v_{0y} = v_0\operatorname{sen}\theta$};
+  \draw[dashed, gray] (0,2) -- (3,2);
+  \draw (0.6,0) arc (0:33.7:0.6);
+  \node at (0.85,0.2) {\small $\theta$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[formulabox={Equa\c{c}\~oes do Lan\c{c}amento Obl\'iquo}]
+  \textbf{Horizontal (MRU):}
+  \[
+    x = v_0\cos\theta\cdot t \qquad v_x = v_0\cos\theta = \text{cte}
+  \]
+
+  \textbf{Vertical (MRUV):}
+  \[
+    v_y = v_0\operatorname{sen}\theta - g\,t \qquad
+    y = v_0\operatorname{sen}\theta\cdot t - \tfrac{1}{2}g\,t^2
+  \]
+\end{tcolorbox}
+
+\subsection{Tempo de Voo, Alcance e Altura M\'axima}
+
+\subsubsection*{Tempo de Voo ($T$)}
+
+O proj\'etil retorna ao n\'ivel de lan\c{c}amento quando $y = 0$:
+
+\[
+  0 = v_0\operatorname{sen}\theta\cdot T - \tfrac{1}{2}g\,T^2
+    = T\!\left(v_0\operatorname{sen}\theta - \tfrac{g}{2}\,T\right)
+\]
+
+Como $T \neq 0$, dividimos pelos dois fatores e isolamos $T$:
+
+\begin{tcolorbox}[formulabox={Tempo de Voo}]
+  \[
+    \boxed{T = \frac{2\,v_0\operatorname{sen}\theta}{g}}
+  \]
+\end{tcolorbox}
+
+\subsubsection*{Alcance M\'aximo ($R$)}
+
+\[
+  R = v_0\cos\theta\cdot T = v_0\cos\theta\cdot
+      \frac{2\,v_0\operatorname{sen}\theta}{g}
+    = \frac{2\,v_0^2\operatorname{sen}\theta\cos\theta}{g}
+\]
+
+Usando a identidade trigonom\'etrica
+$\operatorname{sen}(2\theta) = 2\operatorname{sen}\theta\cos\theta$:
+
+\begin{tcolorbox}[formulabox={Alcance}]
+  \[
+    \boxed{R = \frac{v_0^2\,\operatorname{sen}(2\theta)}{g}}
+  \]
+  O alcance \'e m\'aximo para $\theta = 45^\circ$,
+  pois $\operatorname{sen}(90^\circ) = 1$.
+  \'Angulos complementares (ex.: 30\textdegree{} e 60\textdegree{}) d\~ao o mesmo alcance.
+\end{tcolorbox}
+
+\subsubsection*{Altura M\'axima ($H$)}
+
+No ponto mais alto, $v_y = 0$:
+\[
+  0 = v_0\operatorname{sen}\theta - g\,t_H
+  \implies t_H = \frac{v_0\operatorname{sen}\theta}{g} = \frac{T}{2}
+\]
+\[
+  H = v_0\operatorname{sen}\theta\cdot t_H - \tfrac{1}{2}g\,t_H^2
+    = \frac{(v_0\operatorname{sen}\theta)^2}{2g}
+      - \frac{(v_0\operatorname{sen}\theta)^2}{2g}
+      \cdot\frac{1}{2} \cdot 2
+\]
+
+Simplificando diretamente com Torricelli ($v_y=0$, $v_{0y} = v_0\operatorname{sen}\theta$):
+\[
+  0 = (v_0\operatorname{sen}\theta)^2 - 2g\,H
+\]
+
+\begin{tcolorbox}[formulabox={Altura M\'axima}]
+  \[
+    \boxed{H = \frac{(v_0\,\operatorname{sen}\theta)^2}{2g}}
+  \]
+\end{tcolorbox}
+
+\begin{tcolorbox}[exemplobox={Exemplo 7 --- Lan\c{c}amento obl\'iquo}]
+  Uma bola \'e chutada com $v_0 = 20$~m/s e $\theta = 30^\circ$.
+  ($g = 10$~m/s\textsuperscript{2};\;
+   $\operatorname{sen}30^\circ = 0{,}5$;\;
+   $\cos 30^\circ = \dfrac{\sqrt{3}}{2} \approx 0{,}87$;\;
+   $\operatorname{sen}60^\circ = \dfrac{\sqrt{3}}{2}$)
+
+  \medskip
+  \textbf{(a) Altura m\'axima:}
+  \[
+    H = \frac{(20\times 0{,}5)^2}{2 \times 10}
+      = \frac{100}{20} = \mathbf{5\,\text{m}}
+  \]
+
+  \textbf{(b) Alcance:}
+  \[
+    R = \frac{20^2 \cdot \operatorname{sen}(60^\circ)}{10}
+      = \frac{400\cdot\frac{\sqrt{3}}{2}}{10}
+      = 20\sqrt{3} \approx \mathbf{34{,}6\,\text{m}}
+  \]
+
+  \textbf{(c) Tempo de voo:}
+  \[
+    T = \frac{2 \times 20 \times 0{,}5}{10} = \mathbf{2\,\text{s}}
+  \]
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Resumo de F\'ormulas}
+% ===================================================================
+
+\begin{tcolorbox}[formulabox={Tabela Resumo --- Cinem\'atica}]
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{>{\bfseries}ll}
+    \toprule
+    Grandeza / Situa\c{c}\~ao & F\'ormula \\
+    \midrule
+    Deslocamento & $\Delta x = x_f - x_i$ \\
+    Velocidade m\'edia & $\bar{v} = \Delta x / \Delta t$ \\
+    Acelera\c{c}\~ao m\'edia & $\bar{a} = \Delta v / \Delta t$ \\
+    \midrule
+    MRU & $x = x_0 + v\,t$ \\
+    \midrule
+    MRUV --- velocidade & $v = v_0 + a\,t$ \\
+    MRUV --- posi\c{c}\~ao & $x = x_0 + v_0\,t + \tfrac{1}{2}a\,t^2$ \\
+    Torricelli & $v^2 = v_0^2 + 2\,a\,\Delta x$ \\
+    \midrule
+    Queda livre ($v_0=0$, eixo $\downarrow$) &
+      $v = g\,t$;\quad $h = \tfrac{1}{2}g\,t^2$;\quad $v^2 = 2g\,h$ \\
+    Lan\c{c}amento vert.\ para cima &
+      $v=v_0-gt$;\quad $H_{\max}=v_0^2/2g$;\quad $T=2v_0/g$ \\
+    \midrule
+    Lan\c{c}. obl.\ --- tempo de voo & $T = 2v_0\operatorname{sen}\theta/g$ \\
+    Lan\c{c}. obl.\ --- alcance & $R = v_0^2\operatorname{sen}(2\theta)/g$ \\
+    Lan\c{c}. obl.\ --- altura m\'ax. & $H = (v_0\operatorname{sen}\theta)^2/(2g)$ \\
+    \bottomrule
+  \end{tabular}
+\end{tcolorbox}
+
+
+% ===================================================================
+\section{Quest\~oes de ENEM e Vestibular}
+% ===================================================================
+
+\begin{tcolorbox}[enembox={Quest\~ao 1 --- MRU: Encontro de m\'oveis}]
+  Dois trens partem simultaneamente em sentidos opostos de esta\c{c}\~oes
+  distantes 600~km. O trem A tem velocidade de 120~km/h e o trem B tem
+  velocidade de 80~km/h. Ap\'os quanto tempo os dois trens se encontram?
+
+  \medskip
+  \textbf{(A)} 2~h \quad
+  \textbf{(B)} 3~h \quad
+  \textbf{(C)} 4~h \quad
+  \textbf{(D)} 5~h \quad
+  \textbf{(E)} 6~h
+
+  \medskip
+  \textit{Gabarito: (B) 3~h}
+
+  \textit{Resolu\c{c}\~ao:} Os trens se aproximam com velocidade relativa
+  $v_{\text{rel}} = 120 + 80 = 200$~km/h.
+  $t = 600 / 200 = 3$~h.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 2 --- MRU: Leitura de gr\'afico $v \times t$}]
+  O gr\'afico abaixo representa a velocidade em fun\c{c}\~ao do tempo de dois
+  ve\'iculos A e B:
+
+  \begin{center}
+  \begin{tikzpicture}
+  \begin{axis}[
+    width=7cm, height=4.5cm,
+    xlabel={$t$ (s)}, ylabel={$v$ (m/s)},
+    xmin=0, xmax=6, ymin=0, ymax=13,
+    xtick={0,1,2,3,4,5,6}, ytick={0,4,8,12},
+    grid=both, grid style={line width=0.3pt, draw=gray!30},
+    axis lines=left, tick style={draw=none},
+    legend pos=north west, legend style={font=\small}
+  ]
+    \addplot[color=azulphysics, thick, domain=0:6]{2*x};
+    \addlegendentry{A}
+    \addplot[color=red!70!black, thick, domain=0:6]{8};
+    \addlegendentry{B}
+  \end{axis}
+  \end{tikzpicture}
+  \end{center}
+
+  \'E correto afirmar que:
+
+  \smallskip
+  \textbf{(A)} A tem velocidade maior que B para $t < 4$~s.\\
+  \textbf{(B)} A e B t\^em a mesma acelera\c{c}\~ao.\\
+  \textbf{(C)} A percorre mais espa\c{c}o que B no intervalo $0 \leq t \leq 4$~s.\\
+  \textbf{(D)} A velocidade de A \'e igual \`a de B em $t = 4$~s.\\
+  \textbf{(E)} A est\'a em repouso para $t > 4$~s.
+
+  \medskip
+  \textit{Gabarito: (D)}
+
+  \textit{Resolu\c{c}\~ao:} Em $t=4$~s: $v_A = 2\times4 = 8$~m/s $= v_B$. Correto (D).\\
+  Em $0 \leq t \leq 4$~s: \'area de A (tri\^angulo) $= \tfrac{1}{2}\cdot4\cdot8 = 16$~m;
+  \'area de B (ret\^angulo) $= 4\cdot8 = 32$~m. Ent\~ao A percorre \emph{menos} que B.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 3 --- MRUV: acelera\c{c}\~ao e Torricelli}]
+  Um autom\'ovel parte do repouso e \'e acelerado uniformemente.
+  Ele passa pela posi\c{c}\~ao $x_1 = 10$~m com velocidade $v_1 = 4$~m/s.
+  Ap\'os, passa pela posi\c{c}\~ao $x_2 = 40$~m.
+  Qual \'e a velocidade em $x_2$?
+
+  \medskip
+  \textbf{(A)} 6~m/s \quad
+  \textbf{(B)} 8~m/s \quad
+  \textbf{(C)} 10~m/s \quad
+  \textbf{(D)} 12~m/s \quad
+  \textbf{(E)} 16~m/s
+
+  \medskip
+  \textit{Gabarito: (B) 8~m/s}
+
+  \textit{Resolu\c{c}\~ao:} Da origem at\'e $x_1$:
+  $v_1^2 = 2a\,x_1 \implies 16 = 20a \implies a = 0{,}8$~m/s\textsuperscript{2}.\\
+  Torricelli de $x_1$ a $x_2$:
+  $v_2^2 = v_1^2 + 2a(x_2-x_1) = 16 + 2(0{,}8)(30) = 16+48 = 64
+  \implies v_2 = 8$~m/s.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 4 --- MRUV: dist\^ancia de frenagem}]
+  Um motorista trafega a 20~m/s e avista um obst\'aculo a 60~m de dist\^ancia.
+  Ele freia com desacelera\c{c}\~ao de $4$~m/s\textsuperscript{2}.
+  O carro para antes do obst\'aculo? A que dist\^ancia?
+
+  \medskip
+  \textit{Resolu\c{c}\~ao:}
+  $v^2 = v_0^2 + 2a\,\Delta x \implies 0 = 400 + 2(-4)\Delta x
+  \implies \Delta x = 50$~m.\\
+  50~m $<$ 60~m: \textbf{o carro para antes}, sobrando 10~m.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 5 --- Queda livre}]
+  Uma pedra \'e solta do alto de um penhasco e leva $4$~s para atingir o solo.
+  ($g = 10$~m/s\textsuperscript{2})
+  Qual a altura do penhasco e a velocidade de impacto?
+
+  \medskip
+  \textbf{(A)} 40~m e 20~m/s \quad
+  \textbf{(B)} 80~m e 40~m/s \quad
+  \textbf{(C)} 80~m e 20~m/s \\
+  \textbf{(D)} 160~m e 40~m/s \quad
+  \textbf{(E)} 40~m e 40~m/s
+
+  \medskip
+  \textit{Gabarito: (B) 80~m e 40~m/s}
+
+  \textit{Resolu\c{c}\~ao:}
+  $h = \tfrac{1}{2}(10)(4^2) = 80$~m;\quad $v = 10 \times 4 = 40$~m/s.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 6 --- Lan\c{c}amento vertical para cima}]
+  Uma pedra \'e lan\c{c}ada verticalmente para cima com $v_0 = 40$~m/s.
+  ($g = 10$~m/s\textsuperscript{2})
+  \begin{enumerate}[label=(\alph*), nosep]
+    \item Qual a altura m\'axima?
+    \item Qual o tempo total de voo?
+    \item Qual a velocidade 5~s ap\'os o lan\c{c}amento?
+  \end{enumerate}
+
+  \medskip
+  \textbf{(a)} $H = v_0^2/2g = 1600/20 = \mathbf{80}$~\textbf{m}
+
+  \textbf{(b)} $T = 2v_0/g = 80/10 = \mathbf{8}$~\textbf{s}
+
+  \textbf{(c)} $v = 40 - 10\times5 = \mathbf{-10}$~\textbf{m/s}
+  (negativo: j\'a est\'a descendo)
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 7 --- Lan\c{c}amento obl\'iquo}]
+  Uma bola de futebol \'e chutada com $v_0 = 20$~m/s e $\theta = 45^\circ$.
+  ($g = 10$~m/s\textsuperscript{2};\; $\operatorname{sen}90^\circ = 1$)
+  Qual \'e o alcance horizontal?
+
+  \medskip
+  \textbf{(A)} 20~m \quad
+  \textbf{(B)} 30~m \quad
+  \textbf{(C)} 40~m \quad
+  \textbf{(D)} 50~m \quad
+  \textbf{(E)} 80~m
+
+  \medskip
+  \textit{Gabarito: (C) 40~m}
+
+  \textit{Resolu\c{c}\~ao:}
+  $R = v_0^2\operatorname{sen}(90^\circ)/g = 400/10 = 40$~m.
+\end{tcolorbox}
+
+\begin{tcolorbox}[enembox={Quest\~ao 8 --- Lan\c{c}amento obl\'iquo: \^angulo de alcance m\'aximo}]
+  Dois proj\'eteis s\~ao lan\c{c}ados com a mesma velocidade inicial
+  $v_0 = 30$~m/s, um com $\theta_1 = 30^\circ$ e outro com $\theta_2 = 60^\circ$.
+  Compare os alcances.
+
+  \medskip
+  \textit{Resolu\c{c}\~ao:}
+  \[
+    R_1 = \frac{30^2\,\operatorname{sen}(60^\circ)}{10}
+        = \frac{900\cdot\frac{\sqrt{3}}{2}}{10} = 45\sqrt{3}~\text{m}
+  \]
+  \[
+    R_2 = \frac{30^2\,\operatorname{sen}(120^\circ)}{10}
+        = \frac{900\cdot\frac{\sqrt{3}}{2}}{10} = 45\sqrt{3}~\text{m}
+  \]
+  \textbf{Os alcances s\~ao iguais!} \^Angulos complementares
+  ($30^\circ + 60^\circ = 90^\circ$) produzem o mesmo alcance.
+\end{tcolorbox}
+
+\end{document}
