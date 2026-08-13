@@ -1,0 +1,364 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% Tipografia: Palatino, versalete, uma cor de destaque (bordô)
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{microtype}
+\usepackage[top=2.4cm, bottom=2.6cm, left=2.6cm, right=2.6cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{qrcode}
+\usepackage{hyperref}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+\hypersetup{colorlinks=true, linkcolor=vinho, urlcolor=vinho}
+
+\linespread{1.06}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% ---------------------------------------------------------------
+% Cabeçalhos
+% ---------------------------------------------------------------
+\newcommand{\secao}[1]{%
+  \needspace{7\baselineskip}
+  \vspace{1.8em}
+  {\Large\bfseries #1}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\objetivo}[1]{{\itshape\color{grafite}#1}\par\smallskip}
+
+% ---------------------------------------------------------------
+% Ficha de v\'ideo: n\'umero, t\'itulo, canal, dura\c{c}\~ao, link
+% ---------------------------------------------------------------
+\newcommand{\video}[5]{%
+  \needspace{8\baselineskip}
+  \par\addvspace{1.4em}
+  {\large\bfseries\color{vinho}V\'ideo #1 \,\textemdash\, #2}\\[0.1em]
+  {\small\scshape\color{grafite}#3 \,\textperiodcentered\, #4}\\[-0.5em]
+  {\color{black!25}\rule{\linewidth}{0.4pt}}
+  \par\nobreak\smallskip
+  {\small\url{#5}}
+  \par\smallskip
+}
+
+\newcommand{\campo}[2]{%
+  \par{\small\scshape\color{vinho}#1}\ #2\par}
+
+% ---------------------------------------------------------------
+% Painéis: barra fina à esquerda
+% ---------------------------------------------------------------
+\newtcolorbox{painel}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{black!30},
+  before skip=11pt, after skip=11pt}
+
+\newtcolorbox{quadro}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}no quadro, depois do
+    v\'ideo}\par\smallskip}}
+
+\newtcolorbox{aviso}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}aten\c{c}\~ao}\par\smallskip}}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+% ---------------------------------------------------------------
+% TÍTULO
+% ---------------------------------------------------------------
+\thispagestyle{empty}
+
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
+{\huge\bfseries Tr\^es V\'ideos}\\[0.35em]
+{\LARGE Din\^amica --- as Leis de Newton em a\c{c}\~ao}\\[0.7em]
+{\itshape\color{grafite}Situa\c{c}\~oes reais do dia a dia
+\,\textperiodcentered\, 7 minutos de v\'ideo na aula inteira}
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\linewidth}{0.5pt}}
+
+\vspace{1.0em}
+
+\begin{painel}
+\begin{itemize}[nosep, leftmargin=1.5em]
+  \item S\~ao \textbf{filmagens de situa\c{c}\~oes reais}, n\~ao
+        v\'ideo-aula: um teste de colis\~ao, um teste de freio e um
+        experimento de propuls\~ao. A explica\c{c}\~ao continua sendo
+        sua, no quadro.
+  \item T\'itulo, canal e dura\c{c}\~ao foram conferidos.
+  \item Os tr\^es juntos d\~ao \textbf{6 min 56 s}. O v\'ideo 1 sozinho
+        cobre as tr\^es leis; se o tempo apertar de verdade, \'e o
+        \'unico indispens\'avel.
+  \item Assistir antes de levar, e conferir os links na v\'espera.
+\end{itemize}
+\end{painel}
+
+\vspace{0.8em}
+
+% ---------------------------------------------------------------
+% MAPA
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}lXcccl@{}}
+  \multicolumn{6}{@{}l}{{\scshape\color{vinho}o que cada um cobre}}\\
+  \addlinespace[2pt]
+  \toprule
+  & V\'ideo & 1\textordfeminine{} & 2\textordfeminine{} &
+    3\textordfeminine{} & Bloco \\
+  \midrule
+  1 & Crash test: carro de 1959 contra carro de 2009
+    & $\bullet$ & $\bullet$ & $\bullet$ & 0 ou 2 \\
+  2 & Teste de freio: com ABS e sem ABS
+    & $\bullet$ & $\bullet$ &           & 2 \\
+  3 & Bal\~ao foguete preso a um fio
+    &           & $\bullet$ & $\bullet$ & 3 \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{0.6em}
+
+\begin{aviso}
+O v\'ideo 1 \'e o \'unico que mostra as tr\^es leis na mesma cena, e \'e
+o mais curto dos tr\^es (1:13). Se a aula estiver atrasada, cortar o 2 e
+o 3: eles refor\c{c}am e ligam com quest\~oes espec\'ificas da lista,
+mas n\~ao introduzem nenhuma lei que o v\'ideo 1 j\'a n\~ao tenha
+mostrado.
+\end{aviso}
+
+\newpage
+
+% ===================================================================
+\secao{V\'ideo 1 --- as tr\^es leis em uma colis\~ao}
+% ===================================================================
+
+\video{1}{1959 Chevrolet Bel Air vs.\ 2009 Chevrolet Malibu --- IIHS
+crash test}{IIHS (Insurance Institute for Highway
+Safety)}{1:13}{https://www.youtube.com/watch?v=C_r5UJrxcck}
+
+\campo{quando}{Bloco 0 (abertura) \textbf{ou} Bloco 2, logo depois de
+escrever $\vec{F}_R = m\vec{a}$. Se for usar v\'ideo em um momento s\'o
+da aula, use aqui.}
+
+\campo{o que \'e}{Dois carros de massa parecida batem de frente, um
+contra o outro: um sedan de 1959, de a\c{c}o grosso e sem cinto de
+tr\^es pontos, e um sedan de 2009. Sem narra\c{c}\~ao --- d\'a para
+falar por cima e repetir o trecho em c\^amera lenta.}
+
+\campo{pergunte antes}{``Qual carro voc\^es acham mais seguro: o antigo,
+de a\c{c}o grosso, ou o moderno, que amassa todo?'' A turma quase sempre
+escolhe o antigo. O v\'ideo mostra o contr\'ario: o Bel Air quase n\~ao
+amassa e o boneco dentro dele \'e destru\'ido; o Malibu amassa muito e o
+boneco sai bem.}
+
+\campo{as tr\^es leis, na mesma cena}{}
+
+\begin{enumerate}[leftmargin=2.4em, itemsep=0.55em]
+  \item[\textbf{1\textordfeminine{}}] \textbf{O boneco continua.} O carro
+        para contra o outro carro, mas o boneco segue para a frente com
+        a velocidade que tinha --- ningu\'em o empurrou. Ele s\'o para
+        quando o cinto, o airbag ou o volante o param. \'E o passageiro
+        da freada do Bloco 0, em escala real.
+
+  \item[\textbf{2\textordfeminine{}}] \textbf{Quem amassa protege.} Nos
+        dois carros o boneco vai de $v$ a zero: a varia\c{c}\~ao de
+        velocidade \'e a mesma, n\~ao d\'a para mudar. O que muda \'e o
+        \textbf{tempo} em que isso acontece. A frente que amassa \'e uma
+        frente que \textbf{estica o} $\Delta t$, e por isso derruba a
+        for\c{c}a. A lataria r\'igida de 1959 n\~ao absorve nada: joga a
+        desacelera\c{c}\~ao inteira, de uma vez, no corpo de quem est\'a
+        dentro.
+
+  \item[\textbf{3\textordfeminine{}}] \textbf{Nenhum dos dois ``ganha''
+        a batida.} Os carros se empurram com for\c{c}as de
+        \textbf{mesma intensidade e sentidos opostos}, sempre. O de 1959
+        n\~ao empurra mais forte por ser mais r\'igido --- ele s\'o
+        \textit{recebe} a mesma for\c{c}a de um jeito pior. \'E o
+        argumento da Quest\~ao 9 (a m\~ae e o m\'ovel) aplicado a duas
+        toneladas de a\c{c}o.
+\end{enumerate}
+
+\begin{quadro}
+Escrever a 2\textordfeminine{} Lei na forma que explica o v\'ideo:
+\[
+  F = m\,a = m\,\frac{\Delta v}{\Delta t}
+\]
+e ao lado: \textbf{$\Delta v$ est\'a dado. S\'o d\'a para mexer no
+$\Delta t$.} Deixar essa frase no quadro --- cinto, airbag, capacete,
+luva de boxe e a lataria que amassa fazem todos a mesma coisa.
+
+\smallskip
+Para a 3\textordfeminine{} Lei, dois diagramas separados, um para cada
+carro, com as duas setas de mesmo tamanho apontando para lados opostos.
+\end{quadro}
+
+\campo{prepara}{\textbf{Quest\~ao 5} (ENEM 2017, o gr\'afico dos cintos),
+que ser\'a feita em sala: o cinto mais seguro \'e o de menor pico de
+desacelera\c{c}\~ao, ou seja, o que espalha a frenagem no tempo. Depois
+deste v\'ideo, a turma resolve a Q5 quase sem ajuda. Tamb\'em prepara a
+\textbf{Quest\~ao 9}.}
+
+\newpage
+
+% ===================================================================
+\secao{V\'ideo 2 --- por que o freio ABS para antes}
+% ===================================================================
+
+\video{2}{Teste dos freios ABS}{Quatro
+Rodas}{2:02}{https://www.youtube.com/watch?v=x2BVJfaXH0A}
+
+\campo{quando}{Bloco 2, item 4 (atrito), na hora de escrever
+$\mu_e > \mu_c$.}
+
+\campo{o que \'e}{Teste de revista com as duas frenagens lado a lado e a
+dist\^ancia de parada medida: roda travada, derrapando, contra roda
+girando, sem travar.}
+
+\campo{pergunte antes}{``Para parar antes: travar a roda de vez, ou
+n\~ao deixar travar?'' A intui\c{c}\~ao de quase todo mundo \'e pisar
+com tudo e travar.}
+
+\campo{as leis, no v\'ideo}{}
+
+\begin{enumerate}[leftmargin=2.4em, itemsep=0.55em]
+  \item[\textbf{1\textordfeminine{}}] \textbf{O carro n\~ao para
+        sozinho.} Tirando o p\'e do acelerador ele seguiria em frente;
+        quem muda o estado de movimento \'e uma for\c{c}a, e nesse caso
+        a \'unica for\c{c}a que freia o carro \'e o \textbf{atrito dos
+        pneus com o asfalto}. Nem \'e o freio: o freio segura a roda,
+        quem segura o carro \'e o ch\~ao.
+
+  \item[\textbf{2\textordfeminine{}}] \textbf{Mais atrito, mais
+        desacelera\c{c}\~ao, menos dist\^ancia.} Como
+        $a = F_{at}/m$, uma for\c{c}a de atrito maior d\'a uma
+        desacelera\c{c}\~ao maior --- e o carro para em menos metros. As
+        duas dist\^ancias medidas no v\'ideo s\~ao a 2\textordfeminine{}
+        Lei com trena.
+\end{enumerate}
+
+\campo{o ponto que a turma erra}{Com a roda \textbf{travada} o pneu
+\textbf{desliza} sobre o asfalto: vale o atrito \textbf{cin\'etico}. Com
+a roda \textbf{girando} o ponto do pneu que toca o ch\~ao \textbf{n\~ao
+desliza}: vale o atrito \textbf{est\'atico}, que \'e maior. Da\'i o ABS
+parar antes. E o atrito \textbf{n\~ao depende da \'area de contato} ---
+pneu mais largo n\~ao entra nessa conta.}
+
+\begin{quadro}
+\[
+  f_{at} = \mu N \qquad\text{com}\qquad \mu_e > \mu_c
+\]
+Embaixo: \textbf{roda travada $\Rightarrow$ desliza $\Rightarrow$
+cin\'etico. Roda girando $\Rightarrow$ n\~ao desliza $\Rightarrow$
+est\'atico.}
+\end{quadro}
+
+\campo{prepara}{\textbf{Quest\~ao 11} (ENEM PPL 2012), que \'e este
+v\'ideo em forma de enunciado --- inclusive as alternativas erradas
+sobre \'area de contato.}
+
+% ===================================================================
+\secao{V\'ideo 3 --- a\c{c}\~ao e rea\c{c}\~ao sem ter em que se apoiar}
+% ===================================================================
+
+\video{3}{Bal\~ao Foguete e a 3\textordfeminine{} Lei de Newton}{PET
+F\'isica UFAM}{3:41}{https://www.youtube.com/watch?v=R1W2Nohk8Yg}
+
+\campo{quando}{Bloco 3, no exemplo do foguete.}
+
+\campo{o que \'e}{Um bal\~ao cheio de ar, preso a um canudo que corre por
+um fio esticado. Solta o bico e ele dispara. D\'a para \textbf{fazer ao
+vivo} com bal\~ao, canudo, fita e linha --- nesse caso o v\'ideo serve
+de roteiro de montagem, ou de plano B.}
+
+\campo{pergunte antes}{``O bal\~ao anda porque o ar que sai
+\textbf{empurra o ar da sala}?'' \'E o que quase todo mundo acha, e \'e
+a mesma ideia errada da alternativa (e) da Quest\~ao 10, do astronauta
+que ``nadaria'' no v\'acuo.}
+
+\campo{as leis, no v\'ideo}{}
+
+\begin{enumerate}[leftmargin=2.4em, itemsep=0.55em]
+  \item[\textbf{3\textordfeminine{}}] \textbf{O par est\'a em corpos
+        diferentes.} O bal\~ao empurra o ar para tr\'as; o ar empurra o
+        bal\~ao para a frente. S\~ao duas for\c{c}as de mesma
+        intensidade em \textbf{corpos diferentes} --- por isso n\~ao se
+        cancelam e o bal\~ao acelera. E o que empurra o bal\~ao \'e o ar
+        que \textbf{saiu dele}, n\~ao o ar de fora: por isso o mesmo
+        princ\'ipio funciona no v\'acuo.
+
+  \item[\textbf{2\textordfeminine{}}] \textbf{Enquanto sai ar, ele
+        acelera.} A propuls\~ao dura s\'o enquanto h\'a ar saindo;
+        acabou o ar, acabou a for\c{c}a, e o bal\~ao segue perdendo
+        velocidade s\'o pelo atrito. \'E a diferen\c{c}a entre
+        \textbf{ter for\c{c}a} e \textbf{ter velocidade} --- a mesma
+        confus\~ao da Quest\~ao 3.
+\end{enumerate}
+
+\begin{quadro}
+Dois diagramas lado a lado, um para o bal\~ao e um para o ar expelido,
+com as setas de mesmo tamanho e sentidos opostos. Do lado, escrever:
+\textbf{n\~ao precisa de apoio no ar de fora}.
+\end{quadro}
+
+\campo{prepara}{\textbf{Quest\~ao 10} (UTFPR, astronauta que se move
+expelindo g\'as) e o argumento da \textbf{Quest\~ao 9}.}
+
+\newpage
+
+% ===================================================================
+\secao{P\'agina para projetar no fim da aula}
+% ===================================================================
+
+\objetivo{Projetar no Bloco 6, junto com o aviso da tarefa, para quem
+quiser rever em casa. Os alunos apontam a c\^amera do celular para o
+c\'odigo.}
+
+\vspace{1.5em}
+
+\begin{center}
+{\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}p{3.7cm}p{9.0cm}@{}}
+  \qrcode[height=2.8cm,padding]{https://www.youtube.com/watch?v=C_r5UJrxcck} &
+  \raisebox{1.0cm}{\parbox[t]{9.0cm}{%
+    \textbf{Crash test: carro de 1959 contra carro de 2009}\\
+    {\small\scshape\color{grafite}iihs
+    \,\textperiodcentered\, 1:13}\\
+    {\small As tr\^es leis na mesma colis\~ao. Repare no boneco, n\~ao
+    na lataria.}}}
+  \\[1.8em]
+  \qrcode[height=2.8cm,padding]{https://www.youtube.com/watch?v=x2BVJfaXH0A} &
+  \raisebox{1.0cm}{\parbox[t]{9.0cm}{%
+    \textbf{Teste dos freios ABS}\\
+    {\small\scshape\color{grafite}quatro rodas
+    \,\textperiodcentered\, 2:02}\\
+    {\small Por que n\~ao travar a roda faz o carro parar antes.}}}
+  \\[1.8em]
+  \qrcode[height=2.8cm,padding]{https://www.youtube.com/watch?v=R1W2Nohk8Yg} &
+  \raisebox{1.0cm}{\parbox[t]{9.0cm}{%
+    \textbf{Bal\~ao foguete e a 3\textordfeminine{} Lei}\\
+    {\small\scshape\color{grafite}pet f\'isica ufam
+    \,\textperiodcentered\, 3:41}\\
+    {\small D\'a para montar em casa com bal\~ao, canudo, fita e
+    linha.}}}
+\end{tabular}}
+\end{center}
+
+\end{document}

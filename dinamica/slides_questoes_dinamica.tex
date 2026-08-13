@@ -1,0 +1,697 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+
+% ---------------------------------------------------------------
+% Slides para projetar as quest\~oes do Bloco 5 (fazer em sala).
+% Mesma identidade dos outros documentos de din\^amica:
+% Palatino, versalete, uma cor de destaque (bord\^o).
+% Os n\'umeros das quest\~oes s\~ao os mesmos da lista impressa.
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc]{mathpazo}   % sem 'osf': algarismos alinhados leem melhor projetados
+\usefonttheme{serif}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, patterns}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+
+\setbeamercolor{structure}{fg=vinho}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=vinho}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.9cm, text margin right=0.9cm}
+
+% ---------------------------------------------------------------
+% T\'itulo de slide: versalete bord\^o \`a esquerda, fonte/tempo \`a
+% direita, filete embaixo
+% ---------------------------------------------------------------
+\setbeamertemplate{frametitle}{%
+  \vspace{0.18cm}%
+  \begin{minipage}{\textwidth}
+    {\large\scshape\color{vinho}\insertframetitle}%
+    \hfill{\small\itshape\color{grafite}\insertframesubtitle}\\[-0.45em]
+    {\color{vinho}\rule{\textwidth}{1.1pt}}
+  \end{minipage}%
+  \par\vspace{0.08cm}
+}
+
+\setbeamertemplate{footline}{%
+  \hfill{\scriptsize\color{black!45}%
+    din\^amica \,\textperiodcentered\, leis de newton
+    \,\textperiodcentered\, \insertframenumber}%
+  \hspace{0.9cm}\vspace{0.25cm}%
+}
+
+% ---------------------------------------------------------------
+% Alternativas
+% ---------------------------------------------------------------
+\newcommand{\optitem}[2]{%
+  \par\hangindent=1.5em\hangafter=1
+  \makebox[1.5em][l]{\textbf{#1)}}#2}
+
+\newcommand{\alternativas}[5]{%
+  \par\vspace{0.55em}%
+  \begingroup\setlength{\parskip}{0.30em}%
+  \optitem{a}{#1}\optitem{b}{#2}\optitem{c}{#3}\optitem{d}{#4}\optitem{e}{#5}%
+  \par\endgroup}
+
+% vers\~ao em duas colunas (a, b, c | d, e), para alternativas m\'edias
+\newcommand{\alternativascols}[5]{%
+  \par\vspace{0.5em}%
+  \begingroup\setlength{\parskip}{0.28em}%
+  \noindent
+  \begin{minipage}[t]{0.48\textwidth}
+    \optitem{a}{#1}\optitem{b}{#2}\optitem{c}{#3}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \optitem{d}{#4}\optitem{e}{#5}
+  \end{minipage}%
+  \par\endgroup}
+
+% vers\~ao em uma linha s\'o, para alternativas curtas (num\'ericas)
+\newcommand{\alternativascurtas}[5]{%
+  \par\vspace{0.7em}%
+  \noindent\textbf{a)}~#1\hfill\textbf{b)}~#2\hfill\textbf{c)}~#3%
+  \hfill\textbf{d)}~#4\hfill\textbf{e)}~#5\par}
+
+% ---------------------------------------------------------------
+% Slide de resposta (projetar depois de resolver no quadro)
+% ---------------------------------------------------------------
+\newcommand{\resposta}[2]{%
+  \par\vspace{0.2em}
+  {\Large\bfseries\color{vinho}Quest\~ao #1 \,\textemdash\, resposta: #2}
+  \par\vspace{0.6em}}
+
+\setlength{\parskip}{0.35em}
+\linespread{1.03}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+% ===================================================================
+% CAPA
+% ===================================================================
+\begin{frame}[plain]
+\vspace{0.6cm}
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\textwidth}{1.6pt}}\\[1.0em]
+{\huge\bfseries Quest\~oes em Sala}\\[0.45em]
+{\LARGE Din\^amica --- Leis de Newton}\\[1.0em]
+{\itshape\color{grafite}Bloco 5 do plano de aula \,\textperiodcentered\,
+8 quest\~oes \,\textperiodcentered\, 35 min}
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\textwidth}{0.5pt}}\\[0.8em]
+{\small\color{grafite}A numera\c{c}\~ao \'e a mesma da lista impressa
+(\texttt{lista\_questoes\_dinamica.pdf}).}
+\end{frame}
+
+% ===================================================================
+% ROTEIRO
+% ===================================================================
+\begin{frame}
+\frametitle{Roteiro}
+\framesubtitle{35 min}
+
+\small
+{\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}clll@{}}
+  \textbf{\#} & \textbf{Fonte} & \textbf{O que cobra} & \textbf{Tempo}\\[0.15em]
+  \hline
+  \rule{0pt}{1.15em}%
+  Q1  & ENEM PPL 2012      & 1\textordfeminine{} Lei (bola no vag\~ao)      & 4 min \\
+  Q9  & ENEM PPL 2012      & 3\textordfeminine{} Lei (m\~ae e o m\'ovel)    & 3 min \\
+  Q8  & ENEM 2013          & 3\textordfeminine{} Lei + atrito (rampa)       & 4 min \\
+  Q4  & UTFPR Ver\~ao 2025 & 2\textordfeminine{} Lei num\'erica             & 6 min \\
+  Q5  & ENEM 2017          & 2\textordfeminine{} Lei + gr\'afico (cinto)    & 5 min \\
+  Q12 & UEL 1995           & Plano inclinado: $a = g\,\mathrm{sen}\,\theta$ & 4 min \\
+  Q13 & UERJ 1998          & Rampa: for\c{c}a m\'inima                      & 4 min \\
+  Q14 & UTFPR Inverno 2024 & Blocos em contato                              & 5 min \\
+\end{tabular}}
+
+\vspace{0.6em}
+{\small\itshape\color{grafite}Para cada uma: ler o enunciado
+\,\textperiodcentered\, 2 min tentando \,\textperiodcentered\, votar
+nas alternativas \,\textperiodcentered\, resolver no quadro.}
+\end{frame}
+
+% ===================================================================
+% Q1
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 1}
+\framesubtitle{ENEM PPL 2012 \,\textperiodcentered\, $\sim$4 min}
+
+\footnotesize\linespread{0.97}\selectfont
+Em 1543, Nicolau Cop\'ernico publicou um livro revolucion\'ario em que
+propunha a Terra girando em torno do seu pr\'oprio eixo e rodando em
+torno do Sol. Isso contraria a concep\c{c}\~ao aristot\'elica, que
+acredita que a Terra \'e o centro do universo. Para os aristot\'elicos,
+se a Terra gira do oeste para o leste, coisas como nuvens e p\'assaros,
+que n\~ao est\~ao presas \`a Terra, pareceriam estar sempre se movendo
+do leste para o oeste, justamente como o Sol. Mas foi Galileu Galilei
+que, em 1632, baseando-se em experi\^encias, rebateu a cr\'itica
+aristot\'elica, confirmando assim o sistema de Cop\'ernico. Seu
+argumento, adaptado para a nossa \'epoca, \'e: \textbf{se uma pessoa,
+dentro de um vag\~ao de trem em repouso, solta uma bola, ela cai junto
+a seus p\'es. Mas se o vag\~ao estiver se movendo com velocidade
+constante, a bola tamb\'em cai junto a seus p\'es.} Isto porque a bola,
+enquanto cai, continua a compartilhar do movimento do vag\~ao.
+
+\vspace{0.2em}
+\small
+O princ\'ipio f\'isico usado por Galileu para rebater o argumento
+aristot\'elico foi
+
+\alternativascols{a lei da in\'ercia.}{a\c{c}\~ao e rea\c{c}\~ao.}%
+{a 2\textordfeminine{} lei de Newton.}{a conserva\c{c}\~ao da energia.}%
+{o princ\'ipio da equival\^encia.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 1}
+\framesubtitle{gabarito}
+\resposta{1}{A --- lei da in\'ercia}
+
+Enquanto cai, a bola \textbf{mant\'em por in\'ercia} a velocidade
+horizontal que tinha junto com o vag\~ao --- a resultante horizontal
+nela \'e nula.
+
+\vspace{0.2em}
+Por isso ela cai junto aos p\'es. \textbf{Tanto faz} o vag\~ao estar
+parado ou em MRU: nos dois casos $\vec{F}_R = \vec{0}$ na horizontal.
+
+\vspace{0.9em}
+{\color{grafite}\itshape Pegadinha: quem responde ``2\textordfeminine{}
+Lei'' est\'a procurando uma for\c{c}a que n\~ao existe. Sem for\c{c}a
+horizontal, o movimento horizontal simplesmente continua.}
+\end{frame}
+
+% ===================================================================
+% Q9
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 9}
+\framesubtitle{ENEM PPL 2012 \,\textperiodcentered\, $\sim$3 min}
+
+\small
+Durante uma faxina, a m\~ae pediu que o filho a ajudasse, deslocando um
+m\'ovel para mud\'a-lo de lugar. Para escapar da tarefa, o filho disse
+ter aprendido na escola que n\~ao poderia puxar o m\'ovel, pois a
+Terceira Lei de Newton define que \textbf{se puxar o m\'ovel, o m\'ovel
+o puxar\'a igualmente de volta}, e assim n\~ao conseguir\'a exercer uma
+for\c{c}a que possa coloc\'a-lo em movimento.
+
+\vspace{0.3em}
+Qual argumento a m\~ae utilizar\'a para apontar o erro de
+interpreta\c{c}\~ao do garoto?
+
+\alternativas{A for\c{c}a de a\c{c}\~ao \'e aquela exercida pelo
+garoto.}%
+{A for\c{c}a resultante sobre o m\'ovel \'e sempre nula.}%
+{As for\c{c}as que o ch\~ao exerce sobre o garoto se anulam.}%
+{A for\c{c}a de a\c{c}\~ao \'e um pouco maior que a for\c{c}a de
+rea\c{c}\~ao.}%
+{O par de for\c{c}as de a\c{c}\~ao e rea\c{c}\~ao n\~ao atua em um
+mesmo corpo.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 9}
+\framesubtitle{gabarito}
+\resposta{9}{E --- o par n\~ao atua no mesmo corpo}
+
+A\c{c}\~ao e rea\c{c}\~ao t\^em a \textbf{mesma intensidade} e
+\textbf{sentidos opostos}, mas atuam em \textbf{corpos diferentes} ---
+ent\~ao \textbf{nunca se cancelam}.
+
+\vspace{0.2em}
+A resultante \textit{no m\'ovel} pode ser diferente de zero, e ele
+acelera.
+
+\vspace{0.9em}
+{\color{grafite}\itshape A armadilha cl\'assica do ENEM: ``a\c{c}\~ao e
+rea\c{c}\~ao se anulam, logo nada se move''. S\'o se anulam for\c{c}as
+que agem \textbf{no mesmo corpo}.}
+\end{frame}
+
+% ===================================================================
+% Q8
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 8}
+\framesubtitle{ENEM 2013 \,\textperiodcentered\, $\sim$4 min}
+
+Uma pessoa necessita da for\c{c}a de atrito em seus p\'es para se
+deslocar sobre uma superf\'icie. Logo, uma pessoa que sobe uma rampa em
+linha reta ser\'a auxiliada pela for\c{c}a de atrito exercida pelo
+ch\~ao em seus p\'es.
+
+\vspace{0.3em}
+Em rela\c{c}\~ao ao movimento dessa pessoa, quais s\~ao a
+\textbf{dire\c{c}\~ao} e o \textbf{sentido} da for\c{c}a de atrito
+mencionada no texto?
+
+\alternativas{Perpendicular ao plano e no mesmo sentido do movimento.}%
+{Paralelo ao plano e no sentido contr\'ario ao movimento.}%
+{Paralelo ao plano e no mesmo sentido do movimento.}%
+{Horizontal e no mesmo sentido do movimento.}%
+{Vertical e sentido para cima.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 8}
+\framesubtitle{gabarito}
+\resposta{8}{C --- paralelo ao plano, no sentido do movimento}
+
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+Ao andar, o p\'e \textbf{empurra o ch\~ao para tr\'as} (paralelo \`a
+rampa).
+
+\vspace{0.3em}
+Pela 3\textordfeminine{} Lei, o ch\~ao devolve: o \textbf{atrito}
+empurra a pessoa \textbf{para a frente}.
+
+\vspace{0.5em}
+{\color{grafite}\itshape Quem anda \'e movido pelo ch\~ao. Sem atrito,
+a pessoa s\'o patina no lugar.}
+\end{column}
+\begin{column}{0.42\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.92]
+  % rampa (inclina\c{c}\~ao de 31\textdegree{}: subida 0,6 por 1 de base)
+  \draw[thick, fill=black!7] (0,0) -- (4.5,2.7) -- (4.5,0) -- cycle;
+  % pessoa, em p\'e sobre a rampa
+  \begin{scope}[shift={(1.85,1.30)}, rotate=31]
+    \filldraw[black!75] (0,0.78) circle (0.17);
+    \draw[very thick, black!75] (0,0.61) -- (0,0.24);
+    \draw[very thick, black!75] (0,0.24) -- (-0.30,0.01);
+    \draw[very thick, black!75] (0,0.24) -- (0.28,0.01);
+  \end{scope}
+  % atrito: empurra a pessoa rampa acima
+  \draw[-{Stealth[length=3.4mm]}, very thick, vinho]
+    (2.05,1.28) -- (3.05,1.88);
+  \node[font=\small, vinho, anchor=south west] at (2.95,1.86) {$f_{at}$};
+  % rea\c{c}\~ao: o p\'e empurra o ch\~ao rampa abaixo
+  \draw[-{Stealth[length=3mm]}, thick, black!55]
+    (1.62,1.11) -- (0.72,0.57);
+  \node[font=\scriptsize, black!55, align=center, anchor=north]
+    at (1.15,-0.12) {o p\'e empurra\\o ch\~ao para tr\'as};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===================================================================
+% Q4
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 4}
+\framesubtitle{UTFPR Ver\~ao 2025 \,\textperiodcentered\, $\sim$6 min}
+
+\small
+Sobre um piso horizontal, desloca-se um corpo de massa igual a
+$4{,}0$ kg, movendo-se \textbf{sem atrito} e com velocidade inicial de
+$18{,}0$ km/h, quando \'e submetido a uma for\c{c}a de $16{,}0$ N
+durante um intervalo de tempo de $5{,}0$ s.
+
+\vspace{0.4em}
+Sobre este movimento, determine respectivamente:
+
+\vspace{0.2em}
+\hspace{1em}1) a acelera\c{c}\~ao do corpo;\quad
+2) a velocidade ao final dos $5{,}0$ s;\quad
+3) o espa\c{c}o percorrido.
+
+\alternativas{4 m/s\textsuperscript{2}, 25 m/s, 75 m.}%
+{2 m/s\textsuperscript{2}, 30 m/s, 200 m.}%
+{4 m/s\textsuperscript{2}, 15 m/s, 200 m.}%
+{3 m/s\textsuperscript{2}, 18 m/s, 100 m.}%
+{4 m/s\textsuperscript{2}, 20 m/s, 200 m.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 4}
+\framesubtitle{gabarito}
+\resposta{4}{A}
+
+\begin{columns}[T]
+\begin{column}{0.46\textwidth}
+\textbf{1) 2\textordfeminine{} Lei}
+\[ a = \frac{F}{m} = \frac{16}{4} = 4\ \text{m/s}^2 \]
+
+\textbf{2) Convers\~ao primeiro!}
+\[ v_0 = \frac{18}{3{,}6} = 5\ \text{m/s} \]
+\[ v = v_0 + at = 5 + 4\cdot 5 = 25\ \text{m/s} \]
+\end{column}
+\begin{column}{0.52\textwidth}
+\textbf{3) Cinem\'atica}
+\[ \Delta s = v_0 t + \tfrac{1}{2}a t^2 \]
+\[ \Delta s = 5\cdot 5 + \tfrac{1}{2}\cdot 4\cdot 25 = 75\ \text{m} \]
+
+\vspace{0.6em}
+{\color{grafite}\itshape Estilo UTFPR: a f\'isica \'e s\'o o
+$a = F/m$; o resto \'e a cinem\'atica da aula passada. Quem esquece de
+passar km/h para m/s cai na alternativa errada.}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===================================================================
+% Q5
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 5}
+\framesubtitle{ENEM 2017 \,\textperiodcentered\, $\sim$5 min}
+
+\footnotesize
+Em uma colis\~ao frontal entre dois autom\'oveis, a for\c{c}a que o cinto de
+seguran\c{c}a exerce sobre o t\'orax e abd\^omen do motorista pode causar
+les\~oes graves nos \'org\~aos internos. Um fabricante realizou testes em cinco
+modelos diferentes de cinto, simulando uma colis\~ao de $0{,}30$ s de
+dura\c{c}\~ao, com bonecos equipados com aceler\^ometros.
+\textbf{A massa dos bonecos, as dimens\~oes dos cintos e a velocidade antes e
+depois do impacto foram as mesmas em todos os testes.}
+
+\vspace{-0.1em}
+\begin{columns}[T]
+\begin{column}{0.42\textwidth}
+\vspace{0.9em}
+\normalsize
+Qual modelo de cinto oferece \textbf{menor risco de les\~ao interna} ao
+motorista?
+
+\alternativascurtas{1}{2}{3}{4}{5}
+\end{column}
+\begin{column}{0.56\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=7.9cm, height=3.95cm,
+  xlabel={tempo (s)}, ylabel={desacelera\c{c}\~ao},
+  label style={font=\small},
+  tick label style={font=\small},
+  xmin=0, xmax=0.32, ymin=0, ymax=110,
+  ytick=\empty,
+  xtick={0,0.10,0.20,0.30},
+  legend pos=north east,
+  legend style={font=\scriptsize, draw=black!30},
+  axis lines=left,
+]
+\addplot[thick, smooth, black] coordinates
+  {(0,0) (0.03,60) (0.06,100) (0.09,55) (0.13,15) (0.20,5) (0.30,0)};
+\addlegendentry{1}
+\addplot[very thick, smooth, vinho, dashed] coordinates
+  {(0,0) (0.05,30) (0.10,38) (0.15,40) (0.20,38) (0.25,30) (0.30,0)};
+\addlegendentry{2}
+\addplot[thick, smooth, black!55] coordinates
+  {(0,0) (0.07,25) (0.12,80) (0.16,50) (0.22,20) (0.30,0)};
+\addlegendentry{3}
+\addplot[thick, smooth, black, dotted] coordinates
+  {(0,0) (0.10,15) (0.17,30) (0.22,90) (0.26,40) (0.30,0)};
+\addlegendentry{4}
+\addplot[thick, smooth, black!55, dashdotted] coordinates
+  {(0,0) (0.04,45) (0.09,70) (0.15,65) (0.21,25) (0.30,0)};
+\addlegendentry{5}
+\end{axis}
+\end{tikzpicture}\\[-0.2em]
+{\scriptsize\itshape (figura redesenhada)}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 5}
+\framesubtitle{gabarito}
+\resposta{5}{B --- o cinto 2}
+
+Mesma massa e mesma varia\c{c}\~ao de velocidade em todos os testes
+$\Rightarrow$ a \textbf{\'area embaixo de cada curva \'e igual}.
+
+\vspace{0.3em}
+Por $F = ma$, o cinto mais seguro \'e o que tem o \textbf{menor pico de
+desacelera\c{c}\~ao} --- ou seja, o que \textbf{espalha a frenagem ao
+longo do tempo}. \'E a curva 2, baixa e larga.
+
+\vspace{0.8em}
+{\color{grafite}\itshape A mesma ideia do airbag, do capacete e da
+zona de deforma\c{c}\~ao do carro: n\~ao d\'a para mudar o
+$\Delta v$, ent\~ao aumenta-se o $\Delta t$ para derrubar a for\c{c}a.}
+\end{frame}
+
+% ===================================================================
+% Q12
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 12}
+\framesubtitle{UEL 1995 \,\textperiodcentered\, $\sim$4 min}
+
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+Um corpo de massa $2{,}0$ kg \'e abandonado sobre um plano
+\textbf{perfeitamente liso} e inclinado de $37^{\circ}$ com a
+horizontal.
+
+\vspace{0.4em}
+Adotando $g = 10$ m/s\textsuperscript{2},
+$\mathrm{sen}\,37^{\circ} = 0{,}60$ e $\cos 37^{\circ} = 0{,}80$,
+conclui-se que a acelera\c{c}\~ao com que o corpo desce o plano tem
+m\'odulo, em m/s\textsuperscript{2}:
+
+\alternativascurtas{4,0}{5,0}{6,0}{8,0}{10}
+\end{column}
+\begin{column}{0.42\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[thick] (0,0) -- (4.3,0);
+  \draw[thick] (0,0) -- (4.3,3.24) -- (4.3,0);
+  \draw (0.9,0) arc (0:37:0.9);
+  \node at (1.18,0.26) {\small $37^{\circ}$};
+  \begin{scope}[shift={(2.1,1.58)}, rotate=37]
+    \draw[thick, fill=black!8] (0,0) rectangle (0.95,0.6);
+    \node[font=\small] at (0.48,0.3) {2 kg};
+  \end{scope}
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 12}
+\framesubtitle{gabarito}
+\resposta{12}{C --- $6{,}0$ m/s\textsuperscript{2}}
+
+\begin{columns}[T]
+\begin{column}{0.54\textwidth}
+Na rampa, decompor o \textbf{peso}:
+\[ P_x = mg\,\mathrm{sen}\,\theta \qquad
+   P_y = mg\cos\theta = N \]
+
+Sem atrito, a resultante \'e s\'o $P_x$:
+\[ ma = mg\,\mathrm{sen}\,\theta \;\Rightarrow\;
+   a = g\,\mathrm{sen}\,\theta \]
+\[ a = 10 \cdot 0{,}60 = 6{,}0\ \text{m/s}^2 \]
+\end{column}
+\begin{column}{0.44\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick] (0,0) -- (4.0,0);
+  \draw[thick] (0,0) -- (4.0,3.0) -- (4.0,0);
+  \begin{scope}[shift={(1.9,1.42)}, rotate=37]
+    \draw[thick, fill=black!8] (0,0) rectangle (0.9,0.55);
+    \draw[-{Stealth[length=2.6mm]}, thick, vinho] (0.45,0.28) -- (-0.55,0.28)
+      node[left, font=\small] {$P_x$};
+    \draw[-{Stealth[length=2.6mm]}, thick, black!60] (0.45,0.28) -- (0.45,1.15)
+      node[above, font=\small] {$N$};
+  \end{scope}
+  \draw[-{Stealth[length=2.6mm]}, thick, black!60] (2.35,1.70) -- (2.35,0.55)
+    node[midway, right, font=\small] {$P$};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+{\color{grafite}\itshape A massa cancela: qualquer corpo desceria essa
+rampa com a mesma acelera\c{c}\~ao.}
+\end{frame}
+
+% ===================================================================
+% Q13
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 13}
+\framesubtitle{UERJ 1998 \,\textperiodcentered\, $\sim$4 min}
+
+\begin{columns}[T]
+\begin{column}{0.50\textwidth}
+\small
+O carregador deseja levar um bloco de \textbf{400 N} de peso at\'e a
+carroceria do caminh\~ao, a uma altura de $1{,}5$ m, utilizando-se de
+um plano inclinado de $3{,}0$ m de comprimento, conforme a figura.
+
+\vspace{0.4em}
+\textbf{Desprezando o atrito}, a for\c{c}a m\'inima com que o
+carregador deve puxar o bloco, enquanto este sobe a rampa, ser\'a, em
+N, de:
+
+\alternativascurtas{100}{150}{200}{400}{500}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[thick] (-0.8,0) -- (5.6,0);
+  \draw[thick] (0,0) -- (2.6,1.5) -- (2.6,0);
+  \draw[thick] (2.6,1.5) -- (4.9,1.5);
+  \draw[thick] (4.9,1.5) -- (4.9,0);
+  \node[anchor=south, font=\small] at (3.75,1.55) {carroceria};
+  \begin{scope}[shift={(0.95,0.55)}, rotate=30]
+    \draw[thick, fill=black!8] (0,0) rectangle (0.9,0.55);
+  \end{scope}
+  \draw[<->] (-0.18,0.30) -- (2.42,1.80)
+    node[midway, above, sloped, font=\small] {$3{,}0$ m};
+  \draw[<->] (3.05,0) -- (3.05,1.5)
+    node[midway, right, font=\small] {$1{,}5$ m};
+\end{tikzpicture}\\[0.3em]
+{\scriptsize\itshape (figura redesenhada)}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 13}
+\framesubtitle{gabarito}
+\resposta{13}{C --- 200 N}
+
+Para subir com velocidade constante (for\c{c}a \textbf{m\'inima}),
+basta equilibrar a componente do peso ao longo da rampa:
+\[ F = P\,\mathrm{sen}\,\theta = P\cdot\frac{h}{L}
+     = 400\cdot\frac{1{,}5}{3{,}0} = 200\ \text{N} \]
+
+\vspace{0.4em}
+{\color{grafite}\itshape N\~ao precisa nem do \^angulo: $\mathrm{sen}\,
+\theta$ \'e o cateto oposto sobre a hipotenusa, que \'e $h/L$.}
+
+\vspace{0.5em}
+A rampa como \textbf{m\'aquina simples}: metade da for\c{c}a, mas o
+dobro do caminho ($1{,}5$ m de altura contra $3{,}0$ m de rampa).
+\end{frame}
+
+% ===================================================================
+% Q14
+% ===================================================================
+\begin{frame}
+\frametitle{Quest\~ao 14}
+\framesubtitle{UTFPR Inverno 2024 \,\textperiodcentered\, $\sim$5 min}
+
+\begin{columns}[T]
+\begin{column}{0.50\textwidth}
+Dois blocos encostados um ao outro, em uma superf\'icie plana e
+\textbf{sem atrito}, possuem massas de, respectivamente, 5 kg e 2 kg.
+Uma for\c{c}a $F = 140$ N empurra os blocos da esquerda para a direita,
+como representado na figura.
+
+\vspace{0.4em}
+Qual \'e a \textbf{acelera\c{c}\~ao do sistema} e a \textbf{for\c{c}a
+normal entre os dois blocos}, respectivamente?
+($g = 10$ m/s\textsuperscript{2}.)
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.05]
+  \draw[thick] (-0.2,0) -- (5.2,0);
+  \draw[thick, fill=black!8] (1.4,0) rectangle (2.9,1.2);
+  \node at (2.15,0.6) {5 kg};
+  \draw[thick, fill=black!8] (2.9,0) rectangle (4.0,0.85);
+  \node at (3.45,0.42) {2 kg};
+  \draw[-{Stealth[length=3mm]}, very thick] (0.15,0.6) -- (1.3,0.6)
+    node[midway, above] {$F$};
+\end{tikzpicture}\\[0.3em]
+{\scriptsize\itshape (figura redesenhada)}
+\end{column}
+\end{columns}
+
+\vspace{-0.2em}
+\alternativascols{10 m/s\textsuperscript{2} e 40 N}%
+{10 m/s\textsuperscript{2} e 20 N}%
+{10 m/s\textsuperscript{2} e 80 N}%
+{20 m/s\textsuperscript{2} e 20 N}%
+{20 m/s\textsuperscript{2} e 40 N}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quest\~ao 14}
+\framesubtitle{gabarito}
+\resposta{14}{E --- 20 m/s\textsuperscript{2} e 40 N}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Passo 1 --- sistema inteiro}
+\[ a = \frac{F}{m_1+m_2} = \frac{140}{7} = 20\ \text{m/s}^2 \]
+
+\textbf{Passo 2 --- s\'o o bloco de 2 kg}\\
+A \'unica for\c{c}a horizontal nele \'e a de contato:
+\[ N = m_2\,a = 2\cdot 20 = 40\ \text{N} \]
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[thick] (0,0) -- (2.2,0);
+  \draw[thick, fill=black!8] (0.6,0) rectangle (1.7,0.85);
+  \node[font=\small] at (1.15,0.42) {2 kg};
+  \draw[-{Stealth[length=2.6mm]}, very thick, vinho] (-0.1,0.42) -- (0.55,0.42)
+    node[midway, above, font=\small] {$N$};
+  \node[font=\small, anchor=north] at (1.15,-0.15) {diagrama isolado};
+\end{tikzpicture}
+
+\vspace{0.5em}
+{\color{grafite}\itshape\small O m\'etodo geral de blocos: sistema
+inteiro primeiro, depois o diagrama de \textbf{um corpo s\'o}.}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===================================================================
+% FECHAMENTO
+% ===================================================================
+\begin{frame}
+\frametitle{As tr\^es leis, em uma tela}
+\framesubtitle{fechamento}
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{1\textordfeminine{} Lei} --- se $\vec{F}_R = \vec{0}$, o estado
+de movimento n\~ao muda.
+\[ \vec{F}_R = \vec{0} \;\Rightarrow\; \vec{a} = \vec{0} \]
+
+\textbf{2\textordfeminine{} Lei}
+\[ \boxed{\vec{F}_R = m\,\vec{a}} \]
+
+\textbf{3\textordfeminine{} Lei} --- A empurra B com $\vec{F}$, B
+empurra A com $-\vec{F}$, \textbf{em corpos diferentes}.
+\end{column}
+\begin{column}{0.46\textwidth}
+\textbf{As for\c{c}as da aula}
+\[ P = mg \qquad f_{at} = \mu N \]
+\[ N \perp \text{superf\'icie} \qquad T \parallel \text{fio} \]
+
+\textbf{Na rampa}
+\[ P_x = mg\,\mathrm{sen}\,\theta \qquad
+   N = mg\cos\theta \]
+
+\vspace{0.5em}
+{\color{grafite}\itshape Toda quest\~ao de hoje saiu daqui. A
+1\textordfeminine{} Lei \'e s\'o o caso $a = 0$ da 2\textordfeminine{}.}
+\end{column}
+\end{columns}
+\end{frame}
+
+\end{document}

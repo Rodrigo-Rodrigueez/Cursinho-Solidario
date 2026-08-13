@@ -22,7 +22,9 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{comment}
 \pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, patterns}
 
 \definecolor{vinho}{RGB}{122, 27, 42}
 \definecolor{grafite}{RGB}{70, 70, 70}
@@ -73,34 +75,29 @@
 {\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
 {\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
 {\huge\bfseries Lista de Quest\~oes}\\[0.35em]
-{\LARGE Din\^amica --- Leis de Newton e For\c{c}as}\\[0.7em]
-{\itshape\color{grafite}Quest\~oes reais de ENEM e Vestibular UTFPR,
-com gabarito comentado}
+{\LARGE Din\^amica --- Leis de Newton}\\[0.7em]
+{\itshape\color{grafite}Quest\~oes reais de ENEM e de vestibulares
+(UTFPR, UEL, UERJ)}
 \hfill {\color{grafite}2026}\\[-0.3em]
 {\color{black!30}\rule{\linewidth}{0.5pt}}
 
 \vspace{1.0em}
 
 \begin{painel}
-{\small\scshape\color{grafite}como usar esta lista}\par\smallskip
+
 \begin{itemize}[nosep, leftmargin=1.5em]
-  \item Todas as quest\~oes s\~ao de provas de verdade. A fonte e o ano
-        est\~ao do lado do n\'umero. Os gabaritos foram conferidos nas
-        provas e gabaritos oficiais (UTFPR) e em resolu\c{c}\~oes
-        p\'ublicas (ENEM). \textit{PPL = reaplica\c{c}\~ao do ENEM
-        (Pessoas Privadas de Liberdade), mesma banca e mesmo formato.}
-  \item As quest\~oes marcadas com \selosala v\~ao ser resolvidas na
-        aula (Bloco 5 do plano). Vale tentar antes.
-  \item O resto \'e \textbf{tarefa de casa}. Come\c{c}ar por Q2, Q3 e
-        Q11 (uma de cada lei).
-  \item Q13 e Q14 s\~ao revis\~ao de cinem\'atica. Q15 e Q16 s\~ao
-        desafios de assuntos das pr\'oximas aulas.
-  \item O \textbf{gabarito comentado} est\'a no final. Tentar fazer
-        antes de olhar.
+  \item Todas as quest\~oes s\~ao de provas antigas. A fonte e o ano
+        est\~ao do lado do n\'umero.
+  \item As quest\~oes marcadas com \selosala tem como objetivo serem resolvidas na
+        aula (Bloco 5 do plano).
+  \item O resto são questões extras. Come\c{c}ar por Q2, Q3 e
+        Q10 (uma de cada lei); Q15 \'e o treino de diagramas de corpo
+        livre com fio e roldana.
+  \item Q16 e Q17 s\~ao desafios.
 \end{itemize}
 \end{painel}
 
-\vspace{0.6em}
+\newpage
 
 {\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{@{}clll@{}}
@@ -114,19 +111,22 @@ com gabarito comentado}
   3  & ENEM PPL 2014      & For\c{c}a resultante e peso                  & casa \\
   4  & UTFPR Ver\~ao 2025 & 2\textordfeminine{} Lei (num\'erica)         & \textbf{sala} \\
   5  & ENEM 2017          & 2\textordfeminine{} Lei + gr\'afico          & \textbf{sala} \\
-  6  & UTFPR Ver\~ao 2026 & Frenagem (num\'erica)                        & \textbf{sala (b\^onus)} \\
-  7  & ENEM 2009          & Massa $\times$ peso                          & casa \\
-  8  & UTFPR Ver\~ao 2025 & For\c{c}a el\'astica (Lei de Hooke)          & casa \\
-  9  & ENEM 2013          & 3\textordfeminine{} Lei + atrito             & \textbf{sala} \\
-  10 & ENEM PPL 2012      & 3\textordfeminine{} Lei (conceito)           & \textbf{sala} \\
-  11 & UTFPR Inverno 2023 & 3\textordfeminine{} Lei / propuls\~ao        & casa \\
-  12 & ENEM PPL 2012      & Atrito est\'atico $\times$ cin\'etico (ABS)  & casa \\
-  13 & UTFPR Ver\~ao 2024 & Revis\~ao: MRUV                              & casa \\
-  14 & UTFPR Ver\~ao 2024 & Revis\~ao: gr\'afico $v \times t$            & casa \\
-  15 & ENEM 2009          & Desafio: curva do trem-bala                  & casa \\
-  16 & UTFPR Ver\~ao 2024 & Desafio: colis\~ao                           & casa \\
+  6  & ENEM 2009          & Massa $\times$ peso                          & casa \\
+  7  & UTFPR Ver\~ao 2025 & For\c{c}a el\'astica (Lei de Hooke)          & casa \\
+  8  & ENEM 2013          & 3\textordfeminine{} Lei + atrito             & \textbf{sala} \\
+  9  & ENEM PPL 2012      & 3\textordfeminine{} Lei (conceito)           & \textbf{sala} \\
+  10 & UTFPR Inverno 2023 & 3\textordfeminine{} Lei / propuls\~ao        & casa \\
+  11 & ENEM PPL 2012      & Atrito est\'atico $\times$ cin\'etico (ABS)  & \textbf{sala} \\
+  12 & UEL 1995           & Plano inclinado sem atrito                   & \textbf{sala (bonus)} \\
+  13 & UERJ 1998          & Rampa: for\c{c}a m\'inima                    & casa \\
+  14 & UTFPR Inverno 2024 & Blocos em contato (2\textordfeminine{} Lei)  & \textbf{sala} \\
+  15 & UEL 1994           & Blocos ligados por fio + roldana             & casa \\
+  16 & ENEM 2009          & Desafio: curva do trem-bala                  & casa \\
+  17 & UTFPR Ver\~ao 2024 & Desafio: colis\~ao                           & casa \\
   \bottomrule
 \end{tabular}}
+
+\newpage
 
 % ===================================================================
 \parte{Parte I --- 1\textordfeminine{} Lei: In\'ercia}
@@ -290,24 +290,7 @@ motorista?
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{6}{\selobonus\fonte{UTFPR Ver\~ao 2026 --- Q35}}
-Para testar os sistemas de freio de um carro em um certo tipo de
-asfalto, para simular situa\c{c}\~oes reais nas estradas brasileiras, o
-fabricante realizou testes da frenagem de seu novo carro pr\'oximo do
-limite de 110 km/h (padr\~ao em muitas rodovias). Em um dos testes, o
-medidor de velocidade indicou uma velocidade de 108 km/h no instante do
-in\'icio da frenagem. Sabendo que o carro levou 150 m para parar, qual
-\'e o m\'odulo da acelera\c{c}\~ao m\'edia do carro durante a frenagem?
-\begin{enumerate}
-  \item 2,0 m/s\textsuperscript{2}
-  \item 2,5 m/s\textsuperscript{2}
-  \item 3,0 m/s\textsuperscript{2}
-  \item 3,5 m/s\textsuperscript{2}
-  \item 3,8 m/s\textsuperscript{2}
-\end{enumerate}
-\end{questao}
-
-\begin{questao}{7}{\fonte{ENEM 2009}}
+\begin{questao}{6}{\fonte{ENEM 2009}}
 O \^onibus espacial Atlantis foi lan\c{c}ado ao espa\c{c}o com cinco
 astronautas a bordo e uma c\^amera nova, que iria substituir uma outra
 danificada por um curto-circuito no telesc\'opio Hubble. Depois de
@@ -340,7 +323,7 @@ dita pelo astronauta
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{8}{\fonte{UTFPR Ver\~ao 2025 --- Q53}}
+\begin{questao}{7}{\fonte{UTFPR Ver\~ao 2025 --- Q53}}
 Considerando o sistema internacional de medidas e a nota\c{c}\~ao de
 engenharia, determine o que se pede a seguir:
 
@@ -362,7 +345,7 @@ a tira est\'a em seu comprimento m\'aximo \'e de:
 \parte{Parte III --- 3\textordfeminine{} Lei: A\c{c}\~ao e Rea\c{c}\~ao}
 % ===================================================================
 
-\begin{questao}{9}{\selosala\fonte{ENEM 2013}}
+\begin{questao}{8}{\selosala\fonte{ENEM 2013}}
 Uma pessoa necessita da for\c{c}a de atrito em seus p\'es para se
 deslocar sobre uma superf\'icie. Logo, uma pessoa que sobe uma rampa em
 linha reta ser\'a auxiliada pela for\c{c}a de atrito exercida pelo
@@ -379,7 +362,7 @@ e o sentido da for\c{c}a de atrito mencionada no texto?
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{10}{\selosala\fonte{ENEM PPL 2012}}
+\begin{questao}{9}{\selosala\fonte{ENEM PPL 2012}}
 Durante uma faxina, a m\~ae pediu que o filho a ajudasse, deslocando um
 m\'ovel para mud\'a-lo de lugar. Para escapar da tarefa, o filho disse
 ter aprendido na escola que n\~ao poderia puxar o m\'ovel, pois a
@@ -400,7 +383,7 @@ interpreta\c{c}\~ao do garoto?
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{11}{\fonte{UTFPR Inverno 2023 --- Q53}}
+\begin{questao}{10}{\fonte{UTFPR Inverno 2023 --- Q53}}
 Em 2024, a NASA, ag\^encia espacial norte-americana, planeja lan\c{c}ar
 a miss\~ao Artemis II para voar ao redor da Lua com quatro astronautas.
 Esta ser\'a a primeira miss\~ao lunar com um homem negro e uma mulher.
@@ -437,7 +420,7 @@ conceito f\'isico envolvido.
 \parte{Parte IV --- Atrito}
 % ===================================================================
 
-\begin{questao}{12}{\fonte{ENEM PPL 2012}}
+\begin{questao}{11}{\fonte{ENEM PPL 2012}}
 O freio ABS \'e um sistema que evita que as rodas de um autom\'ovel
 sejam bloqueadas durante uma frenagem forte e entrem em derrapagem.
 Testes demonstram que, a partir de uma dada velocidade, a dist\^ancia de
@@ -464,55 +447,151 @@ resulta do fato de
 \end{questao}
 
 % ===================================================================
-\parte{Parte V --- Revis\~ao e Desafios}
+\parte{Parte V --- Plano Inclinado e Sistemas de Blocos}
 % ===================================================================
 
-\begin{questao}{13}{\fonte{UTFPR Ver\~ao 2024 --- Q53}}
-Um m\'ovel, parado, parte em movimento retil\'ineo acelerando, com
-acelera\c{c}\~ao constante, igual a 3,5 m/s\textsuperscript{2}. Qual a
-sua velocidade escalar e a dist\^ancia percorrida ap\'os 10 s,
-respectivamente:
+\begin{questao}{12}{\selosala\fonte{UEL 1995}}
+Um corpo de massa $2{,}0$ kg \'e abandonado sobre um plano
+perfeitamente liso e inclinado de $37^{\circ}$ com a horizontal.
+Adotando $g = 10$ m/s\textsuperscript{2},
+$\mathrm{sen}\,37^{\circ} = 0{,}60$ e $\cos 37^{\circ} = 0{,}80$,
+conclui-se que a acelera\c{c}\~ao com que o corpo desce o plano tem
+m\'odulo, em m/s\textsuperscript{2}:
 \begin{enumerate}
-  \item 17,5 m/s e 350 m.
-  \item 35 m/s e 175 m.
-  \item 35 m/s e 350 m.
-  \item 10 m/s e 350 m.
-  \item 3,5 m/s e 17,5 m.
+  \item 4,0
+  \item 5,0
+  \item 6,0
+  \item 8,0
+  \item 10
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{14}{\fonte{UTFPR Ver\~ao 2024 --- Q54}}
-No caso da frenagem de um carro que se encontra em movimento
-retil\'ineo, com velocidade constante no in\'icio da frenagem e
-desacelera\c{c}\~ao constante por uma certa dist\^ancia at\'e que o
-carro pare. Sobre o gr\'afico da velocidade em fun\c{c}\~ao do tempo,
-\'e correto afirmar que:
+\begin{questao}{13}{\selosala\fonte{UERJ 1998}}
+O carregador deseja levar um bloco de 400 N de peso at\'e a
+carroceria do caminh\~ao, a uma altura de $1{,}5$ m, utilizando-se de
+um plano inclinado de $3{,}0$ m de comprimento, conforme a figura.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+  % ch\~ao
+  \draw[thick] (-0.8,0) -- (5.8,0);
+  % rampa (L = 3,0 m; h = 1,5 m)
+  \draw[thick] (0,0) -- (2.6,1.5) -- (2.6,0);
+  % carroceria do caminh\~ao
+  \draw[thick] (2.6,1.5) -- (5.0,1.5);
+  \draw[thick] (5.0,1.5) -- (5.0,0);
+  \node[anchor=south] at (3.9,1.55) {\small carroceria};
+  % bloco sobre a rampa
+  \begin{scope}[shift={(0.95,0.55)}, rotate=30]
+    \draw[thick, fill=black!8] (0,0) rectangle (0.9,0.55);
+  \end{scope}
+  % cotas
+  \draw[<->] (-0.18,0.30) -- (2.42,1.80)
+    node[midway, above, sloped] {\small $3{,}0$ m};
+  \draw[<->] (3.1,0) -- (3.1,1.5)
+    node[midway, right] {\small $1{,}5$ m};
+\end{tikzpicture}\\
+{\small\itshape (Figura redesenhada --- n\~ao \'e a arte original da
+prova.)}
+\end{center}
+
+Desprezando o atrito, a for\c{c}a m\'inima com que o carregador deve
+puxar o bloco, enquanto este sobe a rampa, ser\'a, em N, de:
 \begin{enumerate}
-  \item O gr\'afico de frenagem se assemelha a uma reta, ascendente, com
-        coeficiente angular positivo e posicionamento inicial do
-        coeficiente linear diferente de 0.
-  \item O gr\'afico de frenagem se assemelha a uma reta, descendente,
-        com coeficiente angular positivo e posicionamento inicial do
-        coeficiente linear igual a 0.
-  \item O gr\'afico de frenagem se assemelha a uma reta, descendente,
-        com coeficiente angular negativo e posicionamento inicial do
-        coeficiente linear diferente de 0.
-  \item O gr\'afico de frenagem se assemelha a uma semi-par\'abola,
-        concavidade para baixo, com o ponto cartesiano em Y, de seu
-        v\'ertice, coincidindo com o momento inicial de frenagem
-        (diminui\c{c}\~ao de velocidade) e cujo encontro desse gr\'afico
-        com o eixo X determina a quantidade de tempo at\'e a parada
-        total do m\'ovel.
-  \item O gr\'afico de frenagem se assemelha a uma semi-par\'abola,
-        concavidade para baixo, com o ponto cartesiano em X, de seu
-        v\'ertice, coincidindo com o momento inicial de frenagem
-        (diminui\c{c}\~ao de velocidade) e cujo encontro desse gr\'afico
-        com o eixo Y determina a quantidade de tempo at\'e a parada
-        total do m\'ovel.
+  \item 100
+  \item 150
+  \item 200
+  \item 400
+  \item 500
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{15}{\fonte{ENEM 2009}}
+\begin{questao}{14}{\selosala\fonte{UTFPR Inverno 2024 --- Q55}}
+Dois blocos encostados um ao outro, em uma superf\'icie plana e sem
+atrito, possuem massas de, respectivamente, 5 kg e 2 kg. Uma for\c{c}a
+$F = 140$ N empurra os blocos da esquerda para a direita, como
+representado na figura a seguir.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  % ch\~ao
+  \draw[thick] (-0.2,0) -- (5.4,0);
+  % blocos
+  \draw[thick, fill=black!8] (1.4,0) rectangle (2.9,1.2);
+  \node at (2.15,0.6) {5 kg};
+  \draw[thick, fill=black!8] (2.9,0) rectangle (4.0,0.85);
+  \node at (3.45,0.42) {2 kg};
+  % for\c{c}a
+  \draw[-{Stealth[length=3mm]}, very thick] (0.2,0.6) -- (1.3,0.6)
+    node[midway, above] {$F$};
+\end{tikzpicture}\\
+{\small\itshape (Figura redesenhada --- n\~ao \'e a arte original da
+prova.)}
+\end{center}
+
+Qual \'e a acelera\c{c}\~ao do sistema e a for\c{c}a normal entre os
+dois blocos, respectivamente, nessa situa\c{c}\~ao? (Considere a
+acelera\c{c}\~ao da gravidade $g = 10$ m/s\textsuperscript{2}.)
+\begin{enumerate}
+  \item 10 m/s\textsuperscript{2} e 40 N.
+  \item 10 m/s\textsuperscript{2} e 20 N.
+  \item 10 m/s\textsuperscript{2} e 80 N.
+  \item 20 m/s\textsuperscript{2} e 20 N.
+  \item 20 m/s\textsuperscript{2} e 40 N.
+\end{enumerate}
+\end{questao}
+
+\begin{questao}{15}{\fonte{UEL 1994}}
+Os tr\^es corpos, A, B e C, representados na figura a seguir, t\^em
+massas iguais, $m = 3{,}0$ kg.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  % tampo da mesa
+  \draw[thick] (0,0) -- (4,0);
+  \fill[pattern=north east lines] (0,-0.15) rectangle (4,0);
+  % parede lateral da mesa
+  \draw[thick] (4,0) -- (4,-2.1);
+  \fill[pattern=north east lines] (3.85,-2.1) rectangle (4,0);
+  % blocos A e B
+  \draw[thick, fill=black!8] (0.5,0) rectangle (1.3,0.55);
+  \node at (0.9,0.28) {\small A};
+  \draw[thick, fill=black!8] (1.9,0) rectangle (2.7,0.55);
+  \node at (2.3,0.28) {\small B};
+  % fio A--B
+  \draw[thick] (1.3,0.28) -- (1.9,0.28);
+  % roldana
+  \draw[thick] (4.02,0.02) -- (4.18,0.28);
+  \draw[thick, fill=white] (4.18,0.28) circle (0.2);
+  % fio B--roldana--C
+  \draw[thick] (2.7,0.48) -- (4.18,0.48);
+  \draw[thick] (4.38,0.28) -- (4.38,-0.9);
+  % bloco C
+  \draw[thick, fill=black!8] (4.08,-1.5) rectangle (4.68,-0.9);
+  \node at (4.38,-1.2) {\small C};
+\end{tikzpicture}\\
+{\small\itshape (Figura redesenhada --- n\~ao \'e a arte original da
+prova.)}
+\end{center}
+
+O plano horizontal, onde se apoiam A e B, n\~ao oferece atrito, a
+roldana tem massa desprez\'ivel e a acelera\c{c}\~ao local da
+gravidade pode ser considerada $g = 10$ m/s\textsuperscript{2}. A
+tra\c{c}\~ao no fio que une os blocos A e B tem m\'odulo:
+\begin{enumerate}
+  \item 10 N
+  \item 15 N
+  \item 20 N
+  \item 25 N
+  \item 30 N.
+\end{enumerate}
+\end{questao}
+
+% ===================================================================
+\parte{Parte VI --- Desafios}
+% ===================================================================
+
+\begin{questao}{16}{\fonte{ENEM 2009}}
 O Brasil pode se transformar no primeiro pa\'is das Am\'ericas a entrar
 no seleto grupo das na\c{c}\~oes que disp\~oem de trens-bala. O
 Minist\'erio dos Transportes prev\^e o lan\c{c}amento do edital de
@@ -542,7 +621,7 @@ aproximadamente,
 \end{enumerate}
 \end{questao}
 
-\begin{questao}{16}{\fonte{UTFPR Ver\~ao 2024 --- Q55}}
+\begin{questao}{17}{\fonte{UTFPR Ver\~ao 2024 --- Q55}}
 Popularmente, o estilingue \'e conhecido como: ``Arco atirador com
 el\'asticos presos pelas extremidades que, sendo ativado por um gatilho,
 arremessa pedrinhas, bolas de argila; atiradeira, badoque, bodoque.''
@@ -567,6 +646,7 @@ Despreze a resist\^encia do ar.
 \end{enumerate}
 \end{questao}
 
+
 \newpage
 
 % ===================================================================
@@ -575,11 +655,18 @@ Despreze a resist\^encia do ar.
 
 \begin{center}
 {\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{cccccccccccccccc}
+\begin{tabular}{cccccccccc}
   \toprule
-  1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+  1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
   \midrule
-  A & E & B & A & B & C & D & C & C & E & C & B & B & C & E & D \\
+  A & E & B & A & B & D & C & C & E & C \\
+  \bottomrule
+\end{tabular}\\[0.7em]
+\begin{tabular}{ccccccc}
+  \toprule
+  11 & 12 & 13 & 14 & 15 & 16 & 17 \\
+  \midrule
+  B & C & C & E & A & E & D \\
   \bottomrule
 \end{tabular}}
 \end{center}
@@ -619,61 +706,76 @@ $F = ma$, o cinto mais seguro \'e o que tem o menor pico de
 desacelera\c{c}\~ao (a frenagem fica espalhada no tempo). \'E o cinto
 2.
 
-\item[Q6 --- C (frenagem / Torricelli).]
-$v_0 = 108$ km/h $= 30$ m/s. Por Torricelli, com $v = 0$:
-$0 = 30^2 - 2a(150) \Rightarrow a = 900/300 = 3{,}0$
-m/s\textsuperscript{2}.
-\textit{Para usar na aula: se o carro tiver 1000 kg, a for\c{c}a de
-frenagem \'e $F = ma = 3000$ N.}
-
-\item[Q7 --- D (massa $\times$ peso).]
+\item[Q6 --- D (massa $\times$ peso).]
 As leis de Kepler n\~ao falam de massa nem de peso, ent\~ao a frase
 n\~ao se justifica por elas. E em \'orbita o peso n\~ao \'e pequeno:
 \'e o peso (a gravidade) que mant\'em o telesc\'opio em \'orbita. O que
 existe l\'a \'e a sensa\c{c}\~ao de imponderabilidade. A massa (a
 in\'ercia) continua grande.
 
-\item[Q8 --- C (Lei de Hooke).]
+\item[Q7 --- C (Lei de Hooke).]
 $F = kx = 200 \cdot 0{,}375 = 75$ N. Cuidado com a alternativa d):
 75 kgf seria uns 750 N.
 
-\item[Q9 --- C (3\textordfeminine{} Lei + atrito).]
+\item[Q8 --- C (3\textordfeminine{} Lei + atrito).]
 Ao andar, o p\'e empurra o ch\~ao para tr\'as (paralelo \`a rampa).
 Pela 3\textordfeminine{} Lei, o ch\~ao (atrito) empurra a pessoa para a
 frente: paralelo ao plano e no mesmo sentido do movimento.
 
-\item[Q10 --- E (3\textordfeminine{} Lei).]
+\item[Q9 --- E (3\textordfeminine{} Lei).]
 A\c{c}\~ao e rea\c{c}\~ao t\^em a mesma intensidade e sentidos opostos,
 mas atuam em corpos diferentes, ent\~ao nunca se cancelam. A resultante
 \textit{no m\'ovel} pode ser diferente de zero e ele acelera.
 
-\item[Q11 --- C (3\textordfeminine{} Lei / conserva\c{c}\~ao do momento).]
+\item[Q10 --- C (3\textordfeminine{} Lei / conserva\c{c}\~ao do momento).]
 No v\'acuo n\~ao tem o que empurrar (isso elimina a alternativa e). A
 sa\'ida \'e expelir massa: jogando g\'as para um lado, o astronauta \'e
 impulsionado para o outro. \'E o mesmo princ\'ipio do foguete.
 
-\item[Q12 --- B (atrito est\'atico $\times$ cin\'etico).]
+\item[Q11 --- B (atrito est\'atico $\times$ cin\'etico).]
 Sem travar as rodas, o pneu rola sem deslizar e a frenagem usa atrito
 est\'atico, que tem coeficiente maior que o cin\'etico (roda travada,
 deslizando). E o atrito n\~ao depende da \'area de contato, o que
 elimina d) e e).
 
-\item[Q13 --- B (revis\~ao MRUV).]
-$v = at = 3{,}5 \cdot 10 = 35$ m/s;
-$d = \tfrac{1}{2}at^2 = \tfrac{1}{2}\cdot 3{,}5\cdot 100 = 175$ m.
+\item[Q12 --- C (plano inclinado sem atrito).]
+No plano inclinado, o peso se decomp\~oe: a componente paralela \`a
+rampa \'e $P_x = mg\,\mathrm{sen}\,\theta$ e a perpendicular \'e
+equilibrada pela normal ($N = mg\cos\theta$). Sem atrito, a resultante
+\'e s\'o $P_x$, ent\~ao
+$a = g\,\mathrm{sen}\,37^{\circ} = 10\cdot 0{,}60 = 6{,}0$
+m/s\textsuperscript{2}. Repare que a massa cancela: qualquer corpo
+desceria essa rampa com a mesma acelera\c{c}\~ao.
 
-\item[Q14 --- C (revis\~ao gr\'afico $v \times t$).]
-MRUV de frenagem: reta descendo (coeficiente angular $= a < 0$)
-come\c{c}ando de $v_0 \neq 0$ (coeficiente linear diferente de zero).
+\item[Q13 --- C (rampa: for\c{c}a m\'inima).]
+Para subir com velocidade constante (for\c{c}a m\'inima), basta
+equilibrar a componente do peso ao longo da rampa:
+$F = P\,\mathrm{sen}\,\theta = P\cdot h/L = 400\cdot 1{,}5/3{,}0 =
+200$ N. \'E a rampa como m\'aquina simples: metade da for\c{c}a, mas o
+dobro do caminho (1,5 m de altura contra 3,0 m de rampa).
 
-\item[Q15 --- E (desafio: 2\textordfeminine{} Lei em curva).]
+\item[Q14 --- E (blocos em contato).]
+Primeiro o sistema inteiro:
+$a = F/(m_1+m_2) = 140/7 = 20$ m/s\textsuperscript{2}. Depois s\'o o
+bloco de 2 kg: a \'unica for\c{c}a horizontal nele \'e a de contato,
+ent\~ao $N = m_2\,a = 2\cdot 20 = 40$ N. \'E o m\'etodo geral de
+blocos: sistema inteiro primeiro, depois o diagrama de um corpo s\'o.
+
+\item[Q15 --- A (blocos com fio e roldana).]
+Sistema todo: quem puxa \'e s\'o o peso de C, ent\~ao
+$a = mg/(3m) = 10/3$ m/s\textsuperscript{2}. O fio A--B puxa somente o
+bloco A: $T = m\,a = 3{,}0\cdot 10/3 = 10$ N. (J\'a o fio B--C
+arrasta A e B juntos: $T' = 2m\,a = 20$ N --- repare a
+diferen\c{c}a.)
+
+\item[Q16 --- E (desafio: 2\textordfeminine{} Lei em curva).]
 $v \approx 4\times 10^5\ \text{m} / 5{,}1\times 10^3\ \text{s} \approx
 80$ m/s. Na curva a resultante \'e centr\'ipeta:
 $a_c = v^2/r \Rightarrow r = v^2/a_c = 80^2/1 = 6400$ m.
 \textit{(\'E a mesma 2\textordfeminine{} Lei, s\'o que a for\c{c}a
 aponta para o centro da curva.)}
 
-\item[Q16 --- D (desafio: conserva\c{c}\~ao do momento).]
+\item[Q17 --- D (desafio: conserva\c{c}\~ao do momento).]
 Colis\~ao perfeitamente inel\'astica:
 $m_1 v_1 = (m_1+m_2)v \Rightarrow 0{,}06\cdot 5 = 0{,}30\cdot v
 \Rightarrow v = 1$ m/s.
@@ -690,16 +792,24 @@ essa f\'ormula.)}
 \begin{itemize}[nosep, leftmargin=1.5em]
   \item \textbf{UTFPR}: provas e gabaritos definitivos oficiais em
         \url{https://www.utfpr.edu.br/cursos/estudenautfpr/vestibular}
-        (edi\c{c}\~oes: Inverno 2023, Ver\~ao 2024, Ver\~ao 2025,
-        Ver\~ao 2026).
+        (edi\c{c}\~oes: Inverno 2023, Ver\~ao 2024, Inverno 2024,
+        Ver\~ao 2025). A Q14 \'e a quest\~ao 55 do
+        caderno oficial do Inverno 2024, com gabarito definitivo
+        conferido.
   \item \textbf{ENEM}: provas do INEP. Enunciados conferidos em
         compila\c{c}\~oes p\'ublicas (Projeto Medicina / Tenho Prova
         Amanh\~a; Toda Mat\'eria). ENEM 2017 = quest\~ao 99 do caderno
         azul do 2\textordfeminine{} dia; ENEM 2013 = quest\~ao 76 do
         caderno azul.
-  \item A figura da Q5 foi redesenhada (n\~ao \'e a arte original da
-        prova). Para projetar a original, usar o PDF oficial do INEP.
+  \item \textbf{UEL e UERJ} (Q12, Q13 e Q15): enunciados e gabaritos
+        conferidos na compila\c{c}\~ao p\'ublica do Projeto Medicina
+        (\textit{Exerc\'icios sobre Aplica\c{c}\~ao de Leis de Newton
+        em Blocos, com gabarito}).
+  \item As figuras da Q5, Q13, Q14 e Q15 foram redesenhadas (n\~ao
+        s\~ao a arte original das provas). Para projetar as originais,
+        usar os PDFs oficiais.
 \end{itemize}
 \end{painel}
+
 
 \end{document}

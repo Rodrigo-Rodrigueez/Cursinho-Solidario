@@ -1,4 +1,5 @@
-DOCS = plano_aula_dinamica lista_questoes_dinamica
+DOCS = plano_aula_dinamica lista_questoes_dinamica \
+       slides_questoes_dinamica videos_dinamica
 
 .PHONY: all clean
 
