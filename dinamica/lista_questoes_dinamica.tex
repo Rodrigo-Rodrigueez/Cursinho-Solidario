@@ -23,6 +23,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{comment}
+\usepackage{pdfpages}   % anexa as resolu\c{c}\~oes manuscritas no fim
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta, patterns}
 
@@ -94,6 +95,9 @@
         Q10 (uma de cada lei); Q15 \'e o treino de diagramas de corpo
         livre com fio e roldana.
   \item Q16 e Q17 s\~ao desafios.
+  \item No fim da lista tem o gabarito comentado e, depois dele, as
+        \textbf{resolu\c{c}\~oes passo a passo} das quest\~oes de
+        c\'alculo.
 \end{itemize}
 \end{painel}
 
@@ -811,5 +815,24 @@ essa f\'ormula.)}
 \end{itemize}
 \end{painel}
 
+% ===================================================================
+% RESOLU\c{C}\~OES MANUSCRITAS (anexo)
+% Arquivo externo: resolucoes_dinamica.pdf (5 p\'aginas).
+% A 1\textordfeminine{} p\'agina entra reduzida e deslocada para baixo
+% para caber o t\'itulo do anexo; as demais entram cheias.
+% ===================================================================
+\newcommand{\tituloanexo}{%
+  \thispagestyle{empty}%
+  {\Large\bfseries Resolu\c{c}\~oes Passo a Passo}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}\\[0.35em]
+  {\small\itshape\color{grafite}Manuscritas, das quest\~oes de
+  c\'alculo (Q4, Q7 e Q12 a Q17).}%
+}
+
+\includepdf[pages=1, scale=0.85, offset=0 -1.4cm,
+  pagecommand=\tituloanexo]{resolucoes_dinamica.pdf}
+
+\includepdf[pages=2-, scale=0.95,
+  pagecommand={\thispagestyle{empty}}]{resolucoes_dinamica.pdf}
 
 \end{document}

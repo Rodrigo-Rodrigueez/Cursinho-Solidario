@@ -14,6 +14,10 @@ LaTeX teaching materials (in Brazilian Portuguese) for physics classes at a volu
   the corresponding `lista_questoes_*`
 - `videos_*` — curated list of verified YouTube videos with where each fits in the
   lesson plan; ends in a projectable page of QR codes
+- `resolucoes_*` — handwritten step-by-step solutions, an externally produced PDF (not
+  generated from `.tex`). It is not built by the Makefile; it is appended to the end of
+  the matching `lista_questoes_*` with `\includepdf` (package `pdfpages`), after the
+  commented answer key. Replacing the file and rebuilding the list is enough to update it.
 
 All content is written in Portuguese; keep new material in Portuguese.
 
