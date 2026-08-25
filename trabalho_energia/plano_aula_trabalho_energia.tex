@@ -1,0 +1,933 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% Tipografia: Palatino, versalete, uma cor de destaque (bordô)
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{microtype}
+\usepackage[top=2.4cm, bottom=2.6cm, left=2.6cm, right=2.6cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{hyperref}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+\hypersetup{colorlinks=true, linkcolor=vinho, urlcolor=vinho}
+
+\linespread{1.06}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% ---------------------------------------------------------------
+% Cabeçalhos de bloco e seção
+% ---------------------------------------------------------------
+\newcommand{\bloco}[3]{%
+  \needspace{7\baselineskip}
+  \vspace{1.8em}
+  {\scshape\color{vinho}bloco #1}\hfill
+    {\small\itshape\color{grafite}\textasciitilde\,#3 min}\\[0.1em]
+  {\Large\bfseries #2}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\secao}[1]{%
+  \needspace{6\baselineskip}
+  \vspace{1.8em}
+  {\Large\bfseries #1}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\objetivo}[1]{{\itshape\color{grafite}Objetivo: #1}\par\smallskip}
+
+% ---------------------------------------------------------------
+% Painéis: barra fina à esquerda + rótulo em versalete
+% ---------------------------------------------------------------
+\newtcolorbox{quadro}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}no quadro}\par\smallskip}}
+
+\newtcolorbox{perguntas}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}perguntar \`a turma}\par\smallskip}}
+
+\newtcolorbox{obs}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{black!30},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{black!55}observa\c{c}\~oes}\par\smallskip}}
+
+\newtcolorbox{corte}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho!70, dashed},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}se o tempo apertar}\par\smallskip}}
+
+\newtcolorbox{projetor}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  borderline west={1.4pt}{3.2pt}{black!25},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}projetor}\par\smallskip}}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+% ---------------------------------------------------------------
+% TÍTULO
+% ---------------------------------------------------------------
+\thispagestyle{empty}
+
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
+{\huge\bfseries Trabalho e Energia}\\[0.35em]
+{\LARGE Energia, Conserva\c{c}\~ao, Trabalho e Pot\^encia}\\[0.7em]
+{\itshape\color{grafite}Plano de aula \,\textperiodcentered\, 2h
+ \,\textperiodcentered\, ENEM e vestibular UTFPR}
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\linewidth}{0.5pt}}
+
+\vspace{1.2em}
+
+% ---------------------------------------------------------------
+% VISÃO GERAL
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}X@{}}
+  \multicolumn{2}{@{}l}{{\scshape\color{vinho}vis\~ao geral}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Objetivo} & Partir da ideia de energia e das suas formas
+    mec\^anicas (cin\'etica, potencial gravitacional e el\'astica),
+    chegar \`a conserva\c{c}\~ao da energia mec\^anica e s\'o ent\~ao
+    definir o trabalho de uma for\c{c}a e a pot\^encia, aplicando tudo
+    em quest\~oes de ENEM e do vestibular da UTFPR. \\
+  \textbf{Sequ\^encia} & \textbf{Energia primeiro, trabalho depois.} A
+    turma j\'a tem intui\c{c}\~ao sobre energia, e trabalho \'e o
+    conceito que mais confunde (todo mundo acha que fazer for\c{c}a j\'a
+    \'e trabalho). Quando $W = Fd\cos\theta$ aparece, no Bloco 5, ela
+    j\'a sabe o que \'e energia e s\'o precisa entender que trabalho \'e
+    a energia \textbf{em tr\^ansito}. \\
+  \textbf{Formato} & Teoria no quadro do in\'icio ao fim e, no final,
+    resolu\c{c}\~ao de quest\~oes tamb\'em no quadro. O projetor s\'o
+    é utilizado para mostrar as quest\~oes. \\
+  \textbf{Pr\'e-requisito} & Aula de Din\^amica (Leis de Newton, peso,
+    normal, atrito e for\c{c}a el\'astica). \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{1.4em}
+
+% ---------------------------------------------------------------
+% CRONOGRAMA
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}clX r@{}}
+  \multicolumn{4}{@{}l}{{\scshape\color{vinho}cronograma}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Bloco} & \textbf{T\'opico} & \textbf{Foco principal} & \textbf{Tempo} \\
+  \midrule
+  0 & Abertura & Situa\c{c}\~ao-problema: a montanha-russa & 10 min \\
+  1 & O que \'e energia & Formas, joule, ``n\~ao some, muda de forma'' & 8 min \\
+  2 & Energia cin\'etica & $E_c = mv^2/2$ e o quadrado da velocidade & 10 min \\
+  3 & Energia potencial & $E_{pg} = mgh$, $E_{pe} = kx^2/2$, conservativas & 12 min \\
+  4 & Conserva\c{c}\~ao & $E_m$ constante e o que muda com atrito & 18 min \\
+  5 & Trabalho & $W = Fd\cos\theta$, sinal, peso, teorema, gr\'afico & 20 min \\
+  6 & Pot\^encia & $P = W/\Delta t = Fv$, rendimento, kWh & 10 min \\
+  7 & Quest\~oes & 8 quest\~oes de vestibular ao vivo (projetor) & 35 min \\
+  8 & Encerramento & Resumo das f\'ormulas + tarefa & 7 min \\
+  \midrule
+  & \textbf{Total} & & \textbf{130 min} \\
+  \bottomrule
+\end{tabularx}}
+
+% ===================================================================
+\bloco{0}{Abertura e Situa\c{c}\~ao-Problema}{10}
+% ===================================================================
+
+\objetivo{come\c{c}ar com a montanha-russa, que n\~ao tem motor depois
+do primeiro morro, antes de entrar na teoria.}
+
+\begin{perguntas}
+Lan\c{c}ar as perguntas oralmente e deixar os alunos responderem, sem
+corrigir nada ainda:
+\begin{enumerate}[nosep]
+  \item ``A montanha-russa \'e puxada por um motor s\'o at\'e o alto do
+        primeiro morro. Depois disso o motor desliga.
+        \textbf{De onde vem a velocidade no resto do percurso?}''
+  \item ``Por que \textbf{nenhum morro depois do primeiro \'e mais
+        alto} que ele?''
+  \item ``Voc\^e desce a ladeira de bicicleta, freia at\'e parar e o
+        freio fica quente. \textbf{Para onde foi a energia do
+        movimento?}''
+\end{enumerate}
+\textit{N\~ao dar as respostas ainda. Anotar as ideias no canto do
+quadro. A terceira fecha logo no Bloco 1; a segunda s\'o no Bloco 4.}
+\end{perguntas}
+
+\begin{quadro}
+\begin{itemize}[nosep]
+  \item Escrever o t\'itulo no espa\c{c}o principal:
+        \textbf{Energia e Trabalho.}
+  \item Desenhar o perfil da montanha-russa, um morro alto e dois
+        menores depois, e deixar o desenho no quadro at\'e o Bloco 4.
+\end{itemize}
+\end{quadro}
+
+\begin{obs}
+\textbf{Come\c{c}o da aula:} situar a turma. Na din\^amica a gente
+resolvia tudo com $\vec{F}_R = m\vec{a}$ mais cinem\'atica, e precisava
+saber a acelera\c{c}\~ao e o tempo. Agora vem um atalho: quando a
+quest\~ao liga \textbf{velocidade} com \textbf{altura} ou
+\textbf{dist\^ancia}, e n\~ao fala em tempo, energia resolve bem mais
+r\'apido. \'E o assunto de mec\^anica que mais cai no ENEM.
+
+\textbf{Demonstra\c{c}\~ao:} mostrar vídeo do professor Walter Lewin (https://www.youtube.com/watch?v=77ZF50ve6rs)
+e mostrar que assim como na montanha-russa, o pêndulo nunca atinge uma altura maior que a inicial,
+se não houver forças agindo nele.
+\end{obs}
+
+% ===================================================================
+\bloco{1}{O Que \'e Energia}{8}
+% ===================================================================
+
+\objetivo{dar sentido \`a palavra ``energia'' antes de qualquer
+f\'ormula e instalar a regra que sustenta a aula inteira: a energia
+muda de forma e o total n\~ao muda.}
+
+\begin{quadro}
+\textbf{1. Uma defini\c{c}\~ao honesta} (2 min)
+\begin{itemize}[nosep]
+  \item textbf{Energia \'e o que um sistema
+        precisa ter para provocar mudan\c{c}as}, p\^or algo em
+        movimento, levantar, deformar, aquecer, iluminar.
+  \item Ser honesto com a turma: ningu\'em define energia em uma frase
+        s\'o. O que a f\'isica faz \'e ensinar a \textbf{calcular} um
+        n\'umero em cada situa\c{c}\~ao. A gra\c{c}a \'e que a soma
+        desses n\'umeros n\~ao muda.
+  \item Unidade: \textbf{joule} (J), a mesma para todas as formas. \'E
+        justamente isso que permite somar coisas diferentes e
+        compar\'a-las.
+\end{itemize}
+
+\medskip
+\textbf{2. As formas de energia} (3 min)
+\begin{itemize}[nosep]
+  \item Listar no quadro: cin\'etica (movimento), potencial
+        gravitacional (altura), potencial el\'astica
+        (deforma\c{c}\~ao), t\'ermica (calor), el\'etrica, qu\'imica
+        (comida, combust\'ivel, pilha), nuclear.
+  \item \textbf{Circular as tr\^es primeiras}: s\~ao as da aula de hoje
+        e, juntas, formam a \textbf{energia mec\^anica}.
+  \item Montar uma cadeia com setas, para mostrar que \'e sempre a
+        mesma energia trocando de roupa:
+        \[
+          \underbrace{\text{comida}}_{\text{qu\'imica}} \rightarrow
+          \underbrace{\text{pedalar}}_{\text{cin\'etica}} \rightarrow
+          \underbrace{\text{subir o morro}}_{\text{potencial}} \rightarrow
+          \underbrace{\text{frear}}_{\text{t\'ermica}}
+        \]
+\end{itemize}
+
+\medskip
+\textbf{3. A regra do jogo} (3 min)
+\begin{itemize}[nosep]
+  \item \textbf{A energia n\~ao some, ela muda de forma}.
+  \item \textbf{Responder a terceira pergunta da abertura:} a energia
+        do movimento virou calor no freio, no pneu e no ar. Ela n\~ao
+        sumiu, ficou \textbf{espalhada} --- e espalhada n\~ao d\'a mais
+        para aproveitar.
+  \item Introduzir a palavra \textbf{degradar}: a gente n\~ao ``gasta''
+        energia, a gente degrada, transforma energia \'util em calor
+        espalhado.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Uma pilha nova e uma pilha descarregada pesam praticamente o
+        mesmo. O que acabou na descarregada?''
+        \textit{(A energia qu\'imica guardada nas subst\^ancias de
+        dentro: elas viraram outras, com menos energia guardada.)}
+  \item ``De onde vem, no fundo, a energia da gasolina?''
+        \textit{(Do Sol. Plantas guardaram energia solar como energia
+        qu\'imica, h\'a milh\~oes de anos.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Este bloco \'e curto de prop\'osito. O objetivo \'e s\'o instalar a
+palavra e a regra; a precis\~ao vem nos blocos seguintes, quando
+aparecem as f\'ormulas. \textbf{N\~ao deixar virar aula de ``tipos de
+energia''}: 8 minutos e segue.
+\end{obs}
+
+\begin{corte}
+Cortar a cadeia de transforma\c{c}\~oes (item 2) e as perguntas. N\~ao
+cortar a frase ``a energia n\~ao some, ela muda de forma'': a aula
+inteira se apoia nela.
+\end{corte}
+
+% ===================================================================
+\bloco{2}{Energia Cin\'etica}{10}
+% ===================================================================
+
+\objetivo{dar a primeira f\'ormula da aula e martelar que a velocidade
+entra ao quadrado, que \'e o que o ENEM mais cobra nesse tema.}
+
+\begin{quadro}
+\textbf{1. A energia do movimento} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{E_c = \frac{m\,v^2}{2}}
+  \]
+  medida em joules e \textbf{nunca negativa}, porque a velocidade
+  est\'a ao quadrado.
+  \item Todo corpo em movimento tem energia cin\'etica. Parado,
+        $E_c = 0$.
+\end{itemize}
+
+\medskip
+\textbf{2. O quadrado da velocidade} (4 min)
+\begin{itemize}[nosep]
+  \item \textbf{Insistir}: se a velocidade dobra, a energia cin\'etica
+        fica quatro vezes maior; se triplica, fica nove vezes maior.
+  \item Montar a tabela no quadro, com um carro de 1\,000 kg:
+  \begin{center}\small
+    \begin{tabular}{@{}lll@{}}
+      \toprule
+      $v$ & $E_c$ & compara\c{c}\~ao \\
+      \midrule
+      10 m/s (36 km/h) & 50 kJ  & --- \\
+      20 m/s (72 km/h) & 200 kJ & 4 vezes \\
+      30 m/s (108 km/h) & 450 kJ & 9 vezes \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \item Consequ\^encia pr\'atica: a dist\^ancia de frenagem de um carro
+        cresce bem mais r\'apido do que a velocidade. \'E o gancho que
+        o ENEM usa nas quest\~oes de seguran\c{c}a no tr\^ansito.
+\end{itemize}
+
+\medskip
+\textbf{3. Onde ela aparece} (2 min)
+\begin{itemize}[nosep]
+  \item Voltar ao desenho da montanha-russa: no ponto mais baixo \'e
+        onde a energia cin\'etica \'e m\'axima.
+  \item Ainda n\~ao d\'a para calcular quanto vale --- falta a outra
+        metade da hist\'oria, a energia potencial, que vem agora.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Um caminh\~ao e uma moto andam na mesma velocidade. Qual tem
+        mais energia cin\'etica?''
+        \textit{(O caminh\~ao, a massa entra direto na f\'ormula.)}
+  \item ``E se a moto estiver ao dobro da velocidade do caminh\~ao?''
+        \textit{(A\'i depende dos valores. Serve para mostrar que
+        velocidade entra ao quadrado e massa n\~ao.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Se algu\'em perguntar ``de onde sai esse $mv^2/2$?'', responder que ele
+vem da din\^amica e que a dedu\c{c}\~ao aparece no \textbf{Bloco 5},
+junto com o teorema. N\~ao deduzir agora: sem trabalho definido, a
+conta n\~ao fecha.
+\end{obs}
+
+\begin{corte}
+Cortar a tabela num\'erica do item 2 e o item 3 inteiro. N\~ao cortar a
+conversa sobre o quadrado da velocidade.
+\end{corte}
+
+% ===================================================================
+\bloco{3}{Energia Potencial}{12}
+% ===================================================================
+
+\objetivo{apresentar as duas energias guardadas e separar for\c{c}a
+conservativa de dissipativa, que \'e o crit\'erio para saber se a
+energia mec\^anica se conserva.}
+
+\begin{quadro}
+\textbf{1. Energia potencial gravitacional} (5 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{E_{pg} = m\,g\,h}
+  \]
+  \item \'E energia de \textbf{posi\c{c}\~ao}. O corpo l\'a em cima
+        ainda n\~ao tem velocidade, mas tem a promessa dela.
+  \item \textbf{O n\'ivel zero \'e escolha nossa.} O valor de $E_{pg}$
+        muda, mas a \textbf{varia\c{c}\~ao} n\~ao. Combinar com a turma
+        de escolher sempre o ponto mais baixo do problema como zero.
+  \item Voltar \`a montanha-russa: no alto do primeiro morro \'e tudo
+        $E_{pg}$, e a\'i est\'a a resposta que ficou pendente no Bloco
+        2 sobre de onde vem a velocidade l\'a embaixo.
+\end{itemize}
+
+\medskip
+\textbf{2. Energia potencial el\'astica} (4 min)
+\begin{itemize}[nosep]
+  \item Retomar a Lei de Hooke: $F = k\,x$, com
+        $x$ a \textbf{deforma\c{c}\~ao}, e n\~ao o comprimento da mola.
+  \item
+  \[
+    \boxed{E_{pe} = \frac{k\,x^2}{2}}
+  \]
+  \item Vale para mola comprimida e para mola esticada, porque $x$
+        est\'a ao quadrado. Exemplos: estilingue, arco e flecha,
+        amortecedor, trampolim.
+  \item Mesma pegadinha da cin\'etica: comprimir at\'e a metade guarda
+        \textbf{um quarto} da energia, e n\~ao a metade.
+  \item Deixar uma promessa no quadro: essa f\'ormula sai da
+        \textbf{\'area de um gr\'afico}. A gente confirma isso no Bloco
+        5, quando trabalho estiver definido.
+\end{itemize}
+
+\medskip
+\textbf{3. Conservativas e dissipativas} (3 min)
+\begin{center}\small
+  \begin{tabular}{@{}p{4.2cm}p{7.2cm}@{}}
+    \toprule
+    \textbf{Conservativas} & peso e for\c{c}a el\'astica. Guardam a
+      energia e \textbf{devolvem} depois; t\^em energia potencial
+      associada \\
+    \textbf{Dissipativas} & atrito e resist\^encia do ar. N\~ao
+      devolvem, a energia vira \textbf{calor} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+Escrever no quadro o crit\'erio que abre o pr\'oximo bloco: \textbf{se
+s\'o houver for\c{c}as conservativas, a energia mec\^anica se
+conserva}.
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Uma pessoa no quinto andar tem energia potencial. Medida a
+        partir de onde?''
+        \textit{(Do que a gente escolher. O que tem sentido f\'isico \'e
+        a diferen\c{c}a entre dois pontos.)}
+  \item ``Se eu comprimir a mola s\'o at\'e a metade, guardo metade da
+        energia?''
+        \textit{(N\~ao, um quarto. \'E a mesma pegadinha do quadrado da
+        energia cin\'etica.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{corte}
+Cortar a energia el\'astica (item 2) e avisar que ela volta junto com a
+Lei de Hooke. N\~ao cortar a conversa sobre o n\'ivel de refer\^encia
+nem a tabela de conservativa e dissipativa, sem elas o Bloco 4 n\~ao
+fecha.
+\end{corte}
+
+% ===================================================================
+\bloco{4}{Conserva\c{c}\~ao da Energia Mec\^anica}{18}
+% ===================================================================
+
+\objetivo{chegar no resultado central da aula, fechar a
+situa\c{c}\~ao-problema da abertura e mostrar o que muda quando existe
+atrito. \'E o bloco mais importante para o ENEM.}
+
+\begin{quadro}
+\textbf{1. Energia mec\^anica} (4 min)
+\begin{itemize}[nosep]
+  \item Definir: $E_m = E_c + E_p$, a cin\'etica mais todas as
+        potenciais. \'E a soma das tr\^es formas que foram circuladas
+        no Bloco 1.
+  \item Escrever:
+  \[
+    \boxed{\text{sem atrito:}\quad
+      E_{c_i} + E_{p_i} = E_{c_f} + E_{p_f}}
+  \]
+  \item A energia \textbf{troca de forma},
+        potencial vira cin\'etica e cin\'etica vira potencial, mas o
+        \textbf{total n\~ao muda}. \'E a regra do Bloco 1 aplicada s\'o
+        \`a parte mec\^anica.
+\end{itemize}
+
+\medskip
+\textbf{2. Voltar na montanha-russa} (7 min)
+\begin{itemize}[nosep]
+  \item Usar o desenho da montanha-russa. Marcar
+        tr\^es pontos: o alto do primeiro morro, o vale e o alto do
+        segundo morro.
+  \item Em cada ponto escrever quanto vale a cin\'etica e quanto vale a
+        potencial, com barrinhas proporcionais, que fica visual. No
+        topo \'e tudo potencial, no vale \'e tudo cin\'etica, no
+        segundo morro fica dividido.
+  \item \textbf{Responder as duas perguntas da abertura:} a velocidade
+        vem da energia potencial do primeiro morro, e nenhum morro pode
+        ser mais alto que ele porque \textbf{n\~ao sobra energia} para
+        chegar l\'a em cima.
+  \item Comentar que num escorregador liso vale a mesma conta. A
+        trajet\'oria n\~ao importa, s\'o a altura.
+\end{itemize}
+
+\medskip
+\textbf{3. Quando tem atrito} (7 min)
+\begin{itemize}[nosep]
+  \item A energia mec\^anica \textbf{n\~ao} se conserva: parte dela
+        vira calor. Escrever na faixa de resumo:
+  \[
+    \boxed{E_{m_i} = E_{m_f} + E_{\text{dissipada}}}
+  \]
+  \item Deixar claro que \textbf{a energia total continua se
+        conservando}, s\'o a mec\^anica que diminui. Nada desaparece
+        --- \'e a regra do Bloco 1 outra vez.
+  \item Por enquanto, $E_{\text{dissipada}}$ \'e s\'o ``o que faltou''
+        na conta. A f\'ormula que d\'a o valor dela,
+        $f_{at}\cdot d$, sai no \textbf{Bloco 5}, quando trabalho
+        estiver definido. Avisar isso, para ningu\'em achar que ficou
+        buraco.
+  \item Exemplos do dia a dia: o freio do carro esquenta, a m\~ao
+        esquenta quando a gente esfrega uma na outra, o meteoro pega
+        fogo ao entrar na atmosfera.
+  \item Citar o \textbf{freio regenerativo} do carro el\'etrico. Em vez
+        de jogar a energia fora como calor, o motor vira gerador e
+        devolve parte dela para a bateria. \'E contexto de ENEM.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Dois escorregadores da mesma altura, um reto e um cheio de
+        curvas, os dois sem atrito. Em qual a crian\c{c}a chega embaixo
+        com maior velocidade? E em qual ela chega mais r\'apido?''
+        \textit{(A velocidade final \'e a mesma nos dois, s\'o depende
+        da altura. O tempo \'e que pode ser diferente. Separar bem as
+        duas perguntas, \'e onde a turma se perde.)}
+  \item ``Se a energia n\~ao se cria nem se destr\'oi, por que a gente
+        fala em economizar energia?''
+        \textit{(Retomar a palavra do Bloco 1: a gente n\~ao gasta
+        energia, a gente \textbf{degrada}. Transforma energia \'util em
+        calor espalhado, que n\~ao d\'a mais para aproveitar.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Armadilha cl\'assica do ENEM: usar conserva\c{c}\~ao de energia num
+problema que tem atrito. Antes de escrever $E_{m_i} = E_{m_f}$, obrigar
+a turma a fazer a pergunta: \textbf{tem atrito ou resist\^encia do ar
+nessa quest\~ao?} Se o enunciado falar em ``superf\'icie lisa'',
+``atrito desprez\'ivel'' ou ``sem resist\^encia do ar'', pode
+conservar.
+\end{obs}
+
+\begin{corte}
+Cortar o freio regenerativo e as barrinhas do item 2, deixando s\'o a
+fala em cima do desenho. N\~ao cortar o item 3.
+\end{corte}
+
+% ===================================================================
+\bloco{5}{Trabalho de uma For\c{c}a}{20}
+% ===================================================================
+
+\objetivo{apresentar o trabalho como a medida de \textbf{quanta energia
+uma for\c{c}a transfere} e, com ele, fechar as duas contas deixadas em
+aberto de prop\'osito: o teorema $W = \Delta E_c$ e o valor da energia
+dissipada pelo atrito.}
+
+\begin{perguntas}
+Abrir o bloco com a pergunta, antes de qualquer f\'ormula, e deixar no
+ar por uns 30 segundos:
+\begin{itemize}[nosep]
+  \item ``Empurrar uma parede com toda a for\c{c}a durante 10 minutos:
+        voc\^e realizou \textbf{trabalho}?''
+\end{itemize}
+\end{perguntas}
+
+\begin{quadro}
+\textbf{1. Defini\c{c}\~ao} (5 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{W = F \cdot d \cdot \cos\theta}
+  \]
+  em que $\theta$ \'e o \^angulo entre a \textbf{for\c{c}a} e o
+  \textbf{deslocamento}.
+  \item Unidade: joule, $1\ \text{J} = 1\ \text{N}\cdot\text{m}$.
+        \textbf{A mesma unidade da energia}, e isso n\~ao \'e
+        coincid\^encia.
+  \item Escrever a frase no quadro: \textbf{trabalho \'e energia
+        transferida por uma for\c{c}a}. Trabalho positivo entrega
+        energia ao corpo, negativo tira energia dele. Trabalho n\~ao
+        \'e um tipo de energia, \'e energia \textbf{em tr\^ansito}.
+  \item Responder a pergunta da parede: a parede n\~ao sai do lugar,
+        ent\~ao $d = 0$ e $W = 0$. Nenhuma energia foi transferida para
+        ela. Cansa\c{c}o n\~ao \'e trabalho em f\'isica.
+\end{itemize}
+
+\medskip
+\textbf{2. Os tr\^es sinais e o atrito} (5 min)
+\begin{itemize}[nosep]
+  \item Montar a tabela no quadro:
+  \begin{center}\small
+    \begin{tabular}{@{}lll@{}}
+      \toprule
+      \^Angulo & Sinal & Nome \\
+      \midrule
+      $\theta < 90^\circ$ & $W > 0$ & motor (ajuda o movimento) \\
+      $\theta = 90^\circ$ & $W = 0$ & nulo \\
+      $\theta > 90^\circ$ & $W < 0$ & resistente (freia) \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \item \textbf{Atrito cin\'etico \'e sempre resistente}, com
+        $\theta = 180^\circ$, ent\~ao $W_{at} = -f_{at}\,d$.
+  \item \textbf{Fechar o buraco do Bloco 4:} em m\'odulo, esse \'e
+        exatamente o valor que faltava.
+  \[
+    \boxed{E_{\text{dissipada}} = |W_{at}| = f_{at}\cdot d}
+  \]
+  \item \textbf{For\c{c}a perpendicular ao deslocamento n\~ao realiza
+        trabalho.} Dois casos que caem direto: a normal num corpo que
+        desliza na horizontal e a for\c{c}a centr\'ipeta no movimento
+        circular.
+  \item Exemplo: carregar uma mochila andando na horizontal. A
+        for\c{c}a que segura a mochila \'e vertical e o deslocamento \'e
+        horizontal, ent\~ao o trabalho \'e zero.
+\end{itemize}
+
+\medskip
+\textbf{3. Trabalho do peso} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    W_P = \pm\, m\,g\,h
+  \]
+  positivo \textbf{descendo}, negativo \textbf{subindo}, com $h$ o
+  desn\'ivel \textbf{vertical}.
+  \item O ponto principal: \textbf{o trabalho do peso n\~ao depende da
+        trajet\'oria}, s\'o do desn\'ivel. Desenhar tr\^es caminhos
+        entre os mesmos dois pontos (queda vertical, rampa e uma curva
+        qualquer) e escrever o mesmo $mgh$ nos tr\^es.
+  \item Num percurso fechado, que sai e volta ao mesmo ponto, o
+        trabalho do peso \'e \textbf{zero}. \'E exatamente por isso que
+        o peso foi chamado de \textbf{conservativo} no Bloco 3.
+  \item Ligar com o Bloco 3: $W_P = -\Delta E_{pg}$. O peso faz
+        trabalho positivo justamente quando a energia potencial
+        diminui. \'E a mesma coisa dita de duas maneiras.
+\end{itemize}
+
+\medskip
+\textbf{4. Teorema do trabalho e energia cin\'etica} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{W_{\text{total}} = \Delta E_c = \frac{m v_f^2}{2}
+      - \frac{m v_i^2}{2}}
+  \]
+  \item Ler em portugu\^es: \textbf{o trabalho da resultante \'e o que
+        muda a velocidade do corpo}. Se o trabalho total \'e zero, a
+        velocidade n\~ao muda --- \'e a 1\textordfeminine{} Lei escrita
+        em energia.
+  \item Destacar o ``total'': \'e a soma do trabalho de
+        \textbf{todas} as for\c{c}as, ou o trabalho da resultante, que
+        d\'a no mesmo.
+  \item \textbf{De onde vem o $mv^2/2$} (a pergunta que ficou no Bloco
+        2): pegar $v_f^2 = v_i^2 + 2a\Delta S$, isolar $a\Delta S$ e
+        multiplicar tudo por $m$. Aparece $F_R\,\Delta S$ de um lado e
+        a diferen\c{c}a das energias cin\'eticas do outro.
+  \item Avisar que os problemas de frenagem e de arrancada que a gente
+        fazia com Torricelli mais $F = ma$ saem em uma conta s\'o por
+        aqui. Isso fica claro no Bloco 7.
+\end{itemize}
+
+\medskip
+\textbf{5. \'Area do gr\'afico $F \times d$} (2 min)
+\begin{itemize}[nosep]
+  \item Quando a for\c{c}a \textbf{varia}, n\~ao d\'a para usar
+        $W = Fd\cos\theta$ direto. Vale sempre:
+        \textbf{o trabalho \'e a \'area embaixo do gr\'afico
+        $F \times d$}.
+  \item Desenhar dois gr\'aficos lado a lado: for\c{c}a constante, que
+        d\'a um ret\^angulo, e for\c{c}a de mola crescendo com $x$, que
+        d\'a um tri\^angulo de \'area $kx^2/2$. \textbf{\'E a promessa
+        do Bloco 3 cumprida}: a energia el\'astica n\~ao \'e f\'ormula
+        nova, \'e essa \'area.
+  \item \'Area abaixo do eixo conta como trabalho negativo.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Subir at\'e o segundo andar pela escada ou por uma rampa bem
+        longa: em qual dos dois o \textbf{trabalho contra o peso} \'e
+        maior?''
+        \textit{(Igual nos dois, $mgh$. A rampa pede menos
+        \textbf{for\c{c}a}, mas por uma dist\^ancia maior. \'E para
+        isso que a rampa serve.)}
+  \item ``A Lua d\'a voltas em torno da Terra h\'a bilh\~oes de anos. A
+        gravidade da Terra realiza trabalho sobre ela?''
+        \textit{(Numa \'orbita circular n\~ao, a for\c{c}a \'e
+        perpendicular ao deslocamento. Por isso a velocidade n\~ao
+        muda.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Confus\~ao mais comum: achar que fazer for\c{c}a j\'a \'e trabalho. Sem
+deslocamento \textbf{na dire\c{c}\~ao da for\c{c}a} o trabalho \'e
+zero. Repetir isso nos tr\^es exemplos, parede, mochila e for\c{c}a
+centr\'ipeta, at\'e colar.
+
+Vantagem de dar trabalho depois de energia: a turma j\'a sabe o que \'e
+energia, ent\~ao d\'a para apresentar trabalho como \textbf{a conta de
+quanta energia mudou de m\~aos}, e n\~ao como mais uma f\'ormula solta.
+\end{obs}
+
+\begin{corte}
+Cortar o gr\'afico (item 5) e a pergunta da Lua. \textbf{N\~ao cortar}
+o teorema (item 4) nem a f\'ormula da energia dissipada (item 2): os
+dois fecham buracos deixados de prop\'osito nos blocos anteriores.
+\end{corte}
+
+% ===================================================================
+\bloco{6}{Pot\^encia e Rendimento}{10}
+% ===================================================================
+
+\objetivo{fechar a teoria com pot\^encia, que \'e o que aparece nas
+quest\~oes de usina, motor e conta de luz, e separar energia de
+pot\^encia.}
+
+\begin{quadro}
+\textbf{1. Pot\^encia} (5 min)
+\begin{itemize}[nosep]
+  \item
+  \[
+    \boxed{P = \frac{W}{\Delta t} = \frac{\Delta E}{\Delta t}}
+    \qquad
+    1\ \text{W} = 1\ \text{J/s}
+  \]
+  \item Pot\^encia diz quanta energia passa por
+        segundo. A mesma energia em menos tempo d\'a mais pot\^encia.
+  \item Comparar duas pessoas subindo a mesma escada, uma correndo e
+        outra devagar. As duas gastam a mesma energia, mas a que sobe
+        correndo tem mais pot\^encia.
+  \item Caso particular, quando a velocidade \'e constante:
+        $P = F\cdot v$. \'E o que resolve quest\~ao de motor de carro e
+        de esteira.
+\end{itemize}
+
+\medskip
+\textbf{2. Rendimento} (3 min)
+\begin{itemize}[nosep]
+  \item $\eta = \dfrac{P_{\text{\'util}}}{P_{\text{total}}}$, sempre
+        menor que 100\%.
+  \item O resto vira calor, som e vibra\c{c}\~ao. \textbf{Nenhuma
+        m\'aquina \'e 100\% eficiente}, e alternativa que fala em
+        m\'aquina de movimento perp\'etuo est\'a errada. \'E a
+        degrada\c{c}\~ao do Bloco 1 aparecendo em n\'umero.
+  \item Formato cl\'assico de quest\~ao: a usina hidrel\'etrica. A
+        \'agua cai de uma altura $h$, o $mgh$ por segundo d\'a a
+        pot\^encia bruta e o rendimento da turbina d\'a a pot\^encia
+        el\'etrica.
+\end{itemize}
+
+\medskip
+\textbf{3. Quilowatt-hora} (2 min)
+\begin{itemize}[nosep]
+  \item A conta de luz cobra \textbf{energia}, n\~ao pot\^encia. Um kWh
+        \'e a energia de um aparelho de 1000 W ligado por uma hora, ou
+        seja, $3{,}6\times 10^6$ J.
+  \item Chuveiro e ar-condicionado pesam na conta porque t\^em
+        pot\^encia alta, mesmo ficando pouco tempo ligados.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Um elevador sobe dez andares devagar e outro sobe os mesmos
+        dez andares r\'apido. Qual gastou mais \textbf{energia}? Qual
+        tem mais \textbf{pot\^encia}?''
+        \textit{(A energia \'e a mesma, o $mgh$ \'e o mesmo. A
+        pot\^encia \'e maior no que subiu r\'apido. Essa
+        distin\c{c}\~ao \'e o objetivo do bloco.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{corte}
+Cortar o rendimento e o quilowatt-hora (itens 2 e 3), deixando s\'o
+$P = W/\Delta t$. Se cortar, avisar que os dois caem em quest\~ao de
+usina e passar como tarefa.
+\end{corte}
+
+% ===================================================================
+\bloco{7}{Resolu\c{c}\~ao de Quest\~oes}{35}
+% ===================================================================
+
+\objetivo{terminar a aula resolvendo quest\~oes de verdade do ENEM e de
+vestibulares, projetadas uma por uma e resolvidas ao vivo no quadro.
+As quest\~oes est\~ao no arquivo
+\texttt{lista\_questoes\_\allowbreak trabalho\_\allowbreak energia.pdf}
+(as marcadas com {\scshape\color{vinho}[fazer em sala]}).}
+
+\begin{projetor}
+Projetar o arquivo
+\texttt{lista\_questoes\_\allowbreak trabalho\_\allowbreak energia.pdf}.
+
+\smallskip
+\end{projetor}
+
+\begin{comment}
+\begin{quadro}
+\textbf{Roteiro de quest\~oes:}
+
+\medskip
+{\small
+\begin{tabular}{@{}cllr@{}}
+  \toprule
+  \# & Cobra & Fonte & Tempo \\
+  \midrule
+  Q10 & Conserva\c{c}\~ao: bola no ar (num\'erica)  & UERJ               & 4 min \\
+  Q11 & Energia el\'astica: mola do brinquedo       & ENEM 2018          & 4 min \\
+  Q13 & Energia dissipada na queda (num\'erica)     & UNIFOR CE          & 5 min \\
+  Q1  & Trabalho e o \^angulo da for\c{c}a          & UFF                & 3 min \\
+  Q2  & Trabalho do peso independe da trajet\'oria  & UFMG 2003          & 3 min \\
+  Q5  & Teorema $W = \Delta E_c$ (num\'erica)       & FGV                & 5 min \\
+  Q7  & \'Area do gr\'afico $F \times x$            & UFF                & 5 min \\
+  Q17 & Pot\^encia e rendimento (fotovoltaico)      & UTFPR Inv.\ 2023   & 6 min \\
+  \bottomrule
+\end{tabular}}
+
+\medskip
+\textbf{B\^onus}, se sobrar tempo: \textbf{Q8} (ENEM 2011, salto com
+vara --- conserva\c{c}\~ao em uma figura s\'o) e \textbf{Q12}
+(ENEM 2022, barreira de pneus $\times$ blocos --- for\c{c}a m\'edia e
+energia dissipada). As duas s\~ao conceituais e saem em 2 min cada.
+
+\medskip
+A ordem \'e a da aula, e \textbf{n\~ao} a ordem num\'erica da lista:
+come\c{c}ar pelo trio de conserva\c{c}\~ao (Q10, Q11 e Q13), que \'e o
+resultado central e o que mais cai; depois as duas conceituais de
+trabalho, que s\~ao r\'apidas e j\'a corrigem o erro de sinal; ent\~ao
+o teorema, que \'e a ponte entre a din\^amica e a energia; e o fim fica
+com gr\'afico e pot\^encia, que s\~ao os dois formatos preferidos do
+ENEM nesse tema.
+
+\medskip
+Na lista, essas quest\~oes est\~ao marcadas com
+{\scshape\color{vinho}[fazer em sala]} e as duas de b\^onus com
+{\scshape\color{vinho}[sala --- b\^onus]}. O mapa da segunda p\'agina
+da lista mostra tudo de uma vez.
+\end{quadro}
+
+\begin{obs}
+Resolver sempre com a mesma estrutura de tr\^es linhas no quadro:
+estado inicial, estado final e, se tiver atrito, descontar o que foi
+dissipado. A turma precisa sair da aula com um \textbf{procedimento},
+e n\~ao com seis f\'ormulas soltas.
+
+Em alguma quest\~ao num\'erica, se der tempo, resolver de novo pela
+din\^amica, com $F = ma$ e Torricelli, e comparar o tamanho das duas
+solu\c{c}\~oes. \'E o que convence a turma a usar energia.
+\end{obs}
+
+\begin{corte}
+Menos de 25 min? Fazer Q10, Q13, Q1, Q5 e Q17, que cobrem
+conserva\c{c}\~ao, dissipa\c{c}\~ao, trabalho, teorema e pot\^encia.
+Menos de 15 min? Q10, Q11 e Q13. Menos de 10? Q10 e Q13.
+\end{corte}
+
+% ===================================================================
+\bloco{8}{Encerramento e Tarefa}{7}
+% ===================================================================
+
+\begin{quadro}
+\textbf{1. Resumo} (4 min). Fechar a faixa lateral que ficou a aula
+toda no quadro, lendo tudo de uma vez e \textbf{na ordem em que
+apareceu}:
+\begin{center}\small
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    $E_c = mv^2/2$ & energia do movimento \\
+    $E_{pg} = mgh$ \quad $E_{pe} = kx^2/2$ & energia guardada \\
+    $E_{m_i} = E_{m_f} + E_{\text{dissipada}}$ & conserva\c{c}\~ao \\
+    $W = Fd\cos\theta$ & trabalho, energia transferida \\
+    $W_{\text{total}} = \Delta E_c$ & teorema do trabalho e energia \\
+    $P = W/\Delta t = Fv$ & pot\^encia \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\medskip
+\textbf{2. Quando usar energia no lugar de $F = ma$} (3 min).
+Escrever o crit\'erio no quadro, \'e o que mais ajuda na prova:
+\begin{itemize}[nosep]
+  \item A quest\~ao liga \textbf{velocidade com altura ou
+        dist\^ancia} e \textbf{n\~ao fala em tempo}: usar
+        \textbf{energia}.
+  \item A quest\~ao pede \textbf{for\c{c}a} ou
+        \textbf{acelera\c{c}\~ao}, ou envolve \textbf{tempo}: usar
+        \textbf{din\^amica}.
+  \item Trajet\'oria curva ou complicada, sem atrito: usar
+        \textbf{energia}, porque a trajet\'oria n\~ao importa.
+\end{itemize}
+\end{quadro}
+
+\begin{obs}
+Passar como tarefa as quest\~oes que n\~ao foram feitas em sala e
+avisar qual \'e a pr\'oxima aula.
+\end{obs}
+
+% ===================================================================
+\secao{Adapta\c{c}\~ao por Tempo Dispon\'ivel}
+% ===================================================================
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+  \toprule
+  \textbf{Tempo} & \textbf{O que fazer} \\
+  \midrule
+  $\approx 1$h30 &
+    Bloco0 (5 min) + Bloco1 (5 min) + Bloco2 sem a tabela (7 min) +
+    Bloco3 sem a el\'astica (8 min) + Bloco4 completo (18 min) +
+    Bloco5 sem o gr\'afico (16 min) + Bloco6 s\'o $P = W/\Delta t$
+    (5 min) + 5 quest\~oes (22 min) + fechamento (4 min) \\
+  $\approx 2$h &
+    Plano completo. Se atrasar, cortar a Q7, porque o gr\'afico volta
+    em outros temas, e segurar o ritmo nas conceituais \\
+  $\approx 2$h30 &
+    Plano completo + resolver uma quest\~ao num\'erica pelos dois
+    m\'etodos, energia e $F = ma$, + as duas de b\^onus (Q8 e Q12) +
+    a Q14, que junta mola, atrito e rampa \\
+  \bottomrule
+\end{tabularx}}
+
+\bigskip
+
+{\scshape\color{vinho}prioridade dos t\'opicos para enem/utfpr}
+\begin{enumerate}[nosep]
+  \item \textbf{Conserva\c{c}\~ao da energia mec\^anica} (montanha-russa,
+        rampa, p\^endulo, queda), que \'e o que mais cai no ENEM
+  \item \textbf{Energia dissipada pelo atrito} e a ideia de que a
+        energia se degrada, e n\~ao some
+  \item \textbf{Pot\^encia e rendimento} (usina, motor, chuveiro, kWh),
+        muito frequente em quest\~ao de contexto
+  \item \textbf{Teorema $W = \Delta E_c$} e o quadrado da velocidade
+        (frenagem, seguran\c{c}a no tr\^ansito)
+  \item \textbf{Sinal do trabalho} e for\c{c}a perpendicular, que pega
+        muita gente
+  \item \textbf{Energia el\'astica} ($kx^2/2$) junto com a Lei de
+        Hooke, estilo UTFPR
+\end{enumerate}
+\end{comment}
+\end{document}
