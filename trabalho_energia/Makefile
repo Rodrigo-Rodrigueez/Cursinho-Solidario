@@ -1,4 +1,5 @@
-DOCS = plano_aula_trabalho_energia lista_questoes_trabalho_energia
+DOCS = plano_aula_trabalho_energia lista_questoes_trabalho_energia \
+       slides_questoes_trabalho_energia
 
 .PHONY: all clean
 
