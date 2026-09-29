@@ -1,0 +1,1119 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% Tipografia: Palatino, versalete, uma cor de destaque (bord\^o)
+% Mesmo pre\^ambulo dos planos de din\^amica e trabalho e energia.
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{microtype}
+\usepackage[top=2.4cm, bottom=2.6cm, left=2.6cm, right=2.6cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{hyperref}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+\hypersetup{colorlinks=true, linkcolor=vinho, urlcolor=vinho}
+
+\linespread{1.06}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% ---------------------------------------------------------------
+% Cabe\c{c}alhos de bloco e se\c{c}\~ao
+% ---------------------------------------------------------------
+\newcommand{\bloco}[3]{%
+  \needspace{7\baselineskip}
+  \vspace{1.8em}
+  {\scshape\color{vinho}bloco #1}\hfill
+    {\small\itshape\color{grafite}\textasciitilde\,#3 min}\\[0.1em]
+  {\Large\bfseries #2}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newcommand{\secao}[1]{%
+  \needspace{6\baselineskip}
+  \vspace{1.8em}
+  {\Large\bfseries #1}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+% legenda de variaveis: acompanha toda formula nova, com unidade
+\newcommand{\variaveis}[1]{%
+  \begingroup\footnotesize
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{center}
+  \begin{tabular}{@{}rll@{}}
+    \toprule
+    \textbf{s\'imbolo} & \textbf{o que \'e} & \textbf{unidade} \\
+    \midrule
+    #1
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \endgroup}
+
+\newcommand{\objetivo}[1]{{\itshape\color{grafite}Objetivo: #1}\par\smallskip}
+
+% quest\~ao do ENEM, com a identifica\c{c}\~ao j\'a conferida no caderno oficial
+\newcommand{\questao}[3]{%
+  \needspace{4\baselineskip}\medskip
+  {\bfseries\color{vinho}#1}\quad{\small\itshape\color{grafite}#2}%
+  \hfill{\small\itshape\color{grafite}#3}\par\smallskip}
+
+% ---------------------------------------------------------------
+% Pain\'eis: barra fina \`a esquerda + r\'otulo em versalete
+% ---------------------------------------------------------------
+\newtcolorbox{quadro}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}no quadro}\par\smallskip}}
+
+\newtcolorbox{perguntas}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}perguntar \`a turma}\par\smallskip}}
+
+\newtcolorbox{obs}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{black!30},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{black!55}observa\c{c}\~oes}\par\smallskip}}
+
+\newtcolorbox{corte}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{vinho!70, dashed},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{vinho}se o tempo apertar}\par\smallskip}}
+
+\newtcolorbox{projetor}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{grafite},
+  borderline west={1.4pt}{3.2pt}{black!25},
+  before skip=11pt, after skip=11pt,
+  before upper={{\small\scshape\color{grafite}projetor}\par\smallskip}}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+% ---------------------------------------------------------------
+% T\'ITULO
+% ---------------------------------------------------------------
+\thispagestyle{empty}
+
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
+{\huge\bfseries Termologia}\\[0.35em]
+{\LARGE Temperatura, Calor, Mudan\c{c}as de Fase, Propaga\c{c}\~ao e Gases}\\[0.7em]
+{\itshape\color{grafite}Plano de aula \,\textperiodcentered\, 2h10
+ \,\textperiodcentered\, ENEM}
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\linewidth}{0.5pt}}
+
+\vspace{1.2em}
+
+% ---------------------------------------------------------------
+% VIS\~AO GERAL
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}X@{}}
+  \multicolumn{2}{@{}l}{{\scshape\color{vinho}vis\~ao geral}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Objetivo} & Separar temperatura de calor, quantificar as trocas
+    com \mbox{$Q = mc\Delta T$} e \mbox{$Q = mL$}, ler o gr\'afico de aquecimento com
+    patamar, distinguir os tr\^es modos de propaga\c{c}\~ao e fechar em gases,
+    primeira lei e m\'aquinas t\'ermicas. Toda a teoria ancorada nas
+    \textbf{onze quest\~oes do ENEM} que a aula resolve ao vivo. \\
+  \textbf{Sequ\^encia} & \textbf{Temperatura antes de calor.} O erro que
+    mais custa nota nesse tema \'e achar que as duas palavras s\~ao
+    sin\^onimas. Separ\'a-las no Bloco 1 e no Bloco 2 \'e o que sustenta todo
+    o resto: sem essa distin\c{c}\~ao, o patamar do Bloco 4 n\~ao faz sentido e
+    a primeira lei do Bloco 6 vira decoreba. \\
+  \textbf{Formato} & Diferente das outras aulas: o \textbf{projetor fica
+    ligado do in\'icio ao fim}. Termologia \'e visual, e o material tem
+    simula\c{c}\~oes animadas (part\'iculas, equil\'ibrio t\'ermico, gr\'afico de
+    aquecimento, convec\c{c}\~ao e pist\~ao). A teoria e as contas continuam no
+    quadro; a proje\c{c}\~ao mostra o que o quadro n\~ao consegue, que \'e o
+    movimento. \\
+  \textbf{Pr\'e-requisito} & Aula de Trabalho e Energia: energia, joule,
+    pot\^encia e rendimento. Tr\^es das onze quest\~oes dependem disso. \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{1.4em}
+
+% ---------------------------------------------------------------
+% CRONOGRAMA
+% ---------------------------------------------------------------
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}clX r@{}}
+  \multicolumn{4}{@{}l}{{\scshape\color{vinho}cronograma}}\\
+  \addlinespace[2pt]
+  \toprule
+  \textbf{Bloco} & \textbf{T\'opico} & \textbf{Foco principal} & \textbf{Tempo} \\
+  \midrule
+  0 & Abertura & A ma\c{c}aneta de metal e a porta de madeira & 8 min \\
+  1 & Temperatura & Agita\c{c}\~ao das part\'iculas; escalas C, K e F & 12 min \\
+  2 & Calor & Energia em tr\^ansito; equil\'ibrio t\'ermico; caloria & 10 min \\
+  3 & Calor sens\'ivel & $Q = mc\Delta T$ + 2 quest\~oes & 20 min \\
+  4 & Calor latente & $Q = mL$ e o patamar + 2 quest\~oes & 22 min \\
+  5 & Propaga\c{c}\~ao & Condu\c{c}\~ao, convec\c{c}\~ao, irradia\c{c}\~ao + 5 quest\~oes & 33 min \\
+  6 & Gases e 1\textsuperscript{a} lei & $PV = nRT$, $\Delta U = Q - W$, Otto + 2 quest\~oes & 20 min \\
+  7 & Encerramento & Faixa de f\'ormulas + tarefa & 5 min \\
+  \midrule
+  & \textbf{Total} & & \textbf{130 min} \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{0.6em}
+
+{\small\itshape\color{grafite} As onze quest\~oes est\~ao identificadas pelo
+n\'umero do caderno oficial em que foram conferidas. Aten\c{c}\~ao: as quatro de
+2024 s\~ao do \textbf{caderno cinza}, n\~ao do amarelo, e a de 2025 \'e a
+\textbf{quest\~ao 91}, n\~ao a 96.\par}
+
+% ===================================================================
+\bloco{0}{Abertura: a Ma\c{c}aneta Fria}{8}
+% ===================================================================
+
+\objetivo{separar temperatura de sensa\c{c}\~ao t\'ermica no primeiro minuto,
+com um experimento que a turma inteira pode fazer sentada.}
+
+\begin{quadro}
+\textbf{1. O experimento} (3 min)
+\begin{itemize}[nosep]
+  \item Pedir que encostem uma das m\~aos na carteira de madeira e a outra
+        na parte met\'alica da cadeira. Esperar de verdade uns dez segundos.
+  \item Perguntar qual est\'a mais fria. A turma inteira responde: o metal.
+  \item Escrever no quadro, em letra grande:
+        \textbf{os dois est\~ao na mesma temperatura.} Est\~ao na sala h\'a
+        horas, em equil\'ibrio com o ar.
+  \item Ent\~ao o dedo n\~ao est\'a medindo temperatura. Est\'a medindo a
+        \textbf{velocidade com que o objeto puxa calor da m\~ao}.
+\end{itemize}
+
+\medskip
+\textbf{2. As tr\^es perguntas da aula} (3 min)
+\begin{itemize}[nosep]
+  \item Escrever no canto do quadro e deixar l\'a at\'e o fim:
+  \begin{enumerate}[nosep, label=(\alph*)]
+    \item Qual a diferen\c{c}a entre calor e temperatura?
+    \item Por que a \'agua demora tanto mais que o \'oleo para esquentar?
+    \item Por que o metal parece frio?
+  \end{enumerate}
+  \item Avisar que cada bloco derruba uma delas, e que no encerramento
+        as tr\^es voltam para ser respondidas em uma frase cada.
+\end{itemize}
+
+\medskip
+\textbf{3. Combinar o formato} (2 min)
+\begin{itemize}[nosep]
+  \item Avisar que hoje o projetor fica ligado o tempo todo, porque tem
+        simula\c{c}\~ao de part\'iculas e de g\'as rodando ao vivo.
+  \item A conta continua no quadro. A proje\c{c}\~ao \'e para ver o que se mexe.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Se eu deixar uma colher de metal e um pano de prato na mesa a
+        noite inteira, de manh\~a qual est\'a mais frio?''
+        \textit{(Nenhum dos dois. Ambos na temperatura da sala. O que
+        muda \'e a sensa\c{c}\~ao ao tocar.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Essa abertura \'e o gancho direto de duas quest\~oes que a aula resolve no
+final: a \textbf{Q117 de 2023} (o copo que n\~ao esquenta a m\~ao) e a
+\textbf{Q112 de 2024} (o iglu). Vale dizer isso em voz alta agora: a
+turma presta mais aten\c{c}\~ao quando sabe que a historinha do come\c{c}o vira
+quest\~ao de prova.
+\end{obs}
+
+\begin{corte}
+Cortar o item 3. O experimento e as tr\^es perguntas n\~ao podem cair --- \'e
+o fio que costura a aula inteira.
+\end{corte}
+
+% ===================================================================
+\bloco{1}{Temperatura e Escalas}{12}
+% ===================================================================
+
+\objetivo{definir temperatura como medida da agita\c{c}\~ao das part\'iculas e
+deixar as convers\~oes prontas para uso, sem deduzir nenhuma delas.}
+
+\begin{projetor}
+Simula\c{c}\~ao de part\'iculas. Subir a temperatura no controle e deixar a
+turma ver a agita\c{c}\~ao aumentar antes de escrever qualquer defini\c{c}\~ao.
+\end{projetor}
+
+\begin{quadro}
+\textbf{1. Temperatura \'e agita\c{c}\~ao} (5 min)
+\begin{itemize}[nosep]
+  \item Com a simula\c{c}\~ao projetada: quanto mais quente, mais r\'apido as
+        part\'iculas se movem. N\~ao \'e for\c{c}a de express\~ao, \'e a defini\c{c}\~ao.
+  \item Escrever: \textbf{temperatura mede a energia cin\'etica m\'edia das
+        part\'iculas}.
+  \item Duas palavras que importam. \textbf{M\'edia}: n\~ao \'e a de uma
+        part\'icula, \'e a do conjunto. \textbf{Cin\'etica}: \'e movimento, e
+        movimento \'e energia --- o elo com a aula passada.
+  \item \textbf{Zero absoluto}: a temperatura em que a agita\c{c}\~ao cessaria.
+        $-273\ ^\circ$C. N\~ao existe nada mais frio, e \'e por isso que a
+        escala Kelvin come\c{c}a ali.
+\end{itemize}
+
+\medskip
+\textbf{2. As tr\^es escalas} (5 min)
+\begin{itemize}[nosep]
+  \item \textbf{Celsius}: 0 e 100 nos pontos de fus\~ao e ebuli\c{c}\~ao da \'agua,
+        ao n\'ivel do mar.
+  \item \textbf{Kelvin}: mesmo tamanho de grau do Celsius, origem
+        deslocada para o zero absoluto. \'E a escala da f\'isica --- toda
+        f\'ormula de g\'as usa ela.
+  \item \textbf{Fahrenheit}: 32 e 212 nos mesmos dois pontos. Cai pouco,
+        mas cai.
+  \item Escrever as convers\~oes e \textbf{n\~ao deduzir nenhuma}:
+  \[
+    \boxed{T_K = T_C + 273} \qquad\qquad
+    \boxed{T_F = \tfrac{9}{5}\,T_C + 32}
+  \]
+  \variaveis{
+    $T_C$ & temperatura em Celsius     & $^\circ$C \\
+    $T_K$ & temperatura absoluta       & K \\
+    $T_F$ & temperatura em Fahrenheit  & $^\circ$F \\
+  }
+  \item Avisar que o 273 e o 32 s\~ao \textbf{deslocamentos de origem},
+        n\~ao fatores de escala --- e \'e por isso que o tamanho do grau
+        n\~ao muda entre Celsius e Kelvin.
+  \item Montar a r\'egua comparativa no quadro:
+  \begin{center}\small
+    \begin{tabular}{@{}lrrr@{}}
+      \toprule
+      ponto de refer\^encia & Celsius & Kelvin & Fahrenheit \\
+      \midrule
+      zero absoluto        & $-273$ & 0   & $-460$ \\
+      fus\~ao do gelo        & 0      & 273 & 32 \\
+      corpo humano         & 37     & 310 & 98{,}6 \\
+      ebuli\c{c}\~ao da \'agua     & 100    & 373 & 212 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{itemize}
+
+\medskip
+\textbf{3. Escala inventada} (2 min)
+\begin{itemize}[nosep]
+  \item Avisar que o ENEM \`as vezes cria uma escala nova (X, Y) e pede a
+        convers\~ao. A receita \'e sempre a mesma: montar a propor\c{c}\~ao entre
+        os dois pontos fixos das duas escalas.
+\end{itemize}
+\end{quadro}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Uma varia\c{c}\~ao de 1 $^\circ$C corresponde a quantos kelvin?''
+        \textit{(A 1 kelvin. O tamanho do grau \'e o mesmo; s\'o a origem
+        muda. \'E o erro mais comum do tema --- vale insistir.)}
+  \item ``Existe temperatura negativa na escala Kelvin?''
+        \textit{(N\~ao. Abaixo do zero absoluto n\~ao h\'a agita\c{c}\~ao para
+        tirar.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+A \textbf{Q130 de 2025} (term\^ometro de resist\^encia de platina, escala
+linear $R = A + BT$) usa exatamente a ideia do item 3. N\~ao est\'a na lista
+da aula, mas serve de reserva se sobrar tempo ou se algu\'em pedir mais
+uma.
+\end{obs}
+
+\begin{corte}
+Cortar o Fahrenheit e o item 3 inteiro. \textbf{Kelvin n\~ao pode cair}: a
+primeira lei e as transforma\c{c}\~oes gasosas do Bloco 6 dependem dele.
+\end{corte}
+
+% ===================================================================
+\bloco{2}{O Que \'e Calor}{10}
+% ===================================================================
+
+\objetivo{definir calor como energia em tr\^ansito e matar de vez a ideia
+de que um corpo ``tem calor''. \'E a distin\c{c}\~ao que mais vale nota nesse
+tema.}
+
+\begin{quadro}
+\textbf{1. Calor n\~ao \'e o que o corpo tem} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever grande, e deixar vis\'ivel:
+        \textbf{calor \'e energia em tr\^ansito.}
+  \item Um corpo tem \textbf{energia interna} --- a soma da agita\c{c}\~ao de
+        todas as suas part\'iculas. Ele \textbf{n\~ao} tem calor.
+  \item ``Calor'' \'e o nome que essa energia recebe \textbf{enquanto
+        atravessa a fronteira} entre dois corpos, e ela s\'o atravessa se
+        houver \textbf{diferen\c{c}a de temperatura}.
+  \item Analogia: ningu\'em tem chuva. Tem \'agua. Chuva \'e a \'agua em
+        tr\^ansito, caindo. Igualzinho.
+\end{itemize}
+
+\medskip
+\textbf{2. Equil\'ibrio t\'ermico} (4 min)
+\begin{itemize}[nosep]
+  \item Encostar dois corpos, um quente e um frio. A energia passa do
+        quente para o frio at\'e as duas temperaturas se igualarem.
+  \item Escrever a frase e mandar sublinhar: \textbf{o calor vai
+        espontaneamente do mais quente para o mais frio, nunca ao
+        contr\'ario.} Essa frase volta no Bloco 6, para explicar por que
+        nenhum motor tem 100\% de rendimento.
+  \item No equil\'ibrio t\'ermico n\~ao \'e que o calor parou de existir: as
+        temperaturas ficaram iguais, ent\~ao o fluxo l\'iquido \'e zero.
+\end{itemize}
+
+\medskip
+\textbf{3. Unidades} (2 min)
+\begin{itemize}[nosep]
+  \item Calor \'e energia, logo a unidade \'e o \textbf{joule}.
+  \item Mas a tradi\c{c}\~ao do tema usa a \textbf{caloria}:
+        $1\ \text{cal} = 4{,}2\ \text{J}$. O ENEM fornece esse n\'umero
+        sempre que a conta precisa dele.
+  \item Defini\c{c}\~ao da caloria: \'e o calor que aquece \textbf{1 g de \'agua
+        em 1} $^\circ$\textbf{C}. Guardar essa frase --- ela \'e
+        literalmente o calor espec\'ifico da \'agua, que aparece no bloco
+        seguinte.
+\end{itemize}
+\end{quadro}
+
+\begin{projetor}
+Anima\c{c}\~ao de equil\'ibrio t\'ermico: dois blocos a temperaturas diferentes,
+setas de energia atravessando o contato, term\^ometros convergindo. Deixar
+rodar at\'e igualar, e s\'o ent\~ao escrever a conclus\~ao do item 2.
+\end{projetor}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Um corpo a 80 $^\circ$C tem mais calor que um corpo a
+        20 $^\circ$C?'' \textit{(Pergunta armada, e quase todo mundo cai.
+        Ele tem mais energia interna. Calor n\~ao \'e algo que se tem ---
+        s\'o existe durante a troca.)}
+  \item ``Se eu misturar 1 L de \'agua a 80 $^\circ$C com 1 L a
+        20 $^\circ$C, d\'a quanto?'' \textit{(50 $^\circ$C, porque as massas
+        e o material s\~ao iguais. Serve de aperitivo para o Bloco 3.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Essa distin\c{c}\~ao entre calor e energia interna \'e o que separa quem acerta
+de quem erra as quest\~oes conceituais do tema. Se um \'unico recado da aula
+tiver de sobreviver, \'e este.
+\end{obs}
+
+\begin{corte}
+Cortar a analogia da chuva e a segunda pergunta.
+\end{corte}
+
+% ===================================================================
+\bloco{3}{Calor Sens\'ivel}{20}
+% ===================================================================
+
+\objetivo{dar $Q = mc\Delta T$ e transformar o calor espec\'ifico em uma
+grandeza com significado f\'isico, n\~ao em mais uma letra da f\'ormula.}
+
+\begin{quadro}
+\textbf{1. A f\'ormula} (4 min)
+\begin{itemize}[nosep]
+  \item Escrever na faixa de resumo:
+  \[
+    \boxed{Q = m\,c\,\Delta T}
+  \]
+  \variaveis{
+    $Q$        & calor trocado                & J (ou cal) \\
+    $m$        & massa do corpo               & kg (ou g) \\
+    $c$        & calor espec\'ifico do material & J/(kg$\,\cdot\,$$^\circ$C) \\
+    $\Delta T$ & varia\c{c}\~ao de temperatura & $^\circ$C (ou K) \\
+  }
+  \item \textbf{As unidades de $m$ e $c$ t\^em de casar}: kg com
+        J/(kg$\,\cdot\,$$^\circ$C), ou g com cal/(g$\,\cdot\,$$^\circ$C).
+        Misturar os dois \'e o erro de conta mais comum do bloco.
+  \item \textbf{Sens\'ivel} porque o term\^ometro sente: o que muda \'e a
+        \textbf{temperatura}. A fase (s\'olido, l\'iquido, gasoso)
+        \textbf{n\~ao muda} --- se mudar, a f\'ormula \'e outra, e \'e a do
+        bloco seguinte.
+  \item Sinal: $\Delta T = T_{\text{final}} - T_{\text{inicial}}$. Ent\~ao
+        $Q > 0$ \'e corpo recebendo calor e $Q < 0$ \'e corpo cedendo.
+\end{itemize}
+
+\medskip
+\textbf{2. O que \'e o calor espec\'ifico} (5 min)
+\begin{itemize}[nosep]
+  \item $c$ \'e quanto de energia \'e preciso para aquecer \textbf{1 kg
+        daquele material em 1} $^\circ$\textbf{C}. \'E uma propriedade do
+        material, n\~ao do objeto.
+  \item \'Agua: $c = 1\ \text{cal/g}\,^\circ$C $= 4{,}2\ \text{kJ/kg}\,^\circ$C.
+        \'E \textbf{alto} --- o mais alto entre as subst\^ancias comuns.
+  \begin{center}\small
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      material & $c$ (kJ/kg$\,^\circ$C) \\
+      \midrule
+      \'agua       & 4{,}2 \\
+      alum\'inio   & 0{,}90 \\
+      areia      & 0{,}84 \\
+      concreto   & 0{,}80 \\
+      ferro      & 0{,}45 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \item Consequ\^encia a marcar bem: \textbf{a \'agua resiste a mudar de
+        temperatura}. Por isso o litoral tem clima ameno e o interior
+        tem amplitude t\'ermica enorme; por isso a areia queima o p\'e ao
+        meio-dia e o mar, do lado, est\'a agrad\'avel.
+  \item Essa \'e a resposta da pergunta (b) da abertura.
+\end{itemize}
+
+\medskip
+\textbf{3. Capacidade t\'ermica} (1 min)
+\begin{itemize}[nosep]
+  \item $C = m\,c$, ent\~ao $Q = C\,\Delta T$. Junta a massa e o material
+        num n\'umero s\'o, e \'e do \textbf{objeto}, n\~ao do material.
+        A unidade muda junto: $C$ vem em \textbf{J/$^\circ$C}, sem o
+        ``por quilo''.
+\end{itemize}
+\end{quadro}
+
+\begin{projetor}
+\questao{Quest\~ao 129}{ENEM 2022, caderno amarelo}{5 min}
+Amplitude t\'ermica urbana: comparar uma \'area de concreto com o mesmo
+volume de \'agua, absorvendo a mesma radia\c{c}\~ao solar.
+\begin{itemize}[nosep]
+  \item Montar o racioc\'inio antes de qualquer n\'umero: o $Q$ absorvido \'e
+        o mesmo e o volume \'e o mesmo. Quem tiver o \textbf{menor produto
+        $m\,c$} sofre o \textbf{maior} $\Delta T$.
+  \item \textbf{A pegadinha}: o enunciado d\'a a \textbf{densidade}, n\~ao a
+        massa. Precisa de $m = \rho V$, e a\'i o que compara \'e $\rho\,c$.
+  \item \'Agua: $1\,000 \times 4{,}2 = 4\,200$. \quad
+        Concreto: $2\,500 \times 0{,}8 = 2\,000$.
+  \item A pergunta \'e a \textbf{raz\~ao} entre os dois $\Delta T$:
+        $4\,200/2\,000 = 2{,}1$ $\Rightarrow$ alternativa \textbf{B}.
+  \item Ou seja, o concreto esquenta \textbf{duas vezes mais} para a
+        mesma energia absorvida. \'E a ilha de calor urbana, e ela volta
+        na Q111 do Bloco 5.
+\end{itemize}
+
+\questao{Quest\~ao 101}{ENEM 2020, caderno amarelo}{5 min}
+Aqu\'ario de 50 L com aquecedor de 50 W desligado por 1 hora.
+\begin{itemize}[nosep]
+  \item Energia que deixou de entrar:
+        $E = P\,\Delta t = 50 \times 3\,600 = 180\,000\ \text{J} = 180\ \text{kJ}$.
+  \item Massa pela densidade: $50\ \text{L} \times 1\ \text{kg/L} = 50$ kg.
+  \item $\Delta T = \dfrac{Q}{m\,c} = \dfrac{180}{50 \times 4{,}0}
+        = 0{,}9\ ^\circ$C \quad $\Rightarrow$ \quad alternativa
+        \textbf{C}.
+  \item Fechar apontando o formato: essa quest\~ao \textbf{cola pot\^encia
+        com calor sens\'ivel}. \'E o casamento favorito do ENEM, e a raz\~ao
+        pela qual a aula de trabalho e energia \'e pr\'e-requisito desta.
+\end{itemize}
+\end{projetor}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``O Sol bate igual na areia e no mar. Por que s\'o a areia queima
+        o p\'e?'' \textit{(Calor espec\'ifico da areia \'e cinco vezes menor.
+        Mesmo calor, muito mais $\Delta T$.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{corte}
+Cortar o item 3 (capacidade t\'ermica) e a tabela reduzida a duas linhas,
+\'agua e concreto. As duas quest\~oes n\~ao podem cair.
+\end{corte}
+
+% ===================================================================
+\bloco{4}{Calor Latente e Mudan\c{c}as de Fase}{22}
+% ===================================================================
+
+\objetivo{instalar o gr\'afico de aquecimento com patamar. \'E a figura mais
+cobrada de termologia e a que a proje\c{c}\~ao mais ajuda a explicar.}
+
+\begin{quadro}
+\textbf{1. A pergunta antes do gr\'afico} (3 min)
+\begin{itemize}[nosep]
+  \item Propor: pegar gelo a $-20\ ^\circ$C e aquecer com chama constante
+        at\'e virar vapor a $120\ ^\circ$C.
+  \item Perguntar e \textbf{esperar a resposta}: a temperatura sobe o
+        tempo todo? A maioria diz que sim.
+  \item N\~ao corrigir ainda. Ir para a proje\c{c}\~ao.
+\end{itemize}
+
+\medskip
+\textbf{2. O gr\'afico, constru\'ido por partes} (6 min)
+\begin{itemize}[nosep]
+  \item Nas \textbf{rampas}: calor \textbf{sens\'ivel}, $Q = mc\Delta T$.
+        A temperatura sobe, a fase \'e a mesma.
+  \item Nos \textbf{patamares}: calor \textbf{latente}, $Q = mL$. A
+        temperatura \textbf{n\~ao muda}, mesmo com a chama ligada.
+  \item A pergunta que amarra tudo: \textbf{para onde foi a energia no
+        patamar?} N\~ao sumiu --- foi quebrar as liga\c{c}\~oes entre as
+        mol\'eculas. Virou energia potencial de liga\c{c}\~ao, n\~ao agita\c{c}\~ao. E
+        temperatura mede agita\c{c}\~ao (Bloco 1), ent\~ao o term\^ometro n\~ao se
+        move.
+  \item Marcar no gr\'afico que os patamares da \'agua est\~ao em
+        $0\ ^\circ$C e $100\ ^\circ$C, e que o segundo \'e \textbf{muito
+        mais largo} que o primeiro.
+\end{itemize}
+
+\medskip
+\textbf{3. Calor latente} (3 min)
+\[
+  \boxed{Q = m\,L}
+\]
+\variaveis{
+  $Q$ & calor da mudan\c{c}a de fase & J (ou cal) \\
+  $m$ & massa que muda de fase       & kg (ou g) \\
+  $L$ & calor latente da transforma\c{c}\~ao & J/kg (ou cal/g) \\
+}
+\nopagebreak
+{\itshape\color{grafite}Chamar aten\c{c}\~ao para o que \textbf{n\~ao}
+apar\'ece aqui: n\~ao h\'a $\Delta T$, porque a temperatura fica parada
+durante toda a mudan\c{c}a de fase.\par}
+\begin{itemize}[nosep]
+  \item \'Agua: $L_F = 80\ \text{cal/g}$ (fus\~ao) e
+        $L_V = 540\ \text{cal/g}$ (vaporiza\c{c}\~ao).
+  \item Comparar em voz alta: vaporizar custa \textbf{quase sete vezes}
+        mais que fundir. \'E por isso que o patamar de cima \'e t\~ao largo, e
+        por isso que a panela leva um temp\~ao para seguir do in\'icio da
+        fervura at\'e secar.
+  \item Nomes que o enunciado usa: fus\~ao e solidifica\c{c}\~ao; vaporiza\c{c}\~ao e
+        condensa\c{c}\~ao; sublima\c{c}\~ao nos dois sentidos.
+\end{itemize}
+
+\medskip
+\textbf{4. Por que o vapor queima mais que a \'agua fervendo} (2 min)
+\begin{itemize}[nosep]
+  \item Os dois est\~ao a $100\ ^\circ$C. Mas o vapor, ao condensar na
+        pele, despeja $540\ \text{cal/g}$ \textbf{antes} de come\c{c}ar a
+        esfriar.
+  \item Essa \'e, literalmente, a mec\^anica da quest\~ao 95 que vem agora.
+\end{itemize}
+\end{quadro}
+
+\begin{projetor}
+Constru\c{c}\~ao animada do gr\'afico de aquecimento da \'agua: rampa, patamar,
+rampa, patamar, rampa, uma etapa por vez. \textbf{N\~ao adiantar o
+patamar} --- o efeito pedag\'ogico depende de ele aparecer depois da
+rampa, contrariando a expectativa do item 1.
+
+\medskip
+\questao{Quest\~ao 100}{ENEM 2024, caderno cinza}{5 min}
+Cafeteira de 700 W aquece 500 g de \'agua de $20\ ^\circ$C a
+$100\ ^\circ$C em 3 minutos; calcular o rendimento.
+\begin{itemize}[nosep]
+  \item Energia necess\'aria:
+        $Q = 500 \times 1 \times 80 = 40\,000\ \text{cal}
+        = 168\,000\ \text{J}$.
+  \item Energia fornecida:
+        $E = 700 \times 180 = 126\,000\ \text{J}$.
+  \item Raz\~ao: $126/168 = 0{,}75$ \quad $\Rightarrow$ \quad alternativa
+        \textbf{B}, 75\%.
+  \item \textbf{Dizer isto em voz alta}: essa quest\~ao \textbf{n\~ao tem
+        mudan\c{c}a de fase}. A \'agua chega a $100\ ^\circ$C e para ali ---
+        nada ferve. \'E calor sens\'ivel puro somado a rendimento.
+  \item Ela est\'a posicionada aqui de prop\'osito, para deixar o rendimento
+        aquecido antes das m\'aquinas t\'ermicas do Bloco 6.
+\end{itemize}
+
+\questao{Quest\~ao 95}{ENEM 2023, caderno amarelo}{5 min}
+Tacho de parede oca para doce de leite: entra vapor a $120\ ^\circ$C,
+sai \'agua l\'iquida a $100\ ^\circ$C.
+\begin{itemize}[nosep]
+  \item Separar no quadro os \textbf{dois lados da parede}. A pergunta \'e
+        sobre a \textbf{origem} da energia, o lado do vapor.
+  \item Lado do vapor: esfria de $120$ para $100\ ^\circ$C
+        (\textbf{sens\'ivel}) e depois condensa a $100\ ^\circ$C
+        (\textbf{latente de condensa\c{c}\~ao}).
+  \item Essa energia atravessa a parede e evapora a \'agua do doce ---
+        esse \'e o \textbf{destino}, n\~ao a origem.
+  \item Resposta: sens\'ivel + latente de condensa\c{c}\~ao $\Rightarrow$
+        alternativa \textbf{D}.
+  \item \textbf{Erro cl\'assico}: marcar E, que mistura origem com
+        destino. Vale escrever as duas colunas no quadro s\'o para mostrar
+        de onde vem a confus\~ao.
+\end{itemize}
+\end{projetor}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Com a \'agua j\'a fervendo, se eu aumentar o fogo ela ferve a mais
+        de 100 $^\circ$C?'' \textit{(N\~ao. Ferve mais r\'apido, na mesma
+        temperatura. Aumentar o fogo aumenta a taxa, n\~ao o patamar.)}
+  \item ``Por que a panela de press\~ao cozinha mais r\'apido?''
+        \textit{(A press\~ao maior sobe o ponto de ebuli\c{c}\~ao, ent\~ao o
+        patamar sai de 100 $^\circ$C. Gancho de gases, para o Bloco 6.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{corte}
+Cortar o item 4 e a segunda pergunta. \textbf{O gr\'afico n\~ao pode cair} ---
+\'e a figura mais cobrada do tema.
+\end{corte}
+
+% ===================================================================
+\bloco{5}{Propaga\c{c}\~ao de Calor}{33}
+% ===================================================================
+
+\objetivo{dar os tr\^es modos com um crit\'erio de decis\~ao que resolve
+qualquer quest\~ao do tema, e gastar dois ter\c{c}os do bloco resolvendo as
+cinco quest\~oes que o ENEM j\'a fez sobre ele.}
+
+\begin{quadro}
+\textbf{1. Condu\c{c}\~ao} (4 min)
+\begin{itemize}[nosep]
+  \item A energia passa \textbf{de part\'icula para part\'icula}, por
+        colis\~ao. A mat\'eria fica no lugar --- \textbf{n\~ao h\'a transporte
+        de massa}.
+  \item Exige meio material. \'E o modo t\'ipico dos \textbf{s\'olidos},
+        principalmente dos metais.
+  \item Metais conduzem bem porque t\^em \textbf{el\'etrons livres}, que
+        espalham a agita\c{c}\~ao muito mais r\'apido.
+  \item \textbf{Voltar \`a abertura}: a ma\c{c}aneta parece fria porque
+        \textbf{conduz bem} e puxa calor da m\~ao depressa. A madeira \'e m\'a
+        condutora, ou seja, \textbf{isolante t\'ermico}. Est\'a respondida a
+        pergunta (c).
+\end{itemize}
+
+\medskip
+\textbf{2. Convec\c{c}\~ao} (4 min)
+\begin{itemize}[nosep]
+  \item S\'o em \textbf{fluidos} --- l\'iquidos e gases. Aqui a mat\'eria
+        \textbf{se desloca}, em correntes.
+  \item O mecanismo, na ordem: aquece $\rightarrow$ dilata
+        $\rightarrow$ fica menos denso $\rightarrow$ \textbf{sobe}. O
+        fluido frio, mais denso, desce e ocupa o lugar. Fecha o ciclo.
+  \item Consequ\^encias que a turma conhece: o congelador fica em cima na
+        geladeira; o ar-condicionado \'e instalado no alto e o aquecedor
+        no ch\~ao.
+\end{itemize}
+
+\medskip
+\textbf{3. Irradia\c{c}\~ao} (3 min)
+\begin{itemize}[nosep]
+  \item Transporte por \textbf{ondas eletromagn\'eticas}
+        (infravermelho). \textbf{N\~ao precisa de meio} --- atravessa o
+        v\'acuo.
+  \item \'E como o Sol nos aquece: 150 milh\~oes de quil\^ometros de v\'acuo, e
+        chega. \textbf{\'E o \'unico modo que funciona no v\'acuo}, e esse \'e
+        o crit\'erio que o ENEM mais usa.
+  \item Superf\'icie escura absorve mais; clara e espelhada reflete.
+  \item \textbf{Garrafa t\'ermica}: parede espelhada contra irradia\c{c}\~ao,
+        v\'acuo entre as paredes contra condu\c{c}\~ao e convec\c{c}\~ao. Um objeto,
+        os tr\^es modos barrados.
+\end{itemize}
+
+\medskip
+\textbf{4. A tabela de decis\~ao} (2 min)
+\begin{itemize}[nosep]
+  \item Montar no quadro e mandar copiar:
+  \begin{center}\small
+    \begin{tabular}{@{}lcc@{}}
+      \toprule
+      modo & precisa de meio? & a mat\'eria se desloca? \\
+      \midrule
+      condu\c{c}\~ao   & sim              & n\~ao \\
+      convec\c{c}\~ao  & sim (fluido)     & sim \\
+      irradia\c{c}\~ao & \textbf{n\~ao}     & n\~ao \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \item Duas perguntas, tr\^es respostas poss\'iveis. Praticamente toda
+        quest\~ao do ENEM sobre o tema cai nessa tabela --- e as cinco que
+        v\^em agora comprovam isso.
+\end{itemize}
+\end{quadro}
+
+\begin{projetor}
+Anima\c{c}\~ao de convec\c{c}\~ao: panela com \'agua, correntes subindo no centro e
+descendo nas laterais. Deixar rodando durante o item 2.
+
+\medskip
+\questao{Quest\~ao 91}{ENEM 2025, caderno amarelo}{4 min}
+Mariposas em volta da l\^ampada. Pergunta pelo processo de transfer\^encia
+de calor \textbf{que independe da presen\c{c}a de fluidos}.
+\begin{itemize}[nosep]
+  \item Aplica\c{c}\~ao direta da coluna ``precisa de meio?'' da tabela.
+  \item Sem fluido, sobra \textbf{irradia\c{c}\~ao} $\Rightarrow$
+        alternativa \textbf{C}.
+  \item \textbf{Aten\c{c}\~ao ao n\'umero}: no caderno amarelo esta \'e a quest\~ao
+        \textbf{91}. Em caderno de outra cor o n\'umero muda.
+\end{itemize}
+
+\questao{Quest\~ao 117}{ENEM 2024, caderno cinza}{4 min}
+Aquecedor solar. Pergunta pelo processo que leva o calor
+\textbf{dos coletores para o reservat\'orio t\'ermico}.
+\begin{itemize}[nosep]
+  \item \textbf{A pegadinha est\'a no trecho escolhido.} Do Sol at\'e o
+        coletor \'e irradia\c{c}\~ao --- e \'e isso que a maioria marca. Mas a
+        pergunta \'e do coletor \textbf{para o reservat\'orio}.
+  \item Ali o que se move \'e a \textbf{\'agua quente}, que sobe por ser
+        menos densa. Mat\'eria se deslocando $\Rightarrow$
+        \textbf{convec\c{c}\~ao} $\Rightarrow$ alternativa \textbf{E}.
+  \item Vale ler a pergunta em voz alta duas vezes, sublinhando ``dos
+        coletores para o reservat\'orio''. \'E uma aula de leitura de
+        enunciado.
+\end{itemize}
+
+\questao{Quest\~ao 117}{ENEM 2023, caderno amarelo}{4 min}
+Copo de pl\'astico reciclado com casca de caf\'e, que n\~ao esquenta na parte
+externa. Pergunta as \textbf{duas} vantagens sobre o descart\'avel.
+\begin{itemize}[nosep]
+  \item Metade f\'isica, metade ambiental --- e a alternativa s\'o fecha se
+        as duas metades estiverem certas.
+  \item N\~ao esquentar por fora significa \textbf{baixa condutividade
+        t\'ermica}. Ser reutiliz\'avel significa \textbf{reduzir o res\'iduo
+        n\~ao biodegrad\'avel}.
+  \item Alternativa \textbf{D}. As distratoras trocam ``baixa'' por
+        ``alta'' condutividade, ou chamam o material de biodegrad\'avel,
+        que o enunciado nega na primeira linha.
+  \item \'E o copo da ma\c{c}aneta da abertura, agora valendo ponto.
+\end{itemize}
+
+\questao{Quest\~ao 111}{ENEM 2021, caderno amarelo}{4 min}
+Ilha de calor em S\~ao Paulo. Pergunta os \textbf{dois} mecanismos
+dominantes: entre o Sol e a ilha de calor, e entre a ilha de calor e a
+brisa mar\'itima.
+\begin{itemize}[nosep]
+  \item Primeiro trecho, Sol $\rightarrow$ cidade: atravessa o v\'acuo e a
+        atmosfera, \'e \textbf{irradia\c{c}\~ao}.
+  \item Segundo trecho, cidade $\rightarrow$ brisa: o enunciado entrega
+        de gra\c{c}a, ao dizer ``fluxo de ar vertical''. Ar subindo \'e
+        \textbf{convec\c{c}\~ao}.
+  \item Irradia\c{c}\~ao e convec\c{c}\~ao $\Rightarrow$ alternativa \textbf{A}.
+  \item Amarrar com o Bloco 3: a cidade esquenta mais que o campo porque
+        o concreto tem calor espec\'ifico baixo. \'E a mesma f\'isica da
+        Q129 de 2022, agora do lado da meteorologia.
+\end{itemize}
+
+\questao{Quest\~ao 133}{ENEM 2020, caderno amarelo}{4 min}
+Manual do refrigerador: n\~ao instalar perto de fog\~ao nem sob o sol.
+Pergunta por que o consumo de energia aumenta.
+\begin{itemize}[nosep]
+  \item Explicar antes o que o \textbf{condensador} faz: ele \'e a grade
+        atr\'as da geladeira, e o trabalho dele \'e \textbf{jogar calor
+        fora}, para o ar da cozinha.
+  \item Com ar quente em volta, as \textbf{correntes de convec\c{c}\~ao} que
+        levariam esse calor embora ficam prejudicadas. O compressor
+        precisa trabalhar mais, e o consumo sobe.
+  \item Alternativa \textbf{E}.
+  \item Fechar apontando adiante: uma geladeira \'e uma m\'aquina t\'ermica
+        rodando ao contr\'ario. \'E a deixa do Bloco 6.
+\end{itemize}
+\end{projetor}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Por que a garrafa t\'ermica \'e espelhada por dentro?''
+        \textit{(Para refletir a irradia\c{c}\~ao. O v\'acuo j\'a barrou condu\c{c}\~ao
+        e convec\c{c}\~ao; faltava o terceiro.)}
+  \item ``Cobertor esquenta?'' \textit{(N\~ao. Ele \'e isolante: reduz a
+        condu\c{c}\~ao, e o corpo faz o resto.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{corte}
+Cortar a garrafa t\'ermica do item 3 e a tabela do item 4 (fica s\'o falada).
+\textbf{Nenhuma das cinco quest\~oes pode cair} --- \'e o tema mais cobrado
+da aula, com cinco apari\c{c}\~oes em seis anos de prova.
+\end{corte}
+
+% ===================================================================
+\bloco{6}{Gases, Primeira Lei e M\'aquinas T\'ermicas}{20}
+% ===================================================================
+
+\objetivo{ligar o microsc\'opico (part\'iculas batendo na parede) ao
+macrosc\'opico ($P$, $V$, $T$) e da\'i ao motor, usando o simulador de
+pist\~ao para que as tr\^es transforma\c{c}\~oes n\~ao sejam decoradas.}
+
+\begin{projetor}
+Simulador de pist\~ao, aberto do come\c{c}o ao fim do bloco. Mostrar
+\textbf{primeiro} e escrever depois: empurrar o pist\~ao e deixar a turma
+ver as colis\~oes ficarem mais frequentes antes de qualquer f\'ormula
+aparecer no quadro.
+\end{projetor}
+
+\begin{quadro}
+\textbf{1. Press\~ao \'e colis\~ao} (3 min)
+\begin{itemize}[nosep]
+  \item Com o simulador: ao empurrar o pist\~ao, as part\'iculas passam a
+        bater \textbf{mais vezes por segundo} na parede. O man\^ometro
+        sobe junto.
+  \item Definir com as palavras do Bloco 1: \textbf{press\~ao} \'e o efeito
+        das colis\~oes nas paredes; \textbf{temperatura} \'e a energia
+        cin\'etica m\'edia.
+  \item Com isso, as tr\^es transforma\c{c}\~oes deixam de ser f\'ormulas e
+        passam a ser consequ\^encia.
+\end{itemize}
+
+\medskip
+\textbf{2. As tr\^es transforma\c{c}\~oes} (5 min)
+\begin{itemize}[nosep]
+  \item \textbf{Isot\'ermica} ($T$ fixa): $P\,V = $ constante. Comprimiu,
+        a press\~ao sobe --- mesma velocidade das part\'iculas, menos espa\c{c}o,
+        mais colis\~oes.
+  \item \textbf{Isob\'arica} ($P$ fixa): $V/T = $ constante. No simulador o
+        pist\~ao est\'a \textbf{livre, com uma carga desenhada em cima} ---
+        e \'e ela que fixa a press\~ao externa. Ao aquecer, o g\'as empurra o
+        pist\~ao, que \textbf{sobe sozinho} at\'e a press\~ao equilibrar a
+        carga outra vez. Vale dizer isso em voz alta: n\~ao \'e o programa
+        que decide mover o pist\~ao, \'e o g\'as que o empurra.
+        \'E o efeito mais bonito dos tr\^es.
+  \item \textbf{Isovolum\'etrica} ($V$ fixo): $P/T = $ constante. Aqueceu
+        e n\~ao deixou expandir, a press\~ao sobe.
+  \item Lei geral, que engloba as tr\^es:
+  \[
+    \boxed{\frac{P_1 V_1}{T_1} = \frac{P_2 V_2}{T_2}}
+    \qquad\text{e}\qquad
+    \boxed{P V = n R T}
+  \]
+  \variaveis{
+    $P$ & press\~ao do g\'as        & Pa (ou atm) \\
+    $V$ & volume ocupado            & m$^3$ (ou L) \\
+    $T$ & temperatura \textbf{absoluta} & K \\
+    $n$ & quantidade de mat\'eria   & mol \\
+    $R$ & constante universal dos gases & 8,31 J/(mol$\,\cdot\,$K) \\
+  }
+  \item \textbf{Insistir}: $T$ sempre em \textbf{kelvin}. \'E o erro que
+        mais derruba conta de g\'as.
+\end{itemize}
+
+\medskip
+\textbf{3. Primeira lei da termodin\^amica} (3 min)
+\[
+  \boxed{\Delta U = Q - W}
+\]
+\variaveis{
+  $\Delta U$ & varia\c{c}\~ao da energia interna & J \\
+  $Q$        & calor trocado                     & J \\
+  $W$        & trabalho realizado                & J \\
+}
+\begin{itemize}[nosep]
+  \item N\~ao \'e lei nova: \'e a \textbf{conserva\c{c}\~ao de energia} da aula
+        passada, agora com o calor inclu\'ido no balan\c{c}o.
+  \item $U$ \'e a energia interna --- a agita\c{c}\~ao. Para g\'as ideal, depende
+        \textbf{s\'o da temperatura}.
+  \item Conven\c{c}\~ao: $Q > 0$ o g\'as \textbf{recebe} calor; $W > 0$ o g\'as
+        \textbf{expande} e realiza trabalho.
+  \item Dois casos que resolvem quase tudo: na \textbf{isot\'ermica},
+        $\Delta U = 0$, ent\~ao $Q = W$; na \textbf{isovolum\'etrica},
+        $W = 0$, ent\~ao $\Delta U = Q$.
+\end{itemize}
+
+\medskip
+\textbf{4. M\'aquinas t\'ermicas} (3 min)
+\begin{itemize}[nosep]
+  \item O esquema de toda m\'aquina t\'ermica: recebe $Q_q$ da fonte quente,
+        realiza trabalho $W$, e \textbf{rejeita} $Q_f$ na fonte fria.
+  \item Rendimento:
+  \[
+    \boxed{\eta = \frac{W}{Q_q} = 1 - \frac{Q_f}{Q_q}}
+  \]
+  \variaveis{
+    $\eta$   & rendimento da m\'aquina        & sem unidade (ou \%) \\
+    $W$      & trabalho \'util por ciclo      & J \\
+    $Q_q$    & calor recebido da fonte quente & J \\
+    $Q_f$    & calor rejeitado na fonte fria  & J \\
+  }
+  \item Como $\eta$ \'e uma raz\~ao entre energias, ele \textbf{n\~ao tem
+        unidade}. Se a conta der ``joule'', alguma coisa saiu errada.
+  \item \textbf{Nunca 100\%}: seria preciso n\~ao rejeitar nada na fonte
+        fria. E lembrar a frase sublinhada no Bloco 2 --- o calor n\~ao
+        volta sozinho do frio para o quente. O rendimento n\~ao \'e limitado
+        por engenharia ruim, mas por essa assimetria.
+  \item No diagrama $P$--$V$, \textbf{a \'area dentro do ciclo \'e o
+        trabalho}. Vale desenhar o ret\^angulo e sombrear.
+\end{itemize}
+\end{quadro}
+
+\begin{projetor}
+\questao{Quest\~ao 101}{ENEM 2024, caderno cinza}{4 min}
+Ciclo de Otto em diagrama $P$--$V$, com as seis etapas descritas num
+quadro. Pergunta em qual etapa a \textbf{energia t\'ermica se transforma
+em energia \'util}.
+\begin{itemize}[nosep]
+  \item Percorrer o quadro com a turma: I admiss\~ao isob\'arica, II
+        compress\~ao adiab\'atica, III entrada de calor da combust\~ao, IV
+        \textbf{expans\~ao adiab\'atica}, V libera\c{c}\~ao de calor, VI descarga.
+  \item Etapa III \'e onde a energia \textbf{entra}, n\~ao onde ela vira
+        trabalho --- e \'e a distratora mais marcada.
+  \item Na expans\~ao adiab\'atica, $Q = 0$, logo $\Delta U = -W$: a energia
+        interna do g\'as \textbf{vira trabalho} sobre o pist\~ao. \'E a
+        defini\c{c}\~ao de energia \'util aqui.
+  \item Etapa \textbf{IV} $\Rightarrow$ alternativa \textbf{C}.
+  \item Mostrar no diagrama que essa \'e a etapa que empurra o pist\~ao para
+        baixo, e que a \'area sob ela \'e o que o motor entrega.
+\end{itemize}
+
+\questao{Quest\~ao 112}{ENEM 2024, caderno cinza}{4 min}
+Tirinha do Laerte: esquim\'os dentro de um iglu, com uma geladeira.
+Pergunta por que a geladeira \'e necess\'aria para fazer gelo.
+\begin{itemize}[nosep]
+  \item A gra\c{c}a da tirinha \'e o estranhamento: para que geladeira, se l\'a
+        fora est\'a a $-40\ ^\circ$C?
+  \item Porque \textbf{dentro} do iglu n\~ao est\'a. A neve \'e excelente
+        isolante e o calor dos corpos aquece o ambiente --- o interior
+        fica \textbf{acima de} $0\ ^\circ$C.
+  \item Sem estar abaixo do ponto de solidifica\c{c}\~ao, a \'agua n\~ao congela
+        sozinha. Alternativa \textbf{A}.
+  \item Fechamento perfeito da aula: essa quest\~ao amarra
+        \textbf{mudan\c{c}a de fase} (Bloco 4) com \textbf{isolamento
+        t\'ermico} (Bloco 5) numa tirinha de quatro quadrinhos.
+\end{itemize}
+\end{projetor}
+
+\begin{perguntas}
+\begin{itemize}[nosep]
+  \item ``Por que o saco de salgadinho estufa quando o \^onibus sobe a
+        serra?'' \textit{(A press\~ao externa cai e o g\'as de dentro
+        expande. Lei geral dos gases.)}
+  \item ``Existe motor com 100\% de rendimento?'' \textit{(N\~ao. Sempre
+        sobra calor rejeitado na fonte fria.)}
+\end{itemize}
+\end{perguntas}
+
+\begin{obs}
+Este bloco \'e o mais apertado da aula: s\~ao tr\^es assuntos (gases, primeira
+lei, m\'aquinas t\'ermicas) em 20 minutos. O simulador \'e o que torna isso
+vi\'avel --- ele substitui a dedu\c{c}\~ao das tr\^es transforma\c{c}\~oes por uma
+demonstra\c{c}\~ao de trinta segundos cada. Se o simulador n\~ao estiver
+dispon\'ivel, este bloco precisa de 30 min, e o corte tem de sair de outro
+lugar.
+
+\medskip
+O man\^ometro do simulador \textbf{mede de verdade}: ele soma a
+transfer\^encia de momento das colis\~oes nas paredes, em vez de imprimir
+$nRT/V$. E o pist\~ao \textbf{realiza trabalho}: comprimir aquece o g\'as e
+expandir o esfria, como manda a primeira lei. Na isob\'arica isso fica
+vis\'ivel --- o g\'as expande, esfria, e o aquecedor tem de repor a energia
+para a temperatura voltar ao alvo. \'E $\Delta U = Q - W$ acontecendo na
+tela. Com o pist\~ao parado a leitura fecha dentro de $1\%$, e o ponto
+assenta sobre a isoterma. \textbf{Enquanto voc\^e arrasta}, por\'em, o ponto
+fica para tr\'as e s\'o alcan\c{c}a a curva cerca de um segundo depois de
+voc\^e parar --- como todo instrumento que tira m\'edia. Vale usar isso:
+mexa, \textbf{espere assentar} e s\'o ent\~ao leia o n\'umero em voz alta.
+Se algum aluno reparar no atraso ou na oscila\c{c}\~ao, a resposta \'e boa:
+com 6\,000 part\'iculas ainda h\'a \textbf{ru\'ido estat\'istico}; um g\'as real
+tem $10^{23}$ e a\'i o desvio desaparece.
+\end{obs}
+
+\begin{corte}
+Cortar a equa\c{c}\~ao de Clapeyron ($PV = nRT$) e o item 3 reduzido apenas a
+$\Delta U = Q - W$ com os dois casos. As duas quest\~oes e o rendimento
+n\~ao podem cair.
+\end{corte}
+
+% ===================================================================
+\bloco{7}{Encerramento}{5}
+% ===================================================================
+
+\objetivo{fechar as tr\^es perguntas da abertura e deixar a faixa de
+f\'ormulas no quadro para a turma copiar.}
+
+\begin{quadro}
+\textbf{1. A faixa de f\'ormulas} (2 min)
+\begin{itemize}[nosep]
+  \item Deixar as seis no quadro, agrupadas:
+  \[
+    Q = mc\Delta T \qquad Q = mL \qquad T_K = T_C + 273
+  \]
+  \[
+    \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2} \qquad
+    \Delta U = Q - W \qquad
+    \eta = 1 - \frac{Q_f}{Q_q}
+  \]
+\end{itemize}
+
+\medskip
+\textbf{2. As tr\^es perguntas da abertura} (3 min)
+\begin{itemize}[nosep]
+  \item \textbf{(a) Calor e temperatura?} Temperatura \'e a agita\c{c}\~ao que o
+        corpo tem; calor \'e energia atravessando a fronteira por causa de
+        uma diferen\c{c}a de temperatura.
+  \item \textbf{(b) Por que a \'agua demora?} Calor espec\'ifico alto ---
+        4,2 kJ por kg e por grau, cinco vezes o da areia.
+  \item \textbf{(c) Por que o metal parece frio?} N\~ao est\'a mais frio:
+        conduz melhor, e puxa calor da m\~ao mais r\'apido.
+  \item Tarefa: a lista de quest\~oes, com as onze do ENEM resolvidas na
+        aula mais as de fixa\c{c}\~ao.
+\end{itemize}
+\end{quadro}
+
+% ===================================================================
+\secao{Adapta\c{c}\~ao por Tempo Dispon\'ivel}
+% ===================================================================
+
+{\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}p{2.2cm}X@{}}
+  \toprule
+  \textbf{130 min} & Plano completo, como est\'a acima. \\
+  \addlinespace[2pt]
+  \textbf{100 min} & Aplicar todos os pain\'eis
+    \textit{se o tempo apertar}. Sai o Fahrenheit, a capacidade t\'ermica,
+    a garrafa t\'ermica e Clapeyron. As onze quest\~oes permanecem. \\
+  \addlinespace[2pt]
+  \textbf{80 min} & Cortar o Bloco 6 inteiro e pass\'a-lo para a aula
+    seguinte, junto com as quest\~oes 101 e 112. Ficam nove quest\~oes e a
+    aula fecha em termologia pura, sem termodin\^amica. \\
+  \addlinespace[2pt]
+  \textbf{50 min} & Blocos 0 a 4 apenas, com as quatro primeiras
+    quest\~oes. Propaga\c{c}\~ao e gases viram a aula seguinte. \\
+  \bottomrule
+\end{tabularx}}
+
+\vspace{0.4em}
+
+{\small\itshape\color{grafite} A ordem dos cortes segue a frequ\^encia no
+ENEM: propaga\c{c}\~ao de calor \'e o subtema mais cobrado (cinco das onze
+quest\~oes), ent\~ao o Bloco 5 \'e o \'ultimo a sair.\par}
+
+% ===================================================================
+\secao{Material da Aula}
+% ===================================================================
+
+\begin{tabularx}{\linewidth}{@{}p{5.4cm}X@{}}
+  \toprule
+  \texttt{plano\_aula\_termologia.tex} & Este documento. \\
+  \addlinespace[2pt]
+  \texttt{slides\_termologia.html} & Deck projetado, com as simula\c{c}\~oes
+    animadas (part\'iculas, equil\'ibrio t\'ermico, gr\'afico de aquecimento,
+    convec\c{c}\~ao e pist\~ao). As onze quest\~oes aparecem como
+    \textbf{recorte do caderno oficial do INEP}, n\~ao redigitadas: a turma
+    v\^e a p\'agina da prova, com a diagrama\c{c}\~ao e as figuras originais.
+    Arquivo \'unico e autocontido: abre em qualquer navegador, sem
+    internet. \\
+  \addlinespace[2pt]
+  \texttt{figuras/} & Os onze recortes em PNG, mais o
+    \texttt{FONTES.md} com a proced\^encia de cada um (prova, caderno,
+    p\'agina, coluna e URL do PDF de origem). \\
+  \addlinespace[2pt]
+  \texttt{lista\_questoes\_termologia.tex} & Lista impressa, com as onze
+    do ENEM mais as de fixa\c{c}\~ao. \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{1.2em}
+{\color{black!30}\rule{\linewidth}{0.5pt}}\\[0.3em]
+{\small\itshape\color{grafite} As onze quest\~oes foram conferidas uma a
+uma nos cadernos oficiais do INEP. Duas refer\^encias vieram corrigidas:
+a de 2025 \'e a quest\~ao \textbf{91} (n\~ao 96), e as quatro de 2024 s\~ao do
+caderno \textbf{cinza} (n\~ao amarelo).\par}
+
+\end{document}

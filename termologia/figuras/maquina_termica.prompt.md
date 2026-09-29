@@ -1,0 +1,8 @@
+# Desenho de máquina térmica
+
+Gerado com a ferramenta integrada ImageGen. Arquivo: `maquina_termica.png`.
+Valores didáticos por ciclo. Imagem incorporada ao slide 27 no HTML.
+
+## Prompt
+
+Crie uma ilustração didática limpa para uma aula brasileira de física do ensino médio: esquema de uma máquina térmica, em formato quase quadrado, fundo uniforme branco quente #faf9f6, linhas elegantes em grafite e vinho #7a1b2a, cores discretas vermelha para calor de entrada e azul para calor rejeitado. Não é fotografia. Desenhe uma pequena máquina de pistão com cilindro em corte, biela e roda volante no centro; representação conceitual, sem detalhes mecânicos excessivos. Acima, um reservatório vermelho identificado exatamente 'FONTE QUENTE'. Uma seta vermelha grossa sai dele e aponta PARA BAIXO, entrando na máquina, com rótulo grande 'Qq = 1000 J'. Abaixo, um reservatório azul identificado exatamente 'FONTE FRIA'. Uma seta azul sai da máquina e aponta PARA BAIXO, entrando no reservatório frio, com rótulo 'Qf = 600 J'. À direita da máquina, uma seta horizontal vinho aponta PARA A DIREITA, saindo da máquina, com rótulo 'W = 400 J' e abaixo 'trabalho útil'. Identifique a máquina com o rótulo 'MÁQUINA TÉRMICA'. No rodapé do desenho, uma única equação grande e correta: '1000 J = 400 J + 600 J'. Tipografia clara e muito legível em português, títulos de tamanho generoso, etiquetas separadas das setas e peças, todas as letras e números exatos. Mostrar somente estas três setas de transferência de energia, com sentidos inequívocos. Sem outras fórmulas, sem legendas extras, sem título geral no topo, sem moldura, sem logotipo ou marca d'água. Composição com espaço entre cada elemento para projetar em slide.

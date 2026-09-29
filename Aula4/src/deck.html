@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ondas, Som e Luz</title>
+<!--
+  Deck da aula 4 (ondas, fenomenos ondulatorios, acustica e optica).
+  ARQUIVO GERADO por montar.py a partir de src/. Edite src/ e rode
+  `make` nesta pasta; nao edite slides_ondas.html na mao.
+
+  Palco fixo de 1600x900 px escalado por JS. Setas / espaco / clique
+  avancam; a URL aceita #12 para abrir direto na prancha 12 e
+  #imprimir para a versao de impressao (todas as pranchas, todos os
+  passos revelados), usada para gerar o PDF.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Young+Serif&display=swap">
+<style>
+/* ---------------------------------------------------------------
+   CIANOTIPIA. A cianotipia e uma impressao feita pela propria luz;
+   as pranchas imitam um atlas de fisica em azul-da-prussia. Um so
+   acento quente (laser) para o raio de luz e para o que importa.
+   --------------------------------------------------------------- */
+:root{
+  color-scheme: dark;
+  --prussia:#123a63;          /* chao das pranchas */
+  --prussia-fundo:#0b2745;    /* paineis das figuras */
+  --prussia-borda:#2b5680;
+  --folha:#eef3f6;            /* texto principal; folha das questoes */
+  --folha-2:#b9cde0;          /* texto secundario */
+  --traco:#8fb3d4;            /* reticula, eixos, frentes de onda */
+  --laser:#ff6a3d;            /* acento unico */
+  --tinta:#0f1b24;            /* texto sobre a folha */
+  --serif:"Young Serif", Georgia, "Times New Roman", serif;
+  --sans:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:#061a2e;overflow:hidden}
+body{font-family:var(--sans);color:var(--folha)}
+
+#stage{
+  position:absolute;top:0;left:0;width:1600px;height:900px;
+  transform-origin:top left;background:var(--prussia);overflow:hidden;
+}
+/* grao de papel: a cianotipia nunca e um azul chapado */
+#stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,.045), transparent 60%),
+    radial-gradient(80% 70% at 90% 100%, rgba(0,0,0,.22), transparent 70%);
+}
+
+.slide{
+  position:absolute;inset:0;z-index:1;
+  padding:40px 64px 0;
+  display:none;flex-direction:column;
+}
+.slide.on{display:flex}
+
+/* --- cabecalho: rotulo do bloco em mono, titulo em serifa --- */
+.cab{display:flex;align-items:baseline;gap:28px;flex:none;margin-bottom:22px}
+.cab .bloco{
+  font-family:var(--mono);font-size:17px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--traco);white-space:nowrap;
+}
+.cab h2{
+  font-family:var(--serif);font-weight:400;font-size:50px;line-height:1.05;margin:0;
+  color:var(--folha);text-wrap:balance;letter-spacing:-.005em;
+}
+.cab h2 em{font-style:normal;color:var(--laser)}
+
+/* --- rodape --- */
+.rod{
+  position:absolute;left:64px;right:64px;bottom:0;height:40px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--mono);font-size:15px;letter-spacing:.08em;color:var(--folha-2);
+  border-top:1px solid rgba(143,179,212,.22);
+}
+.rod .n{font-variant-numeric:tabular-nums}
+
+/* --- prancha: figura grande + coluna de legenda --- */
+.prancha{
+  flex:1;min-height:0;margin-bottom:58px;
+  display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:44px;
+}
+.prancha.larga{grid-template-columns:minmax(0,1fr) 380px}
+.fig{
+  position:relative;margin:0;min-width:0;min-height:0;
+  background-color:var(--prussia-fundo);
+  background-image:
+    linear-gradient(rgba(143,179,212,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143,179,212,.07) 1px, transparent 1px);
+  background-size:40px 40px;
+  border:1px solid var(--prussia-borda);
+  overflow:hidden;
+}
+.fig canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fig .lbl3d{
+  position:absolute;transform:translate(-50%,-100%);pointer-events:none;
+  font-family:var(--mono);font-size:16px;color:var(--folha);white-space:nowrap;
+  padding:2px 8px;background:rgba(11,39,69,.78);border:1px solid rgba(143,179,212,.35);
+}
+/* etiqueta de valores da cena, no canto: informacao, nao enfeite */
+.val{
+  position:absolute;top:16px;left:16px;z-index:3;
+  font-family:var(--mono);font-size:18px;line-height:1.5;color:var(--folha);
+  background:rgba(11,39,69,.85);padding:7px 13px;border-left:3px solid var(--laser);
+  font-variant-numeric:tabular-nums;white-space:pre;
+}
+.val:empty{display:none}
+/* quadro de sonda (cuba): as duas ondas e a soma no ponto marcado */
+.fig canvas.sonda{
+  position:absolute;inset:auto 16px 66px auto;width:360px;height:190px;z-index:3;
+  background:rgba(11,39,69,.9);border:1px solid rgba(143,179,212,.4);
+}
+
+/* controles dentro da figura */
+.ctl{
+  position:absolute;left:16px;right:16px;bottom:14px;z-index:3;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+}
+.ctl button{
+  font-family:var(--mono);font-size:16px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--folha);background:rgba(11,39,69,.85);border:1px solid var(--traco);
+  padding:7px 14px;cursor:pointer;
+}
+.ctl button:hover{background:rgba(143,179,212,.18)}
+.ctl button.sel{background:var(--folha);color:var(--tinta);border-color:var(--folha)}
+.ctl button:focus-visible,.ctl input:focus-visible{outline:2px solid var(--laser);outline-offset:2px}
+.ctl label{
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:16px;
+  color:var(--folha-2);background:rgba(11,39,69,.85);padding:5px 12px;
+}
+.ctl input[type=range]{width:190px;accent-color:var(--laser)}
+.ctl .sp{flex:1}
+
+/* --- legenda --- */
+.leg{display:flex;flex-direction:column;gap:18px;min-width:0;padding-top:2px}
+.leg p{margin:0;font-size:25px;line-height:1.42;color:var(--folha)}
+.leg .ideia{font-size:30px;line-height:1.3;font-weight:600;text-wrap:balance}
+.leg .ideia em{font-style:normal;color:var(--laser)}
+.leg b{font-weight:700;color:var(--folha)}
+.leg .sec{color:var(--folha-2)}
+.leg ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.leg li{font-size:24px;line-height:1.35;padding-left:26px;position:relative}
+.leg li::before{content:"";position:absolute;left:2px;top:.62em;width:12px;height:2px;background:var(--traco)}
+
+.formula{
+  font-family:var(--serif);font-size:52px;line-height:1.1;color:var(--folha);
+  padding:14px 0 12px;border-top:1px solid rgba(143,179,212,.35);border-bottom:1px solid rgba(143,179,212,.35);
+  text-align:center;white-space:nowrap;
+}
+.formula.m{font-size:40px}
+.formula .k{color:var(--laser)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.72em;line-height:1.08}
+.frac>span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}
+.frac>span:last-child{padding:2px 6px 0}
+sub,sup{font-size:.6em;line-height:0}
+
+/* legenda de variaveis: aparece sob toda formula nova */
+.vars{
+  display:grid;grid-template-columns:auto 1fr auto;gap:4px 16px;align-items:baseline;
+  font-size:20px;padding:10px 0 0;
+}
+.vars .s{font-family:var(--serif);font-size:24px;color:var(--laser);white-space:nowrap}
+.vars .u{font-family:var(--mono);font-size:17px;color:var(--folha-2);white-space:nowrap;text-align:right}
+
+.nota{font-size:20px !important;line-height:1.4 !important;color:var(--folha-2) !important}
+.nota b{color:var(--folha) !important}
+.cuidado{
+  font-size:22px !important;line-height:1.38 !important;padding:12px 16px;
+  border:1px solid var(--laser);color:var(--folha) !important;
+}
+.cuidado::before{
+  content:"pegadinha";display:block;font-family:var(--mono);font-size:14px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--laser);margin-bottom:4px;
+}
+
+/* passos revelados um a um */
+[data-step]{visibility:hidden;opacity:0}
+[data-step].vis{visibility:visible;opacity:1}
+
+/* --- capa --- */
+.slide.capa{padding:0}
+.capa .fig{position:absolute;inset:0;border:0;background-image:none;background-color:transparent}
+.capa .txt{position:absolute;left:96px;bottom:108px;z-index:2;max-width:980px}
+.capa .kick{font-family:var(--mono);font-size:19px;letter-spacing:.2em;text-transform:uppercase;color:var(--traco);margin-bottom:20px}
+.capa h1{font-family:var(--serif);font-weight:400;font-size:132px;line-height:.95;margin:0 0 22px;letter-spacing:-.01em}
+.capa h1 em{font-style:normal;color:var(--laser)}
+.capa .sub{font-size:30px;color:var(--folha-2);margin:0}
+.capa .meta{position:absolute;right:96px;bottom:108px;z-index:2;font-family:var(--mono);font-size:17px;line-height:1.7;color:var(--folha-2);text-align:right}
+
+/* --- roteiro --- */
+table.rot{border-collapse:collapse;width:100%;font-size:24px}
+.rot td{padding:13px 16px;border-bottom:1px solid rgba(143,179,212,.22);vertical-align:baseline}
+.rot td:first-child{font-family:var(--mono);font-size:18px;color:var(--traco);width:70px;letter-spacing:.08em}
+.rot td.t{font-family:var(--mono);font-size:19px;color:var(--folha-2);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rot td.q{font-family:var(--mono);font-size:17px;color:var(--folha-2)}
+.rot tr.tot td{border-bottom:0;color:var(--folha);font-weight:700}
+/* tabela de casos (espelhos): primeira coluna tambem e texto */
+.rot.casos{font-size:22px}
+.rot.casos td{padding:12px 14px}
+.rot.casos td:first-child{width:auto;font-size:17px;white-space:nowrap}
+.rot.casos td:nth-child(2){white-space:nowrap}
+.rot.casos tr.cab-t td{font-family:var(--mono);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--traco)}
+
+/* --- questao: a folha da prova sobre a prancha --- */
+.qgrid{flex:1;min-height:0;margin-bottom:58px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:40px}
+.papel{
+  position:relative;min-width:0;min-height:0;background:#fbfcfd;
+  align-self:center;justify-self:start;max-width:100%;max-height:100%;
+  box-shadow:0 1px 0 rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.6);
+  padding:18px;display:flex;align-items:flex-start;justify-content:center;
+}
+.papel img{max-width:100%;max-height:690px;width:auto;height:auto;display:block}
+.papel.txt{
+  display:block;align-self:stretch;color:var(--tinta);font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font-size:27px;line-height:1.45;padding:36px 44px;overflow:hidden;
+}
+.papel.txt .qn{font-weight:700;font-size:25px;letter-spacing:.02em;border-bottom:3px double #999;padding-bottom:6px;margin-bottom:16px}
+.papel.txt p{margin:0 0 14px;text-align:justify;text-indent:1.6em}
+.papel.txt p.cit{font-size:17px;text-align:right;text-indent:0;color:#333}
+.papel.txt p.per{text-indent:0}
+.papel.txt ol{list-style:none;margin:6px 0 0;padding:0}
+.papel.txt li{margin:0 0 6px;padding-left:44px;position:relative}
+.papel.txt li::before{
+  content:attr(data-l);position:absolute;left:0;top:.18em;width:28px;height:28px;border-radius:50%;
+  background:#111;color:#fff;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.qleg{display:flex;flex-direction:column;gap:16px;min-width:0}
+.qleg .fonte{font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--traco)}
+.qleg .cobra{font-size:24px;line-height:1.38;margin:0}
+.qleg .tempo{font-family:var(--mono);font-size:17px;color:var(--folha-2)}
+/* resolucao em passos (sequencia real: numeracao faz sentido) */
+.qgrid.resolve{grid-template-columns:minmax(0,1fr) 480px}
+.qgrid.resolve .qleg{gap:12px}
+ol.passos{margin:0;padding:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:10px;
+  border-top:1px solid rgba(143,179,212,.35);padding-top:12px}
+ol.passos li{counter-increment:p;position:relative;padding-left:40px;font-size:19px;line-height:1.38}
+ol.passos li::before{
+  content:counter(p);position:absolute;left:0;top:1px;width:26px;height:26px;border:1.5px solid var(--laser);
+  color:var(--laser);font-family:var(--mono);font-size:15px;display:flex;align-items:center;justify-content:center;
+}
+ol.passos .eq{display:block;font-family:var(--serif);font-size:22px;color:var(--folha);margin:4px 0 2px;white-space:nowrap}
+.vars .note{grid-column:1/-1;font-size:17px;line-height:1.35;color:var(--folha-2);margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(143,179,212,.35);padding-top:16px}
+.carimbo{
+  align-self:flex-start;display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--laser);
+}
+.carimbo b{
+  font-family:var(--serif);font-weight:400;font-size:46px;line-height:1;letter-spacing:0;color:var(--prussia);
+  background:var(--laser);width:64px;height:64px;display:flex;align-items:center;justify-content:center;
+}
+.resp p{margin:0;font-size:22px;line-height:1.42}
+.resp p.eq{font-family:var(--serif);font-size:27px;color:var(--folha)}
+
+/* questao muito larga: folha em largura total, legenda numa faixa embaixo */
+.qgrid.larga{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:22px}
+.qgrid.larga .papel{justify-self:center;align-self:start}
+.qgrid.larga .papel img{max-height:520px}
+.qgrid.larga .qleg{display:grid;grid-template-columns:360px 1fr;gap:6px 40px;align-content:start}
+.qgrid.larga .qleg > .fonte,.qgrid.larga .qleg > .cobra,.qgrid.larga .qleg > .tempo{grid-column:1}
+.qgrid.larga .resp{grid-column:2;grid-row:1 / span 3;border-top:0;padding-top:0;border-left:1px solid rgba(143,179,212,.35);padding-left:32px;
+  display:grid;grid-template-columns:auto 1fr;gap:8px 24px;align-content:start}
+.qgrid.larga .resp .carimbo{grid-row:1 / span 3}
+
+/* --- resumo final --- */
+.resumo{flex:1;min-height:0;margin-bottom:58px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:34px}
+.resumo section h3{font-family:var(--mono);font-weight:500;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--traco);margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(143,179,212,.35)}
+.resumo .f{font-family:var(--serif);font-size:30px;margin:0 0 4px}
+.resumo p{font-size:20px;line-height:1.4;margin:0 0 16px;color:var(--folha-2)}
+.resumo p b{color:var(--folha)}
+
+/* barra de progresso */
+#prog{position:absolute;left:0;bottom:0;height:3px;background:var(--laser);z-index:5;transition:width .3s}
+
+@media (prefers-reduced-motion: reduce){ #prog{transition:none} }
+
+/* --- impressao / PDF: todas as pranchas empilhadas --- */
+html.imprimir, html.imprimir body{overflow:visible;height:auto;background:var(--prussia)}
+html.imprimir #stage{position:relative;transform:none !important;height:auto;background:transparent}
+html.imprimir #stage::before{display:none}
+html.imprimir .slide{display:flex !important;position:relative;width:1600px;height:900px;background:var(--prussia);break-after:page;page-break-after:always}
+html.imprimir [data-step]{visibility:visible;opacity:1}
+html.imprimir #prog{display:none}
+@page{size:1600px 900px;margin:0}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- ============================================================
+     0 · ABERTURA
+     ============================================================ -->
+<section class="slide capa">
+  <figure class="fig" data-sim="capa"></figure>
+  <div class="txt">
+    <div class="kick">Física · aula 4</div>
+    <h1>Ondas,<br>som e <em>luz</em></h1>
+    <p class="sub">fenômenos ondulatórios, acústica e óptica</p>
+  </div>
+  <div class="meta">cursinho solidário<br>130 min · 14 questões do ENEM</div>
+</section>
+
+<section class="slide" data-steps="1">
+  <header class="cab"><span class="bloco">00 · abertura</span><h2>Por que você <em>ouve</em> atrás do muro, mas não <em>vê</em>?</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="muro">
+      <div class="val"></div>
+      <div class="ctl">
+        <button data-modo="som" class="sel">som · λ ≈ 1 m</button>
+        <button data-modo="luz">luz · λ ≈ 0,0000005 m</button>
+      </div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Som e luz são ondas. Os dois batem no mesmo muro.</p>
+      <p class="sec">Uma pessoa fala do outro lado. A voz chega até você, a imagem dela não. Por quê?</p>
+      <div data-step="1" style="display:flex;flex-direction:column;gap:16px">
+        <p>A onda <b>contorna</b> um obstáculo quando o tamanho dele é parecido com o seu <b>comprimento de onda</b>.</p>
+        <p>O som tem λ de metros, do tamanho do muro. A luz tem λ milhões de vezes menor e passa reta, deixando <b>sombra</b>.</p>
+        <p class="nota">O nome disso é <b>difração</b>. Vamos voltar a ela no bloco 3.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">00 · roteiro</span><h2>O caminho de hoje</h2></header>
+  <div class="prancha larga">
+    <div>
+      <table class="rot">
+        <tr><td>00</td><td>Abertura: o muro</td><td class="q"></td><td class="t">3 min</td></tr>
+        <tr><td>01</td><td>O que é onda</td><td class="q">ENEM 2025 Q126</td><td class="t">14 min</td></tr>
+        <tr><td>02</td><td>Amplitude, λ, f e v = λf</td><td class="q">2023 Q91 · 2022 Q95</td><td class="t">16 min</td></tr>
+        <tr><td>03</td><td>Fenômenos ondulatórios</td><td class="q">2020 Q94 · 2025 Q128 · 2023 Q92</td><td class="t">25 min</td></tr>
+        <tr><td>04</td><td>Acústica</td><td class="q">2024 Q115 · 2021 Q134 · 2024 Q130</td><td class="t">24 min</td></tr>
+        <tr><td>05</td><td>Óptica</td><td class="q">2021 Q115 · 2024 Q131 · 2012 · 2022 Q96 · 2019</td><td class="t">45 min</td></tr>
+        <tr><td>06</td><td>Fechando</td><td class="q"></td><td class="t">3 min</td></tr>
+        <tr class="tot"><td></td><td>Total</td><td></td><td class="t">130 min</td></tr>
+      </table>
+    </div>
+    <aside class="leg">
+      <p class="ideia">Um fio só: <em>tudo é onda</em>.</p>
+      <p>Som, rádio, luz e raio X obedecem às mesmas regras. Quem entende a onda resolve metade da prova de física do ENEM sem decorar fórmula.</p>
+      <p class="nota">As questões aparecem logo depois do conteúdo que cobram. Resolva antes de ver a resposta.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     1 · O QUE E ONDA
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">01 · o que é onda</span><h2>A onda leva <em>energia</em>, não leva matéria</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="pulso">
+      <div class="val"></div>
+      <div class="ctl"><button data-acao="pulso">mandar um pulso</button><button data-acao="continuo" class="sel">onda contínua</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Olhe o ponto <em>laranja</em>: ele sobe e desce, mas não viaja.</p>
+      <p>O que anda pela corda é a <b>perturbação</b>. Cada pedaço da corda só oscila em torno de onde estava.</p>
+      <p>No estádio é igual: a "ola" dá a volta, e cada torcedor continua na sua cadeira.</p>
+      <p class="nota">Onda = <b>perturbação que se propaga</b> transportando energia.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">01 · o que é onda</span><h2>Mecânica ou eletromagnética</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="em">
+      <div class="val">E (campo elétrico) · vertical
+B (campo magnético) · horizontal
+propaga em c = 300 000 km/s</div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">A pergunta que decide: <em>precisa de meio?</em></p>
+      <ul>
+        <li><b>Mecânica</b> precisa de matéria para vibrar: som, onda na corda, onda na água. <b>No vácuo, não existe.</b></li>
+        <li><b>Eletromagnética</b> é campo elétrico e magnético se regenerando. Viaja até no vácuo: luz, rádio, micro-ondas, raio X.</li>
+      </ul>
+      <p class="cuidado">No espaço não há som. A luz do Sol chega; o barulho de uma explosão solar, não.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">01 · o que é onda</span><h2>Transversal ou longitudinal</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="translong"><div class="val"></div></figure>
+    <aside class="leg">
+      <p class="ideia">Compare a <em>direção da vibração</em> com a direção em que a onda anda.</p>
+      <ul>
+        <li><b>Transversal</b>: vibra perpendicular à propagação. Corda, luz e toda onda eletromagnética.</li>
+        <li><b>Longitudinal</b>: vibra na mesma direção. O <b>som no ar</b> é uma fila de compressões e rarefações.</li>
+      </ul>
+      <p class="nota">Isso vai importar na polarização: <b>só onda transversal polariza</b>.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">01 · o que é onda</span><h2>O espectro eletromagnético</h2></header>
+  <div class="prancha larga">
+    <figure class="fig" data-sim="espectro"><div class="val"></div></figure>
+    <aside class="leg">
+      <p class="ideia">É tudo a mesma onda. Muda só <em>f</em> e <em>λ</em>.</p>
+      <p>No vácuo todas andam a <b>c = 3 × 10<sup>8</sup> m/s</b>. Frequência maior, comprimento menor e mais energia por fóton.</p>
+      <p>Da esquerda para a direita: rádio, micro-ondas, infravermelho, <b>visível</b>, ultravioleta, raios X, gama.</p>
+      <p class="nota">Luz visível é só a faixa de <b>400 a 700 nm</b>. Violeta tem o menor λ, vermelho o maior.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">01 · questão</span><h2>ENEM 2025 · Questão 126</h2></header>
+  <div class="qgrid larga">
+    <div class="papel"><img data-img="q2025_126" alt="ENEM 2025, questão 126: controle remoto de TV e de drone"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: onde cada aparelho fica no espectro, e por quê.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>D</b></div>
+        <p><b>TV</b>: precisa estar perto e sem obstáculo. É o <b>infravermelho</b>, que se comporta como luz e é bloqueado.</p>
+        <p><b>Drone</b>: quilômetros e contorna obstáculos. É <b>rádio</b>: λ grande, difrata e vai longe.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     2 · GRANDEZAS
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">02 · grandezas</span><h2>Amplitude, comprimento de onda e período</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="grandezas"><div class="val"></div></figure>
+    <aside class="leg">
+      <div class="vars" style="padding-top:0">
+        <span class="s">A</span><span>amplitude: do meio até a crista</span><span class="u">m</span>
+        <span class="s">λ</span><span>comprimento de onda: crista a crista</span><span class="u">m</span>
+        <span class="s">T</span><span>período: tempo de uma oscilação</span><span class="u">s</span>
+        <span class="s">f</span><span>frequência: oscilações por segundo</span><span class="u">Hz</span>
+      </div>
+      <div class="formula">f = <span class="frac"><span>1</span><span>T</span></span></div>
+      <p>A amplitude mede <b>energia</b> (no som, o volume). A frequência vem da <b>fonte</b> (no som, a nota).</p>
+      <p class="nota">440 Hz = 440 oscilações por segundo: é o lá da afinação.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">02 · grandezas</span><h2>A equação fundamental: <em>v = λ · f</em></h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="vlf">
+      <div class="val"></div>
+      <div class="ctl">
+        <span class="sp"></span>
+        <label for="vlf-f">frequência da fonte <input id="vlf-f" type="range" min="800" max="2000" step="50" value="1000"></label>
+      </div>
+    </figure>
+    <aside class="leg">
+      <div class="formula">v = λ · f</div>
+      <div class="vars">
+        <span class="s">v</span><span>velocidade da onda</span><span class="u">m/s</span>
+        <span class="s">λ</span><span>comprimento de onda</span><span class="u">m</span>
+        <span class="s">f</span><span>frequência</span><span class="u">Hz</span>
+      </div>
+      <p>Uma fonte só manda som para três meios: todos <b>oscilam juntos</b> (mesma f). No aço a onda corre mais, então λ fica maior.</p>
+      <p class="cuidado">Mudou de meio? A frequência <b>não muda</b>. Mudam v e λ juntos.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">02 · questão</span><h2>ENEM 2023 · Questão 91</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2023_091" alt="ENEM 2023, questão 91: telefone de lata do Cebolinha e do Cascão"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: o que muda na onda quando ela perde energia no caminho.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>C</b></div>
+        <p>Barbante mais longo dissipa mais energia. Energia é <b>amplitude</b>: o som chega mais fraco.</p>
+        <p>A frequência (altura) é da fonte e a velocidade é do meio: nenhuma das duas mudou.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="4">
+  <header class="cab"><span class="bloco">02 · questão</span><h2>ENEM 2022 · Questão 95</h2></header>
+  <div class="qgrid resolve">
+    <div class="papel"><img data-img="q2022_095" alt="ENEM 2022, questão 95: som da queda do gelo detectado na água e no ar"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: a mesma distância percorrida com duas velocidades.</p>
+      <div class="tempo">tempo sugerido · 5 min</div>
+      <ol class="passos">
+        <li data-step="1"><b>Leia o gráfico.</b> O mesmo "desenho" de sinal aparece em A perto de 220 s e em B perto de 232 s. O som chega ao ar <b>12 s depois</b>.</li>
+        <li data-step="2"><b>Monte a equação.</b> Os dois percorrem a mesma distância L. Tempo = distância ÷ velocidade:
+          <span class="eq">L/340 − L/1 540 = 12</span></li>
+        <li data-step="3"><b>Resolva.</b> Tire o mmc (340 × 1 540):
+          <span class="eq">L × 1 200 = 12 × 340 × 1 540</span>
+          <span class="eq">L ≈ 5 236 m</span></li>
+      </ol>
+      <div class="resp" data-step="4">
+        <div class="carimbo">resposta <b>D</b></div>
+        <p class="nota">Pegadinha: 220 s não é o tempo de viagem (os aparelhos já estavam ligados). Só a <b>diferença</b> importa.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     3 · FENOMENOS
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Reflexão: a onda bate e volta</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="reflexao">
+      <div class="val"></div>
+      <div class="ctl"><button data-ponta="fixa" class="sel">ponta presa</button><button data-ponta="livre">ponta solta</button><button data-acao="pulso">mandar pulso</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Volta pelo mesmo meio: <em>v, f e λ não mudam</em>.</p>
+      <p>Na ponta presa, o pulso volta <b>invertido</b>. Na ponta solta, volta do mesmo lado.</p>
+      <p><b>Eco</b> é a reflexão do som: o ouvido separa os dois sons se o eco chega 0,1 s depois, ou seja, com o obstáculo a pelo menos 17 m.</p>
+      <p class="nota">Sonar, ultrassom e radar medem distância pelo tempo de ida e volta: <b>d = v·t/2</b>.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Refração: a onda muda de meio</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="refracao">
+      <div class="val"></div>
+      <div class="ctl"><label for="ref-a">ângulo <input id="ref-a" type="range" min="0" max="60" step="1" value="35"></label></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Mudou a velocidade, a onda <em>entorta</em>.</p>
+      <p>A frente de onda que entra primeiro no meio lento freia primeiro, e a onda gira.</p>
+      <ul>
+        <li><b>f</b> não muda: é da fonte.</li>
+        <li><b>v</b> e <b>λ</b> mudam na mesma proporção.</li>
+      </ul>
+      <p class="nota">Na praia: onde é raso a onda anda mais devagar, por isso as ondas chegam quase paralelas à areia.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Difração: a onda contorna</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="difracao">
+      <div class="val"></div>
+      <div class="ctl"><label for="dif-a">abertura <input id="dif-a" type="range" min="0.5" max="8" step="0.1" value="1.2"></label><span class="sp"></span></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Fenda do tamanho de λ: a onda <em>se abre</em> atrás dela.</p>
+      <p>Fenda muito maior que λ: a onda passa quase reta e deixa sombra. Arraste a abertura e compare.</p>
+      <p>É a resposta da abertura: o som (λ ~ 1 m) difrata no muro, e a luz (λ ~ 500 nm) não.</p>
+      <p class="nota">Rádio AM (λ de centenas de metros) contorna morros. FM (λ ~ 3 m) é bloqueado por eles.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Interferência: somando <em>duas ondas</em></h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="superposicao"></figure>
+    <aside class="leg">
+      <p class="ideia">Duas ondas no mesmo lugar se <em>somam</em> ponto a ponto.</p>
+      <div class="formula m">y = y<sub>1</sub> + y<sub>2</sub></div>
+      <ul>
+        <li><b>Construtiva completa</b>: crista com crista, vale com vale. A soma tem amplitude <b>2A</b>.</li>
+        <li><b>Destrutiva completa</b>: crista com vale, defasagem de <b>meia onda</b> (λ/2). A soma é <b>zero</b>.</li>
+        <li><b>Parcial</b>: nem alinhadas nem opostas. A amplitude fica <b>entre 0 e 2A</b>.</li>
+      </ul>
+      <p class="nota">Para anular tudo, as duas ondas precisam ter a <b>mesma amplitude</b>. Na cuba, a seguir, cada ponto da água cai num desses três casos.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Interferência: duas ondas no mesmo lugar</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="cuba">
+      <div class="val"></div>
+      <div class="ctl">
+        <button data-fase="0" class="sel">fontes em fase</button><button data-fase="180">fontes opostas</button>
+        <span class="sp"></span>
+        <label for="cuba-d">distância <input id="cuba-d" type="range" min="1" max="4" step="0.25" value="2.5"></label>
+      </div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">As ondas se <em>somam</em> ponto a ponto.</p>
+      <ul>
+        <li><b>Faixas claras</b>: crista chega com crista. A água sobe e desce muito (<b>construtiva</b>).</li>
+        <li><b>Faixas escuras</b>: crista chega com vale. A água quase não se mexe (<b>destrutiva</b>).</li>
+      </ul>
+      <p><b>Clique na água</b> para marcar um ponto: o quadro mostra as duas ondas que chegam ali e a soma delas.</p>
+      <p class="nota">Aperte "fontes opostas": o ponto do meio fica parado. É o truque do fone com <b>cancelamento de ruído</b>.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">03 · questão</span><h2>ENEM 2020 · Questão 94</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2020_094" alt="ENEM 2020, questão 94: fone de ouvido com cancelamento de ruído"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: identificar o fenômeno pelo efeito.</p>
+      <div class="tempo">tempo sugerido · 2 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>B</b></div>
+        <p>O fone capta o ruído e emite uma onda <b>igual e invertida</b>. Crista encontra vale e a soma é zero: <b>interferência destrutiva</b>.</p>
+        <p class="nota">Funciona bem para ruído constante (turbina) porque dá tempo de prever a onda. Choro de bebê é irregular demais.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">03 · questão</span><h2>ENEM 2025 · Questão 128</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2025_128" alt="ENEM 2025, questão 128: carros elétricos e rádio AM"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: a mesma ideia do fone, escrita com outras palavras.</p>
+      <div class="tempo">tempo sugerido · 2 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>E</b></div>
+        <p>"Dois sinais que colidem e se cancelam" com o <b>mesmo comprimento de onda</b>: é a definição de <b>interferência</b> destrutiva.</p>
+        <p class="nota">Ressonância seria um sistema vibrando na própria frequência natural. Não há nada vibrando aqui.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">03 · questão</span><h2>ENEM 2023 · Questão 92</h2></header>
+  <div class="qgrid larga">
+    <div class="papel"><img data-img="q2023_092" alt="ENEM 2023, questão 92: laser de CD e DVD e difração"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: difração depende de λ, e onde está o menor λ no espectro.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>A</b></div>
+        <p>Cavidade menor exige λ menor para não difratar. Das opções, o menor comprimento de onda é o <b>violeta</b>.</p>
+        <p class="nota">Por isso o disco se chama <b>Blu-ray</b>: laser de 405 nm, contra 650 nm do DVD e 780 nm do CD.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">03 · fenômenos</span><h2>Polarização: o filtro de uma direção só</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="polar">
+      <div class="val"></div>
+      <div class="ctl"><button data-filtro="0" class="sel">filtro vertical</button><button data-filtro="90">filtro horizontal</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">O filtro só deixa passar a vibração <em>alinhada</em> a ele.</p>
+      <p>A onda vibra na vertical. O filtro vertical deixa passar e o horizontal bloqueia.</p>
+      <p>Óculos de sol polarizados e telas de LCD funcionam assim.</p>
+      <p class="cuidado">Som no ar é longitudinal: <b>não polariza</b>. Se a alternativa diz "som polarizado", está errada.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     4 · ACUSTICA
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">04 · acústica</span><h2>Altura, intensidade e timbre</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="som">
+      <div class="val"></div>
+      <div class="ctl"><button data-q="altura" class="sel">altura</button><button data-q="intensidade">intensidade</button><button data-q="timbre">timbre</button><span class="sp"></span><button data-acao="ouvir">▶ ouvir</button></div>
+    </figure>
+    <aside class="leg">
+      <ul>
+        <li><b>Altura</b> é a <b>frequência</b>: agudo (f alta) ou grave (f baixa). Não é volume!</li>
+        <li><b>Intensidade</b> é a <b>amplitude</b>: forte ou fraco.</li>
+        <li><b>Timbre</b> é a <b>forma</b> da onda: é por ele que você distingue violão de flauta na mesma nota.</li>
+      </ul>
+      <p class="cuidado">"Fala baixo!" no dia a dia quer dizer volume. Em física, <b>baixo = grave</b>.</p>
+      <p class="nota">Ouvido humano: de 20 Hz a 20 000 Hz. Abaixo, infrassom; acima, ultrassom.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">04 · acústica</span><h2>Decibel: uma régua que multiplica</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="db"><div class="val"></div></figure>
+    <aside class="leg">
+      <div class="formula m">β = 10 · log <span class="frac"><span>I</span><span>I<sub>0</sub></span></span></div>
+      <div class="vars">
+        <span class="s">β</span><span>nível sonoro</span><span class="u">dB</span>
+        <span class="s">I</span><span>intensidade</span><span class="u">W/m²</span>
+        <span class="s">I<sub>0</sub></span><span>limiar da audição</span><span class="u">10⁻¹² W/m²</span>
+      </div>
+      <p><b>+10 dB = 10 vezes</b> mais intensidade. De 60 para 80 dB, a intensidade fica 100 vezes maior.</p>
+      <p class="nota">Acima de 85 dB por horas seguidas já lesa o ouvido.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">04 · questão</span><h2>ENEM 2024 · Questão 115</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2024_115" alt="ENEM 2024, questão 115: nível sonoro da fala do professor na sala"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno cinza</div>
+      <p class="cobra">Cobra: ler um gráfico de dB e interpretar "5 dB acima".</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>A</b></div>
+        <p class="eq">45 dB + 5 dB = 50 dB</p>
+        <p>No gráfico, a fala do professor cai para 50 dB em cerca de <b>3 m</b>. Mais longe que isso, ela se perde no ruído.</p>
+        <p class="nota">Não precisa de logaritmo: é leitura de gráfico. Quem senta no fundo aprende pior, e isso é física.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">04 · questão</span><h2>ENEM 2021 · Questão 134</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2021_134" alt="ENEM 2021, questão 134: sino dos ventos com barras de comprimentos diferentes"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: o que depende do meio (v) e o que depende do tamanho (f).</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>D</b></div>
+        <p>Mesmo material: a <b>mesma velocidade</b>, v<sub>1</sub> = v<sub>2</sub>.</p>
+        <p>Barra menor, λ menor. Com v fixa, <b>f = v/λ</b> é maior: f<sub>1</sub> &gt; f<sub>2</sub>.</p>
+        <p class="nota">É o mesmo princípio do xilofone: tecla curta, som agudo.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">04 · acústica</span><h2>Efeito Doppler</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="doppler">
+      <div class="val"></div>
+      <div class="ctl"><label for="dop-v">velocidade da fonte <input id="dop-v" type="range" min="0" max="0.8" step="0.02" value="0.35"></label></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Fonte se aproximando: frentes de onda <em>espremidas</em>, som mais agudo.</p>
+      <div class="formula m">f′ = f · <span class="frac"><span>v ± v<sub>o</sub></span><span>v ∓ v<sub>f</sub></span></span></div>
+      <div class="vars">
+        <span class="s">f′</span><span>frequência que o ouvinte percebe</span><span class="u">Hz</span>
+        <span class="s">f</span><span>frequência que a fonte emite</span><span class="u">Hz</span>
+        <span class="s">v</span><span>velocidade do som no ar</span><span class="u">≈ 340 m/s</span>
+        <span class="s">v<sub>o</sub></span><span>velocidade do observador (ouvinte)</span><span class="u">m/s</span>
+        <span class="s">v<sub>f</sub></span><span>velocidade da fonte</span><span class="u">m/s</span>
+        <span class="note">Sinais de cima (+ em cima, − embaixo) quando um se <b>aproxima</b> do outro; de baixo quando se <b>afastam</b>.</span>
+      </div>
+      <p class="nota">A fonte <b>não</b> muda a frequência que emite: muda a que chega ao ouvinte.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">04 · questão</span><h2>ENEM 2024 · Questão 130</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2024_130" alt="ENEM 2024, questão 130: ambulância, sirene e radar"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno cinza</div>
+      <p class="cobra">Cobra: Doppler duas vezes, no som e no radar.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>D</b></div>
+        <p><b>Sirene</b>: a fonte se aproxima, então o som fica <b>mais agudo</b>.</p>
+        <p><b>Radar</b>: a onda bate num carro que vem na direção dele e volta comprimida. f<sub>r</sub> &gt; f<sub>0</sub>.</p>
+        <p class="nota">O radar de trânsito mede velocidade exatamente por essa diferença de frequência.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     5 · OPTICA
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>A cor de um objeto depende da luz</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="cor">
+      <div class="val"></div>
+      <div class="ctl"><button data-luz="branca" class="sel">luz branca</button><button data-luz="vermelha">luz vermelha</button><button data-luz="verde">luz verde</button><button data-luz="azul">luz azul</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Um objeto não "tem" cor. Ele <em>reflete</em> uma parte da luz e absorve o resto.</p>
+      <p>A folha é verde porque reflete o verde e absorve vermelho e azul. Sob luz vermelha, não há verde para refletir: ela fica <b>escura</b>.</p>
+      <p class="nota">Cor que vemos = a luz que <b>sobra</b> depois da absorção. Branco reflete tudo; preto absorve tudo.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">05 · questão</span><h2>ENEM 2021 · Questão 115</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2021_115" alt="ENEM 2021, questão 115: pigmentos das folhas e espectro de absorção"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: cor refletida é o complemento da cor absorvida.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>A</b></div>
+        <p>O caroteno aparece <b>amarelo-alaranjado</b>, e isso é o que ele reflete.</p>
+        <p>No círculo, o oposto do amarelo-laranja está entre o <b>violeta e o azul</b>: é a faixa que ele absorve.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Reflexão da luz e espelhos</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="espelhos">
+      <div class="val"></div>
+      <div class="ctl"><button data-esp="plano" class="sel">espelho plano</button><button data-esp="concavo">côncavo</button><button data-esp="convexo">convexo</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Ângulo de <em>incidência</em> = ângulo de <em>reflexão</em>, medidos a partir da normal.</p>
+      <ul>
+        <li><b>Plano</b>: imagem virtual, do mesmo tamanho e à mesma distância.</li>
+        <li><b>Côncavo</b>: junta os raios no foco. Farol, antena parabólica, espelho de maquiagem.</li>
+        <li><b>Convexo</b>: espalha os raios e aumenta o campo de visão. Retrovisor, espelho de garagem.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Foco, raio de curvatura e <em>tipos de imagem</em></h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="elementos">
+      <div class="val"></div>
+      <div class="ctl"><button data-el="elementos" class="sel">elementos</button><button data-el="real">imagem real</button><button data-el="virtual">imagem virtual</button></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">O espelho é um <em>pedaço</em> de uma esfera.</p>
+      <div class="vars">
+        <span class="s">C</span><span>centro de curvatura: o centro da esfera</span><span class="u"></span>
+        <span class="s">R</span><span>raio de curvatura: de C até o espelho</span><span class="u">cm</span>
+        <span class="s">V</span><span>vértice: o meio do espelho</span><span class="u"></span>
+        <span class="s">F</span><span>foco: onde os raios paralelos ao eixo se cruzam</span><span class="u"></span>
+        <span class="note">O foco fica no meio do caminho entre C e V: <b>f = R/2</b>.</span>
+      </div>
+      <ul>
+        <li><b>Real</b>: os raios se cruzam de verdade, na frente do espelho. Dá para <b>projetar</b> numa tela.</li>
+        <li><b>Virtual</b>: só os prolongamentos se cruzam, atrás do espelho. Não projeta; você a vê <b>olhando</b> no espelho.</li>
+        <li><b>Imprópria</b>: objeto no foco. Os raios saem paralelos e não formam imagem.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Espelho esférico: raios notáveis e a <em>imagem</em></h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="gauss">
+      <div class="val"></div>
+      <div class="ctl">
+        <button data-esf="concavo" class="sel">côncavo</button><button data-esf="convexo">convexo</button>
+        <span class="sp"></span>
+        <label for="gauss-p">objeto p <input id="gauss-p" type="range" min="0.4" max="3.2" step="0.1" value="2.5"></label>
+      </div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Dois raios bastam: onde eles se <em>cruzam</em>, está a imagem.</p>
+      <ul>
+        <li>Paralelo ao eixo → volta pelo <b>foco</b>.</li>
+        <li>Pelo foco → volta <b>paralelo</b>.</li>
+        <li>No vértice → volta <b>simétrico</b>.</li>
+      </ul>
+      <div class="formula m"><span class="frac"><span>1</span><span>f</span></span> = <span class="frac"><span>1</span><span>p</span></span> + <span class="frac"><span>1</span><span>p′</span></span><span style="display:inline-block;width:44px"></span>A = −<span class="frac"><span>p′</span><span>p</span></span></div>
+      <div class="vars">
+        <span class="s">f</span><span>foco, f = R/2 (côncavo +, convexo −)</span><span class="u">cm</span>
+        <span class="s">p</span><span>distância do objeto</span><span class="u">cm</span>
+        <span class="s">p′</span><span>da imagem (+ real, − virtual)</span><span class="u">cm</span>
+        <span class="s">A</span><span>aumento (− invertida, + direita)</span><span class="u">—</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide" data-steps="3">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Onde está o objeto, como fica a imagem</h2></header>
+  <div class="prancha larga">
+    <div>
+      <table class="rot casos">
+        <tr class="cab-t"><td>espelho</td><td>objeto</td><td>imagem</td><td>onde aparece</td></tr>
+        <tr><td>côncavo</td><td>além de C</td><td>real, invertida, <b>menor</b></td><td class="q">telescópio refletor</td></tr>
+        <tr><td>côncavo</td><td>em C</td><td>real, invertida, <b>igual</b></td><td class="q"></td></tr>
+        <tr><td>côncavo</td><td>entre C e F</td><td>real, invertida, <b>maior</b></td><td class="q">projetor</td></tr>
+        <tr><td>côncavo</td><td>em F</td><td><b>imprópria</b>: raios saem paralelos</td><td class="q">farol, lanterna</td></tr>
+        <tr><td>côncavo</td><td>entre F e V</td><td><b>virtual</b>, direita, maior</td><td class="q">espelho de maquiagem</td></tr>
+        <tr><td>convexo</td><td>qualquer lugar</td><td><b>virtual</b>, direita, menor</td><td class="q">retrovisor, garagem</td></tr>
+        <tr><td>plano</td><td>qualquer lugar</td><td><b>virtual</b>, direita, igual</td><td class="q">troca direita e esquerda</td></tr>
+      </table>
+    </div>
+    <aside class="leg">
+      <p class="ideia">Imagem <em>real</em> é sempre invertida; <em>virtual</em> é sempre direita.</p>
+      <p class="sec">Exemplo: objeto a 30 cm de um espelho côncavo com f = 20 cm.</p>
+      <ol class="passos">
+        <li data-step="1">Gauss: <span class="eq">1/20 = 1/30 + 1/p′  →  p′ = 60 cm</span></li>
+        <li data-step="2">Aumento: <span class="eq">A = −60/30 = −2</span></li>
+        <li data-step="3">p′ &gt; 0 e A &lt; 0: <b>real, invertida e 2× maior</b>. Dá para projetar numa tela.</li>
+      </ol>
+      <p class="nota">Espelho plano: se você anda até ele com velocidade v, sua imagem se aproxima de você com <b>2v</b>. Dois espelhos com ângulo α formam <b>N = 360°/α − 1</b> imagens.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">05 · questão · se der tempo</span><h2>ENEM 2024 · Questão 131</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2024_131" alt="ENEM 2024, questão 131: mirascópio com dois espelhos côncavos"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno cinza</div>
+      <p class="cobra">Cobra: imagem real de espelho côncavo e leitura do esquema.</p>
+      <div class="tempo">tempo sugerido · 4 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>C</b></div>
+        <p>Os raios <b>se cruzam de verdade</b> na abertura, então a imagem é <b>real</b>: parece o objeto ali, mas a mão atravessa.</p>
+        <p>O objeto está no fundo e a imagem se forma na abertura: 3,8 + 3,8 = <b>7,6 cm</b>.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Refração da luz e a lei de Snell</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="snell">
+      <div class="val"></div>
+      <div class="ctl"><label for="sn-a">ângulo de incidência <input id="sn-a" type="range" min="0" max="85" step="1" value="45"></label></div>
+    </figure>
+    <aside class="leg">
+      <div class="formula m">n<sub>1</sub> · sen θ<sub>1</sub> = n<sub>2</sub> · sen θ<sub>2</sub></div>
+      <div class="vars">
+        <span class="s">n</span><span>índice de refração, n = c/v</span><span class="u">sem unidade</span>
+        <span class="s">θ</span><span>ângulo com a normal</span><span class="u">graus</span>
+      </div>
+      <p>A luz entra na água (mais lenta, n = 1,33) e <b>se aproxima da normal</b>.</p>
+      <p class="nota">Por isso o peixe parece mais raso do que está, e o canudo parece quebrado no copo.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">05 · questão</span><h2>ENEM 2012 · Questão 64</h2></header>
+  <div class="qgrid">
+    <div class="papel txt">
+      <div class="qn">QUESTÃO 64</div>
+      <p>Alguns povos indígenas ainda preservam suas tradições realizando a pesca com lanças, demonstrando uma notável habilidade. Para fisgar um peixe em um lago com águas tranquilas o índio deve mirar abaixo da posição em que enxerga o peixe.</p>
+      <p class="per">Ele deve proceder dessa forma porque os raios de luz</p>
+      <ol>
+        <li data-l="A">refletidos pelo peixe não descrevem uma trajetória retilínea no interior da água.</li>
+        <li data-l="B">emitidos pelos olhos do índio desviam sua trajetória quando passam do ar para a água.</li>
+        <li data-l="C">espalhados pelo peixe são refletidos pela superfície da água.</li>
+        <li data-l="D">emitidos pelos olhos do índio são espalhados pela superfície da água.</li>
+        <li data-l="E">refletidos pelo peixe desviam sua trajetória quando passam da água para o ar.</li>
+      </ol>
+    </div>
+    <aside class="qleg">
+      <div class="fonte">1º dia · caderno azul · transcrita</div>
+      <p class="cobra">Cobra: de onde a luz sai e onde ela desvia.</p>
+      <div class="tempo">tempo sugerido · 2 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>E</b></div>
+        <p>A luz sai do peixe, refrata ao passar da água para o ar e se afasta da normal. O olho prolonga o raio em linha reta e vê o peixe <b>mais acima</b>.</p>
+        <p class="nota">Elimine B e D: <b>olho não emite luz</b>. Essa pegadinha volta todo ano.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>Reflexão total e fibra óptica</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="total">
+      <div class="val"></div>
+      <div class="ctl"><label for="tot-a">ângulo <input id="tot-a" type="range" min="0" max="80" step="1" value="30"></label></div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Saindo da água para o ar, se a luz vier muito inclinada, ela <em>não sai</em>: volta inteira.</p>
+      <p>Isso só acontece do meio "mais lento" para o "mais rápido" (água → ar, vidro → ar). O ângulo a partir do qual a luz fica presa é o <b>ângulo limite</b>.</p>
+      <p class="nota">A <b>fibra óptica</b> prende a luz assim, refletindo milhares de vezes. A internet que chega à sua casa viaja desse jeito.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">05 · questão</span><h2>ENEM 2022 · Questão 96</h2></header>
+  <div class="qgrid">
+    <div class="papel"><img data-img="q2022_096" alt="ENEM 2022, questão 96: garrafa PET com água iluminando uma casa"></div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno amarelo</div>
+      <p class="cobra">Cobra: qual fenômeno espalha a luz dentro da garrafa.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>E</b></div>
+        <p>A luz do Sol entra na água da garrafa, <b>muda de meio e de direção</b>. A garrafa funciona como uma lente que espalha a luz para todos os lados dentro de casa.</p>
+        <p class="nota">O enunciado avisa: buraco "muito maior que o comprimento de onda". É para <b>descartar a difração</b>.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="slide">
+  <header class="cab"><span class="bloco">05 · óptica</span><h2>O olho, a miopia e a hipermetropia</h2></header>
+  <div class="prancha">
+    <figure class="fig" data-sim="olho">
+      <div class="val"></div>
+      <div class="ctl">
+        <button data-olho="normal" class="sel">normal</button><button data-olho="miopia">miopia</button><button data-olho="hiper">hipermetropia</button>
+        <span class="sp"></span><button data-acao="lente">+ lente corretora</button>
+      </div>
+    </figure>
+    <aside class="leg">
+      <p class="ideia">Córnea e cristalino são uma lente <em>convergente</em>. A imagem precisa cair na retina.</p>
+      <ul>
+        <li><b>Miopia</b>: olho "comprido", foco antes da retina. Vê mal de longe. Corrige com lente <b>divergente</b>.</li>
+        <li><b>Hipermetropia</b>: olho "curto", foco depois da retina. Vê mal de perto. Corrige com lente <b>convergente</b>.</li>
+      </ul>
+      <p class="nota">No receituário, grau <b>negativo</b> é lente divergente (miopia) e grau <b>positivo</b> é convergente (hipermetropia).</p>
+    </aside>
+  </div>
+</section>
+
+<section class="slide q" data-steps="1">
+  <header class="cab"><span class="bloco">05 · questão</span><h2>ENEM 2019 · Questão 132</h2></header>
+  <div class="qgrid">
+    <div class="papel txt" style="font-size:25px">
+      <div class="qn">QUESTÃO 132</div>
+      <p>A maioria das pessoas fica com a visão embaçada ao abrir os olhos debaixo d’água. Mas há uma exceção: o povo moken, que habita a costa da Tailândia. Essa característica se deve principalmente à adaptabilidade do olho e à plasticidade do cérebro, o que significa que você também, com algum treinamento, poderia enxergar relativamente bem debaixo d’água. Estudos mostraram que as pupilas de olhos de indivíduos moken sofrem redução significativa debaixo d’água, o que faz com que os raios luminosos incidam quase paralelamente ao eixo óptico da pupila.</p>
+      <p class="cit">GISLÉN, A. et al. Visual Training Improves Underwater Vision in Children. <b>Vision Research</b>, n. 46, 2006 (adaptado).</p>
+      <p class="per">A acuidade visual associada à redução das pupilas é fisicamente explicada pela diminuição</p>
+      <ol>
+        <li data-l="A">da intensidade luminosa incidente na retina.</li>
+        <li data-l="B">da difração dos feixes luminosos que atravessam a pupila.</li>
+        <li data-l="C">da intensidade dos feixes luminosos em uma direção por polarização.</li>
+        <li data-l="D">do desvio dos feixes luminosos refratados no interior do olho.</li>
+        <li data-l="E">das reflexões dos feixes luminosos no interior do olho.</li>
+      </ol>
+    </div>
+    <aside class="qleg">
+      <div class="fonte">2º dia · caderno azul · transcrita</div>
+      <p class="cobra">Cobra: por que o olho erra o foco debaixo d’água.</p>
+      <div class="tempo">tempo sugerido · 3 min</div>
+      <div class="resp" data-step="1">
+        <div class="carimbo">resposta <b>D</b></div>
+        <p>Na água, a córnea quase não refrata (n parecidos), e o foco cai atrás da retina. Com a pupila pequena, só entram raios <b>quase paralelos ao eixo</b>, que precisam de pouco desvio.</p>
+        <p class="nota">É o mesmo motivo de apertar os olhos para enxergar melhor sem óculos.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================================================
+     6 · FECHANDO
+     ============================================================ -->
+<section class="slide">
+  <header class="cab"><span class="bloco">06 · fechando</span><h2>O que levar para a prova</h2></header>
+  <div class="resumo">
+    <section>
+      <h3>fórmulas</h3>
+      <p class="f">v = λ · f</p><p>f é da fonte, v é do meio</p>
+      <p class="f">Δd = n·λ</p><p>fontes em fase: reforço; Δd = (n + ½)λ anula</p>
+      <p class="f">1/f = 1/p + 1/p′</p><p>espelho esférico; A = −p′/p, f = R/2</p>
+      <p class="f">n₁ sen θ₁ = n₂ sen θ₂</p><p>entrou em meio mais lento: aproxima da normal</p>
+      <p class="f">+10 dB = ×10</p><p>decibel é escala de multiplicar</p>
+    </section>
+    <section>
+      <h3>fenômeno → pista no enunciado</h3>
+      <p><b>Interferência</b>: "cancelam", "se somam", fone de ruído</p>
+      <p><b>Difração</b>: "contorna", "fenda", "da ordem de λ"</p>
+      <p><b>Refração</b>: "muda de meio", "parece mais raso"</p>
+      <p><b>Espelho côncavo</b>: "concentra a luz", "imagem projetada"</p>
+      <p><b>Doppler</b>: "se aproxima", "mais agudo", radar</p>
+      <p><b>Polarização</b>: "filtro", "óculos de sol", só transversal</p>
+    </section>
+    <section>
+      <h3>pegadinhas que voltam</h3>
+      <p>Som <b>não</b> se propaga no vácuo, e luz sim.</p>
+      <p>Na refração <b>f não muda</b>.</p>
+      <p>Som alto é volume; <b>som alto em física é agudo</b>.</p>
+      <p>Som no ar é longitudinal e <b>não polariza</b>.</p>
+      <p>O olho <b>recebe</b> luz. Não emite.</p>
+      <p>Miopia usa lente <b>divergente</b>; hipermetropia, <b>convergente</b>.</p>
+    </section>
+  </div>
+</section>
+
+<div id="prog"></div>
+</div>
+
+<!-- bibliotecas: versao pinada na CDN, com copia local de reserva
+     (vendor/) para a sala sem internet -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script>window.THREE || document.write('<script src="vendor/three.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>window.gsap || document.write('<script src="vendor/gsap.min.js"><\/script>')</script>
+
+<script id="fisica">
+/*@FISICA@*/
+</script>
+<script>
+/*@QIMG@*/
+</script>
+<script>
+/*@MOTOR@*/
+</script>
+<script>
+/*@SIMS2D@*/
+</script>
+<script>
+/*@SIMS3D@*/
+</script>
+<script>
+/*@INICIO@*/
+</script>
+</body>
+</html>

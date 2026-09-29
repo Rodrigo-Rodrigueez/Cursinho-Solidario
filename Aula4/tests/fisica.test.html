@@ -1,0 +1,150 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Testes — física do deck de ondas</title>
+<!--
+  Roda o bloco <script id="fisica"> do deck MONTADO (slides_ondas.html),
+  isolado, e confere as invariantes fisicas que as pranchas mostram.
+
+  brave --headless=new --allow-file-access-from-files \
+        --virtual-time-budget=3000 --dump-dom tests/fisica.test.html
+  (ou: make testes). Cada linha sai como "ok ..." ou "FALHOU ...".
+-->
+<pre id="saida">rodando…</pre>
+<script>
+var linhas = [], falhas = 0;
+function teste(nome, fn){
+  try { fn(); linhas.push('ok      ' + nome); }
+  catch (e){ falhas++; linhas.push('FALHOU  ' + nome + ' — ' + e.message); }
+}
+function certo(c, msg){ if (!c) throw new Error(msg || 'asserção falsa'); }
+function perto(a, b, tol, msg){
+  if (Math.abs(a - b) > (tol || 1e-9)) throw new Error((msg || '') + ' esperado ' + b + ', veio ' + a);
+}
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '../slides_ondas.html', false);
+xhr.send();
+var html = xhr.responseText;
+var m = html.match(/<script id="fisica">([\s\S]*?)<\/script>/);
+certo(m, 'bloco fisica não encontrado no deck');
+var Fisica = new Function(m[1] + '\nreturn Fisica;')();
+
+teste('v = λf em todos os meios e frequências', function(){
+  [100, 440, 1000].forEach(function(f){
+    Object.keys(Fisica.MEIOS).forEach(function(k){
+      var v = Fisica.MEIOS[k].v, l = Fisica.comprimento(v, f);
+      perto(l * f, v, 1e-9, k);
+    });
+  });
+});
+teste('onda progride: o perfil em t+T/4 é o de t deslocado λ/4', function(){
+  var A = 1, l = 2, f = 5, T = 1 / f;
+  for (var x = 0; x < 4; x += .37)
+    perto(Fisica.onda(x + l / 4, T / 4, A, l, f), Fisica.onda(x, 0, A, l, f), 1e-9);
+});
+teste('mudar de meio mantém f e muda λ (ar → água)', function(){
+  var f = 440, la = Fisica.comprimento(340, f), lw = Fisica.comprimento(1540, f);
+  certo(lw > la, 'λ na água deveria ser maior');
+  perto(Fisica.frequencia(1540, lw), f, 1e-9);
+});
+teste('duas fontes em fase: Δ = λ/2 anula, Δ = λ reforça', function(){
+  var l = .8;
+  perto(Fisica.amplitudeDuasFontes(3, 3 + l / 2, l, 0), 0, 1e-9);
+  perto(Fisica.amplitudeDuasFontes(3, 3 + l, l, 0), 2, 1e-9);
+});
+teste('fones com cancelamento: fase π anula no ponto equidistante', function(){
+  perto(Fisica.amplitudeDuasFontes(1, 1, .5, Math.PI), 0, 1e-9);
+});
+teste('Snell: n1 sen θ1 = n2 sen θ2; ar→água aproxima da normal', function(){
+  var t1 = .6, t2 = Fisica.snell(1, 1.33, t1);
+  perto(Math.sin(t1), 1.33 * Math.sin(t2), 1e-9);
+  certo(t2 < t1);
+});
+teste('reflexão total só acima do ângulo crítico (água → ar)', function(){
+  var c = Fisica.anguloCritico(1.33, 1);
+  perto(c * 180 / Math.PI, 48.75, .05, 'θc');
+  certo(Fisica.snell(1.33, 1, c - 1e-3) !== null, 'abaixo de θc refrata');
+  certo(Fisica.snell(1.33, 1, c + 1e-3) === null, 'acima de θc reflete tudo');
+  certo(Fisica.anguloCritico(1, 1.33) === null, 'ar → água não tem ângulo crítico');
+});
+teste('Doppler: aproximação soa mais agudo, afastamento mais grave', function(){
+  certo(Fisica.doppler(500, 340, 0, 30) > 500);
+  certo(Fisica.doppler(500, 340, 0, -30) < 500);
+  certo(Fisica.doppler(500, 340, 20, 0) > 500);
+});
+teste('superposição: em fase dobra, meia onda anula, 90° dá A√2', function(){
+  var A = 1.3, l = 2, f = 1, t = .17;
+  perto(Fisica.amplitudeSoma(A, 0), 2 * A, 1e-9);
+  perto(Fisica.amplitudeSoma(A, Math.PI), 0, 1e-9);
+  perto(Fisica.amplitudeSoma(A, Math.PI / 2), A * Math.SQRT2, 1e-9);
+  /* confere com a soma ponto a ponto das duas ondas */
+  [0, Math.PI / 2, Math.PI].forEach(function(fa){
+    var mx = 0;
+    for (var x = 0; x < l; x += l / 400) mx = Math.max(mx, Math.abs(Fisica.onda(x, t, A, l, f) + Fisica.onda(x, t, A, l, f, fa)));
+    perto(mx, Fisica.amplitudeSoma(A, fa), 1e-3, 'fase ' + fa);
+  });
+});
+teste('Gauss: côncavo f = 20 cm, objeto a 30 cm → p′ = 60 cm, A = −2', function(){
+  var im = Fisica.imagemEspelho(20, 30);
+  perto(im.pl, 60, 1e-9); perto(im.A, -2, 1e-9);
+  certo(im.real && !im.direita && im.tamanho === 'maior');
+});
+teste('Gauss: os casos do espelho côncavo e do convexo', function(){
+  var f = 10, a = Fisica.imagemEspelho(f, 30), c = Fisica.imagemEspelho(f, 20), e = Fisica.imagemEspelho(f, 5);
+  certo(a.real && !a.direita && a.tamanho === 'menor', 'além de C');
+  certo(c.real && c.tamanho === 'igual', 'em C');
+  certo(Fisica.imagemEspelho(f, 10).impropria, 'no foco');
+  certo(!e.real && e.direita && e.tamanho === 'maior', 'entre F e V');
+  [3, 10, 50].forEach(function(p){
+    var v = Fisica.imagemEspelho(-10, p);
+    certo(!v.real && v.direita && v.tamanho === 'menor', 'convexo p=' + p);
+  });
+});
+teste('dB: +10 dB = 10× a intensidade; 0 dB = limiar', function(){
+  perto(Fisica.decibeis(1e-12), 0, 1e-9);
+  perto(Fisica.intensidade(70) / Fisica.intensidade(60), 10, 1e-9);
+});
+teste('ENEM 2022 Q95: L = 5 240 m dá 12 s entre os detectores', function(){
+  var dt = 5240 / 340 - 5240 / 1540;
+  perto(dt, 12, .02);
+});
+teste('miopia: lente divergente afasta o foco até a retina', function(){
+  var fOlho = .020, retina = .022;                 /* foco antes da retina */
+  var fCorr = 1 / (1 / retina - 1 / fOlho);         /* lente que resolve */
+  certo(fCorr < 0, 'deveria ser divergente');
+  perto(Fisica.focoCombinado(fOlho, fCorr), retina, 1e-12);
+});
+teste('hipermetropia: lente convergente aproxima o foco', function(){
+  var fOlho = .025, retina = .022;
+  var fCorr = 1 / (1 / retina - 1 / fOlho);
+  certo(fCorr > 0, 'deveria ser convergente');
+});
+teste('lente corretora do deck leva o foco à retina (míope e hipermétrope)', function(){
+  var fe = 2.15, D = 1.4;
+  [2.6, 1.8].forEach(function(Lr){
+    var fc = Fisica.lenteCorretora(fe, Lr, D);
+    perto(Fisica.focoNoOlho(fe, fc, D), Lr, 1e-9, 'Lr=' + Lr);
+    certo(Lr > fe ? fc < 0 : fc > 0, 'sinal da lente para Lr=' + Lr);
+  });
+  certo(Fisica.lenteCorretora(fe, fe, D) === Infinity, 'olho normal não precisa de lente');
+});
+teste('cuba: envoltória máxima no meio em fase, nula com fontes opostas', function(){
+  var F0 = [{x: -1, y: 0, fase: 0}, {x: 1, y: 0, fase: 0}], F1 = [{x: -1, y: 0, fase: 0}, {x: 1, y: 0, fase: Math.PI}];
+  var um = Fisica.envelopeCuba(0, 3, [F0[0]], 1.2);
+  perto(Fisica.envelopeCuba(0, 3, F0, 1.2), 2 * um, 1e-9, 'em fase');
+  perto(Fisica.envelopeCuba(0, 3, F1, 1.2), 0, 1e-9, 'opostas');
+});
+teste('cor: folha verde sob luz vermelha fica escura', function(){
+  var c = Fisica.corRefletida([1, 0, 0], [.1, .8, .1]);
+  certo(c[0] + c[1] + c[2] < .2);
+});
+teste('espectro: 450 nm azul, 530 nm verde, 650 nm vermelho', function(){
+  var a = Fisica.corDoComprimento(450), g = Fisica.corDoComprimento(530), r = Fisica.corDoComprimento(650);
+  certo(a[2] > a[0] && a[2] > a[1]);
+  certo(g[1] >= g[0] && g[1] > g[2]);
+  certo(r[0] > r[1] && r[0] > r[2]);
+});
+
+document.getElementById('saida').textContent =
+  linhas.join('\n') + '\n\n' + (falhas ? falhas + ' FALHA(S)' : 'TODOS OS TESTES PASSARAM');
+</script>

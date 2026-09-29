@@ -1,0 +1,68 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Banco de provas — animações do deck de ondas</title>
+<!--
+  Filma uma prancha animada em vários instantes, com relógio controlado,
+  e mostra os quadros lado a lado. Serve para revisar animações num
+  navegador sem tela, onde o requestAnimationFrame quase não avança.
+
+  URL: animacoes.html#N~t1,t2,t3,t4~ação+ação
+    N      número da prancha (1 = capa)
+    t      instantes, em segundos de simulação
+    ação   clique antes de filmar: meio=agua, fase=180, acao=pulso...
+           ou faixa: range=valor (primeiro input da figura)
+  Ex.: animacoes.html#17~0.5,1,2,4~fase=180
+
+  make filme N='17~0.5,1,2,4~fase=180'   (grava tests/quadros.png)
+-->
+<style>html,body{margin:0;background:#061a2e;color:#eef3f6;font:16px monospace}</style>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '../slides_ondas.html', false);
+xhr.send();
+var html = xhr.responseText.replace('<head>', '<head><base href="../">');
+html = html.replace('</body>', '<script>' + rodar.toString() + '\n(' + filmar.toString() + ')();<\/script></body>');
+document.open(); document.write(html); document.close();
+
+function filmar(){
+  var p = decodeURIComponent(location.hash.slice(1)).split('~');
+  var fig = slides[atual].querySelector('[data-sim]');
+  var L = fig && fig._sim;
+  if (!L){ document.title = 'sem simulação'; return; }
+  L.stop();
+  /* ações antes de filmar */
+  (p[2] || '').split('+').filter(Boolean).forEach(function(a){
+    var kv = a.split('='), el;
+    if (kv[0] === 'range'){ el = fig.querySelector('input'); el.value = kv[1]; el.dispatchEvent(new Event('input')); }
+    else { el = fig.querySelector('button[data-' + kv[0] + '="' + kv[1] + '"]'); if (el) el.click(); }
+  });
+  /* espera 300 ms depois das acoes: a difracao recalcula o campo com atraso */
+  setTimeout(function(){ rodar(p, fig, L); }, 300);
+}
+function rodar(p, fig, L){
+  var tempos = (p[1] || '0.5,1,2,4').split(',').map(Number), cur = 0, quadros = [];
+  var raiz = gsap.globalTimeline;
+  tempos.forEach(function(T){
+    while (cur < T - 1e-9){
+      var dt = Math.min(1 / 60, T - cur);
+      raiz.totalTime(raiz.totalTime() + dt);       /* tweens do GSAP no mesmo relogio */
+      L.quadro(dt); cur += dt;
+    }
+    var cv = fig.querySelector('canvas');
+    var v = fig.querySelector('.val');
+    quadros.push({t: T, src: cv.toDataURL('image/png'), val: v ? v.textContent : ''});
+  });
+  /* grade 2 x 2 por cima de tudo */
+  var g = document.createElement('div');
+  g.style.cssText = 'position:fixed;inset:0;z-index:99;background:#061a2e;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px';
+  quadros.forEach(function(q){
+    var c = document.createElement('div');
+    c.style.cssText = 'position:relative;overflow:hidden;background:#0b2745';
+    c.innerHTML = '<img src="' + q.src + '" style="width:100%;height:100%;object-fit:contain">' +
+      '<div style="position:absolute;top:4px;left:6px;background:#000a;padding:2px 6px;white-space:pre;font:13px monospace;color:#fff">t = ' +
+      q.t + ' s\n' + q.val.replace(/</g, '&lt;') + '</div>';
+    g.appendChild(c);
+  });
+  document.body.appendChild(g);
+}
+</script>

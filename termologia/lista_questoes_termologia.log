@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.7.20)  8 SEP 2026 08:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.7.20)  15 SEP 2026 15:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/rodrigo/Cursinho-Solidario/trabalho_energia/plano_aula_trabalho_energia
-(/home/rodrigo/Cursinho-Solidario/trabalho_energia/plano_aula_trabalho_energia.tex
+**/home/rodrigo/Cursinho-Solidario/termologia/lista_questoes_termologia
+(/home/rodrigo/Cursinho-Solidario/termologia/lista_questoes_termologia.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/share/texmf-dist/tex/latex/base/article.cls
@@ -486,6 +486,12 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@delta=\dimen297
 \TX@cols=\count333
 \TX@ftn=\toks44
+) (/usr/share/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip58
+\multirow@cntb=\count334
+\multirow@dima=\skip59
+\bigstrutjot=\dimen298
 ) (/usr/share/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2025/03/13 v1.3e reserve vertical space
 ) (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -512,13 +518,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count334
+\c@section@level=\count335
 ) (/usr/share/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen298
-\Hy@linkcounter=\count335
-\Hy@pagecounter=\count336
+\@linkdim=\dimen299
+\Hy@linkcounter=\count336
+\Hy@pagecounter=\count337
  (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -526,7 +532,7 @@ Now handling font encoding PD1 ...
 ) (/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count337
+\Hy@SavedSpaceFactor=\count338
  (/usr/share/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -539,21 +545,21 @@ Package hyperref Info: Plain pages OFF on input line 4216.
 Package hyperref Info: Backreferencing OFF on input line 4221.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4468.
-\c@Hy@tempcnt=\count338
+\c@Hy@tempcnt=\count339
  (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4807.
-\XeTeXLinkMargin=\dimen299
+\XeTeXLinkMargin=\dimen300
  (/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count339
-\Field@Width=\dimen300
-\Fld@charsize=\dimen301
+\Fld@menulength=\count340
+\Field@Width=\dimen301
+\Fld@charsize=\dimen302
 Package hyperref Info: Hyper figures OFF on input line 6084.
 Package hyperref Info: Link nesting OFF on input line 6089.
 Package hyperref Info: Hyper index ON on input line 6092.
@@ -561,15 +567,15 @@ Package hyperref Info: backreferencing OFF on input line 6099.
 Package hyperref Info: Link coloring OFF on input line 6104.
 Package hyperref Info: Link coloring with OCG OFF on input line 6109.
 Package hyperref Info: PDF/A mode OFF on input line 6114.
-\Hy@abspage=\count340
-\c@Item=\count341
-\c@Hfootnote=\count342
+\Hy@abspage=\count341
+\c@Item=\count342
+\c@Hfootnote=\count343
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
-\Fld@listcount=\count343
-\c@bookmark@seq@number=\count344
+\Fld@listcount=\count344
+\c@bookmark@seq@number=\count345
  (/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -577,46 +583,83 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
-\Hy@SectionHShift=\skip58
+\Hy@SectionHShift=\skip60
+) (/usr/share/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write4
+ Excluding comment 'comment') (/usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
+ (/usr/share/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+) (/usr/share/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count346
+\calc@Bcount=\count347
+\calc@Adimen=\dimen303
+\calc@Bdimen=\dimen304
+\calc@Askip=\skip61
+\calc@Bskip=\skip62
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count348
+\calc@Cskip=\skip63
+) (/usr/share/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
+\ESO@tempdima=\dimen305
+\ESO@tempdimb=\dimen306
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 26.
-LaTeX Font Info:    Trying to load font information for T1+pplj on input line 85.
+\AM@pagewidth=\dimen307
+\AM@pageheight=\dimen308
+\AM@fboxrule=\dimen309
+ (/usr/share/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
+)
+\pdfpages@includegraphics@status=\count349
+\AM@pagebox=\box83
+\AM@global@opts=\toks45
+\AM@pagecnt=\count350
+\AM@toc@title=\toks46
+\AM@lof@heading=\toks47
+\c@AM@survey=\count351
+\AM@templatesizebox=\box84
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 32.
+LaTeX Font Info:    Trying to load font information for T1+pplj on input line 75.
  (/usr/share/texmf-dist/tex/latex/psnfss/t1pplj.fd
 File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
 ) (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count345
-) (./plano_aula_trabalho_energia.aux
+\l__color_backend_stack_int=\count352
+) (./lista_questoes_termologia.aux
 Package babel Info: 'brazil' activates 'portuges' shorthands.
 (babel)             Reported on input line 8.
 )
-\openout1 = `plano_aula_trabalho_energia.aux'.
+\openout1 = `lista_questoes_termologia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Info: Redefining \microtypecontext on input line 85.
-Package microtype Info: Applying patch `item' on input line 85.
-Package microtype Info: Applying patch `toc' on input line 85.
-Package microtype Info: Applying patch `eqnum' on input line 85.
-Package microtype Info: Applying patch `footnote' on input line 85.
-Package microtype Info: Applying patch `verbatim' on input line 85.
-LaTeX Info: Redefining \microtypesetup on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Info: Redefining \microtypecontext on input line 75.
+Package microtype Info: Applying patch `item' on input line 75.
+Package microtype Info: Applying patch `toc' on input line 75.
+Package microtype Info: Applying patch `eqnum' on input line 75.
+Package microtype Info: Applying patch `footnote' on input line 75.
+Package microtype Info: Applying patch `verbatim' on input line 75.
+LaTeX Info: Redefining \microtypesetup on input line 75.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -666,76 +709,215 @@ File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count346
-\scratchdimen=\dimen302
-\scratchbox=\box83
-\nofMPsegments=\count347
-\nofMParguments=\count348
-\everyMPshowfont=\toks45
-\MPscratchCnt=\count349
-\MPscratchDim=\dimen303
-\MPnumerator=\count350
-\makeMPintoPDFobject=\count351
-\everyMPtoPDFconversion=\toks46
+\scratchcounter=\count353
+\scratchdimen=\dimen310
+\scratchbox=\box85
+\nofMPsegments=\count354
+\nofMParguments=\count355
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count356
+\MPscratchDim=\dimen311
+\MPnumerator=\count357
+\makeMPintoPDFobject=\count358
+\everyMPtoPDFconversion=\toks49
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 85.
- (./plano_aula_trabalho_energia.out) (./plano_aula_trabalho_energia.out)
-\@outlinefile=\write4
-\openout4 = `plano_aula_trabalho_energia.out'.
+Package hyperref Info: Link coloring ON on input line 75.
+ (./lista_questoes_termologia.out) (./lista_questoes_termologia.out)
+\@outlinefile=\write5
+\openout5 = `lista_questoes_termologia.out'.
 
+ (/usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2025-06-23 v0.14 Display of landscape pages in PDF
+ (/usr/share/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2025-06-23 v0.14 Display of landscape pages in PDF (HO)
+ (/usr/share/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+))
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplj/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Trying to load font information for TS1+pplj on input line 93.
+LaTeX Font Info:    Trying to load font information for TS1+pplj on input line 80.
  (/usr/share/texmf-dist/tex/latex/psnfss/ts1pplj.fd
 File: ts1pplj.fd 2004/09/06 font definitions for TS1/pplj.
 )
 
 LaTeX Font Warning: Font shape `TS1/pplj/m/sc' undefined
 (Font)              using `TS1/pplj/m/n' instead
-(Font)              for symbol `textperiodcentered' on input line 93.
+(Font)              for symbol `textperiodcentered' on input line 80.
 
-(/usr/share/texmf-dist/tex/latex/psnfss/ot1pplx.fd) (/usr/share/texmf-dist/tex/latex/psnfss/omlzplm.fd) (/usr/share/texmf-dist/tex/latex/psnfss/omszplm.fd) (/usr/share/texmf-dist/tex/latex/psnfss/omxzplm.fd) (/usr/share/texmf-dist/tex/latex/psnfss/ot1zplm.fd) (/usr/share/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/usr/share/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 110.
+ (/usr/share/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
+)
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 110.
+ (/usr/share/texmf-dist/tex/latex/psnfss/omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 110.
+ (/usr/share/texmf-dist/tex/latex/psnfss/omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 110.
+ (/usr/share/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 110.
+ (/usr/share/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `zplm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 110.
+ (/usr/share/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 110.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 110.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 110.
+ (/usr/share/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 110.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 110.
+ [2]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplj/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--201
-[]\T1/pplj/b/n/10.95 (+20) Demonstração: \T1/pplj/m/n/10.95 (+20) mos-trar ví-deo do pro-fes-sor Wal-ter Lewin
- []
-
-
-Underfull \hbox (badness 1715) in paragraph at lines 198--201
-\T1/pplj/m/n/10.95 (+20) (https://www.youtube.com/watch?v=77ZF50ve6rs) e mos-trar que as-sim como na
- []
-
-[2]
+<figuras/enem2025_q130_sensores_platina.png, id=24, 1071.00125pt x 920.43875pt>
+File: figuras/enem2025_q130_sensores_platina.png Graphic file (type png)
+<use figuras/enem2025_q130_sensores_platina.png>
+Package pdftex.def Info: figuras/enem2025_q130_sensores_platina.png  used on input line 152.
+(pdftex.def)             Requested size: 278.7208pt x 239.53314pt.
+<figuras/enem2025r_q124_lamina_bimetalica.png, id=25, 2027.575pt x 475.7775pt>
+File: figuras/enem2025r_q124_lamina_bimetalica.png Graphic file (type png)
+<use figuras/enem2025r_q124_lamina_bimetalica.png>
+Package pdftex.def Info: figuras/enem2025r_q124_lamina_bimetalica.png  used on input line 172.
+(pdftex.def)             Requested size: 427.07419pt x 100.21387pt.
+ [3 <./figuras/enem2025_q130_sensores_platina.png>] [4 <./figuras/enem2025r_q124_lamina_bimetalica.png>] [5]
+<figuras/enem2024_q112_tirinha_iglu.png, id=62, 369.5406pt x 143.5764pt>
+File: figuras/enem2024_q112_tirinha_iglu.png Graphic file (type png)
+<use figuras/enem2024_q112_tirinha_iglu.png>
+Package pdftex.def Info: figuras/enem2024_q112_tirinha_iglu.png  used on input line 338.
+(pdftex.def)             Requested size: 413.58813pt x 160.69272pt.
+ [6] [7 <./figuras/enem2024_q112_tirinha_iglu.png>]
+<figuras/enem2024_q117_aquecedor_solar.png, id=93, 1017.8025pt x 497.86pt>
+File: figuras/enem2024_q117_aquecedor_solar.png Graphic file (type png)
+<use figuras/enem2024_q117_aquecedor_solar.png>
+Package pdftex.def Info: figuras/enem2024_q117_aquecedor_solar.png  used on input line 406.
+(pdftex.def)             Requested size: 323.67886pt x 158.33087pt.
+ [8 <./figuras/enem2024_q117_aquecedor_solar.png>]
+<figuras/enem2021_q111_ilha_calor.png, id=109, 1075.01625pt x 974.64125pt>
+File: figuras/enem2021_q111_ilha_calor.png Graphic file (type png)
+<use figuras/enem2021_q111_ilha_calor.png>
+Package pdftex.def Info: figuras/enem2021_q111_ilha_calor.png  used on input line 463.
+(pdftex.def)             Requested size: 278.7208pt x 252.6869pt.
+ [9 <./figuras/enem2021_q111_ilha_calor.png>]
+<figuras/enem2024_q101_ciclo_otto.png, id=125, 926.46124pt x 628.3475pt>
+File: figuras/enem2024_q101_ciclo_otto.png Graphic file (type png)
+<use figuras/enem2024_q101_ciclo_otto.png>
+Package pdftex.def Info: figuras/enem2024_q101_ciclo_otto.png  used on input line 515.
+(pdftex.def)             Requested size: 260.74168pt x 176.83734pt.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 311.
+(Font)              scaled to size 10.42007pt on input line 521.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 311.
+(Font)              scaled to size 7.91925pt on input line 521.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 311.
+(Font)              scaled to size 10.42007pt on input line 521.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 311.
- [3] [4] [5] [6] [7] [8]
+(Font)              scaled to size 7.91925pt on input line 521.
+ [10 <./figuras/enem2024_q101_ciclo_otto.png>]
+<figuras/enem2023_q119_grafico_pxt.png, id=136, 2140.99875pt x 2145.01375pt>
+File: figuras/enem2023_q119_grafico_pxt.png Graphic file (type png)
+<use figuras/enem2023_q119_grafico_pxt.png>
+Package pdftex.def Info: figuras/enem2023_q119_grafico_pxt.png  used on input line 564.
+(pdftex.def)             Requested size: 418.08119pt x 418.84879pt.
+ [11] [12 <./figuras/enem2023_q119_grafico_pxt.png>] [13]
+
+Package enumitem Warning: Negative labelwidth. This does not make much
+(enumitem)                sense, on input line 659.
+
+[14]
+<resolucoes_termologia.pdf, id=172, 602.25pt x 851.18pt>
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf>
+Package pdftex.def Info: resolucoes_termologia.pdf  used on input line 782.
+(pdftex.def)             Requested size: 602.24852pt x 851.1779pt.
+<resolucoes_termologia.pdf, id=174, page=1, 602.25pt x 851.18pt>
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 1>
+Package pdftex.def Info: resolucoes_termologia.pdf , page1 used on input line 782.
+(pdftex.def)             Requested size: 602.24852pt x 851.1779pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 1>
+Package pdftex.def Info: resolucoes_termologia.pdf , page1 used on input line 782.
+(pdftex.def)             Requested size: 511.91492pt x 723.50641pt.
+ [15]
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 1>
+Package pdftex.def Info: resolucoes_termologia.pdf , page1 used on input line 782.
+(pdftex.def)             Requested size: 511.91492pt x 723.50641pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 1>
+Package pdftex.def Info: resolucoes_termologia.pdf , page1 used on input line 782.
+(pdftex.def)             Requested size: 511.91492pt x 723.50641pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 1>
+Package pdftex.def Info: resolucoes_termologia.pdf , page1 used on input line 782.
+(pdftex.def)             Requested size: 511.91492pt x 723.50641pt.
+ [16
+
+ <./resolucoes_termologia.pdf>]
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf>
+Package pdftex.def Info: resolucoes_termologia.pdf  used on input line 785.
+(pdftex.def)             Requested size: 602.24852pt x 851.1779pt.
+<resolucoes_termologia.pdf, id=192, page=2, 602.25pt x 851.18pt>
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 2>
+Package pdftex.def Info: resolucoes_termologia.pdf , page2 used on input line 785.
+(pdftex.def)             Requested size: 602.24852pt x 851.1779pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 2>
+Package pdftex.def Info: resolucoes_termologia.pdf , page2 used on input line 785.
+(pdftex.def)             Requested size: 572.13425pt x 808.61641pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 2>
+Package pdftex.def Info: resolucoes_termologia.pdf , page2 used on input line 785.
+(pdftex.def)             Requested size: 572.13425pt x 808.61641pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 2>
+Package pdftex.def Info: resolucoes_termologia.pdf , page2 used on input line 785.
+(pdftex.def)             Requested size: 572.13425pt x 808.61641pt.
+File: resolucoes_termologia.pdf Graphic file (type pdf)
+<use resolucoes_termologia.pdf, page 2>
+Package pdftex.def Info: resolucoes_termologia.pdf , page2 used on input line 785.
+(pdftex.def)             Requested size: 572.13425pt x 808.61641pt.
+ [17
+
+ <./resolucoes_termologia.pdf>]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
-
-LaTeX Font Warning: Font shape `T1/pplj/m/scit' undefined
-(Font)              using `T1/pplj/m/sc' instead on input line 785.
-
-[9{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [10] [11] (./plano_aula_trabalho_energia.aux)
+ [18{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./lista_questoes_termologia.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -744,22 +926,22 @@ L3 programming layer <2026-01-19>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `plano_aula_trabalho_energia.out' has not changed.
+Package rerunfilecheck Info: File `lista_questoes_termologia.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28890 strings out of 469495
- 552723 string characters out of 5470098
- 1016232 words of memory out of 5000000
- 56462 multiletter control sequences out of 15000+600000
- 724242 words of font info for 559 fonts, out of 8000000 for 9000
+ 29869 strings out of 469495
+ 572062 string characters out of 5470098
+ 1024451 words of memory out of 5000000
+ 57440 multiletter control sequences out of 15000+600000
+ 714086 words of font info for 469 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 116i,12n,121p,1070b,1031s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplbj8a.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfit1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on plano_aula_trabalho_energia.pdf (11 pages, 251570 bytes).
+ 116i,18n,121p,1062b,943s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplbj8a.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on lista_questoes_termologia.pdf (18 pages, 1418120 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 104 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 120845 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 289 PDF objects out of 1000 (max. 8388607)
+ 213 compressed objects within 3 object streams
+ 99 named destinations out of 1000 (max. 500000)
+ 122441 words of extra memory for PDF output out of 128383 (max. 10000000)
 

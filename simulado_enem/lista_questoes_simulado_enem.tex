@@ -1,0 +1,285 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% Tipografia: Palatino, versalete, uma cor de destaque (bord\^o)
+% Mesmo pre\^ambulo da lista de termologia.
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{microtype}
+\usepackage[top=2.4cm, bottom=2.6cm, left=2.6cm, right=2.6cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{needspace}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{{figuras/}}
+
+\definecolor{vinho}{RGB}{122, 27, 42}
+\definecolor{grafite}{RGB}{70, 70, 70}
+\hypersetup{colorlinks=true, linkcolor=vinho, urlcolor=vinho}
+
+\linespread{1.06}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% ---------------------------------------------------------------
+% Formata\c{c}\~ao das quest\~oes
+% ---------------------------------------------------------------
+\newcommand{\fonte}[1]{{\small\scshape\color{grafite}#1}}
+
+\newenvironment{questao}[2]{%
+  \par\addvspace{1.6em}
+  \needspace{12\baselineskip}
+  {\large\bfseries\color{vinho}Quest\~ao #1}\hfill #2\\[-0.55em]
+  {\color{black!25}\rule{\linewidth}{0.4pt}}
+  \par\nobreak\smallskip
+  % a quest\~ao inteira numa caixa: nunca quebra entre p\'aginas
+  \noindent\begin{minipage}{\linewidth}\setlength{\parskip}{0.45em}%
+}{\end{minipage}\par\addvspace{0.4em}}
+
+\newcommand{\parte}[1]{%
+  \needspace{18\baselineskip}
+  \vspace{1.8em}
+  {\Large\bfseries #1}\\[-0.55em]
+  {\color{black!30}\rule{\linewidth}{0.5pt}}
+  \par\nobreak\smallskip
+}
+
+\newtcolorbox{painel}{blanker, breakable, left=12pt,
+  borderline west={1.4pt}{0pt}{black!30},
+  before skip=11pt, after skip=11pt}
+
+% figura recortada do caderno oficial do INEP
+\newcommand{\figuraoriginal}[2]{%
+  \begin{center}
+    \includegraphics[width=#1]{#2}
+  \end{center}}
+
+% refer\^encia bibliogr\'afica do enunciado, como na prova
+\newcommand{\fontebib}[1]{{\raggedleft\scriptsize\color{grafite}#1\par}}
+
+\setlist[enumerate,1]{label=\textbf{\Alph*)}, leftmargin=2em, nosep}
+
+% ---------------------------------------------------------------
+\begin{document}
+% ---------------------------------------------------------------
+
+\thispagestyle{empty}
+
+{\scshape\color{vinho}cursinho solid\'ario \,\textperiodcentered\, f\'isica}\\[-0.5em]
+{\color{vinho}\rule{\linewidth}{1.6pt}}\\[0.9em]
+{\huge\bfseries Simulado ENEM}\\[0.35em]
+{\LARGE Ondas, Calor, Energia e Newton}\\[0.7em]
+\hfill {\color{grafite}2026}\\[-0.3em]
+{\color{black!30}\rule{\linewidth}{0.5pt}}
+
+\vspace{0.6em}
+
+
+% ===================================================================
+\parte{Ondulat\'oria}
+% ===================================================================
+
+\begin{questao}{1}{\fonte{ENEM 2025 \,\textperiodcentered\, caderno amarelo \,\textperiodcentered\, Q128}}
+\textbf{Carros el\'etricos p\~oem fim ao longo reinado da r\'adio AM}
+
+As montadoras de autom\'oveis est\~ao em uma corrida rumo a um futuro
+eletrificado, e r\'adios AM est\~ao ficando pelo caminho. O problema, dizem
+os especialistas, \'e que os motores dos ve\'iculos el\'etricos geram
+frequ\^encias eletromagn\'eticas do mesmo comprimento de onda que os sinais
+das r\'adios AM. ``Voc\^e tem dois sinais que colidem um com o outro e se
+cancelam'', disse o diretor de inova\c{c}\~ao de motores e tecnologia de uma
+fabricante de autope\c{c}as.
+
+\fontebib{Dispon\'ivel em: www1.folha.uol.com.br. Acesso em: 20 nov. 2018 (adaptado).}
+
+O problema mencionado refere-se a qual fen\^omeno ondulat\'orio?
+\begin{enumerate}
+  \item Difra\c{c}\~ao.
+  \item Reflex\~ao.
+  \item Refra\c{c}\~ao.
+  \item Resson\^ancia.
+  \item Interfer\^encia.
+\end{enumerate}
+\end{questao}
+
+\begin{questao}{2}{\fonte{ENEM 2013 \,\textperiodcentered\, caderno azul \,\textperiodcentered\, Q65}}
+Uma manifesta\c{c}\~ao comum das torcidas em est\'adios de futebol \'e a ola
+mexicana. Os espectadores de uma linha, sem sair do lugar e sem se
+deslocarem lateralmente, ficam de p\'e e se sentam, sincronizados com os da
+linha adjacente. O efeito coletivo se propaga pelos espectadores do
+est\'adio, formando uma onda progressiva.
+
+Calcula-se que a velocidade de propaga\c{c}\~ao dessa ``onda humana'' \'e
+45 km/h, e que cada per\'iodo de oscila\c{c}\~ao cont\'em 16 pessoas, que se
+levantam e sentam organizadamente e distanciadas entre si por 80 cm.
+
+Nessa ola mexicana, a frequ\^encia da onda, em hertz, \'e um valor mais
+pr\'oximo de
+\begin{enumerate}
+  \item 0,3.
+  \item 0,5.
+  \item 1,0.
+  \item 1,9.
+  \item 3,7.
+\end{enumerate}
+\end{questao}
+
+\begin{questao}{3}{\fonte{ENEM 2020 \,\textperiodcentered\, caderno amarelo \,\textperiodcentered\, Q109}}
+Dois engenheiros est\~ao verificando se uma cavidade perfurada no solo est\'a
+de acordo com o planejamento de uma obra, cuja profundidade requerida \'e de
+30 m. O teste \'e feito por um dispositivo denominado oscilador de \'audio de
+frequ\^encia vari\'avel, que permite relacionar a profundidade com os valores
+da frequ\^encia de duas resson\^ancias consecutivas, assim como em um tubo
+sonoro fechado. A menor frequ\^encia de resson\^ancia que o aparelho mediu
+foi 135 Hz. Considere que a velocidade do som dentro da cavidade perfurada
+\'e de 360 m\,s$^{-1}$.
+
+Se a profundidade estiver de acordo com o projeto, qual ser\'a o valor da
+pr\'oxima frequ\^encia de resson\^ancia que ser\'a medida?
+\begin{enumerate}
+  \item 137 Hz.
+  \item 138 Hz.
+  \item 141 Hz.
+  \item 144 Hz.
+  \item 159 Hz.
+\end{enumerate}
+\end{questao}
+
+
+% ===================================================================
+\parte{Calorimetria}
+% ===================================================================
+
+\begin{questao}{4}{\fonte{ENEM 2023 \,\textperiodcentered\, caderno amarelo \,\textperiodcentered\, Q95}}
+Em uma ind\'ustria aliment\'icia, para produ\c{c}\~ao de doce de leite,
+utiliza-se um tacho de parede oca com uma entrada para vapor de \'agua a
+120 $^\circ$C e uma sa\'ida para \'agua l\'iquida em equil\'ibrio com o vapor
+a 100 $^\circ$C. Ao passar pela parte oca do tacho, o vapor de \'agua
+transforma-se em l\'iquido, liberando energia. A parede transfere essa
+energia para o interior do tacho, resultando na evapora\c{c}\~ao de \'agua e
+consequente concentra\c{c}\~ao do produto.
+
+No processo de concentra\c{c}\~ao do produto, \'e utilizada energia proveniente
+\begin{enumerate}
+  \item somente do calor latente de vaporiza\c{c}\~ao.
+  \item somente do calor latente de condensa\c{c}\~ao.
+  \item do calor sens\'ivel e do calor latente de vaporiza\c{c}\~ao.
+  \item do calor sens\'ivel e do calor latente de condensa\c{c}\~ao.
+  \item do calor latente de condensa\c{c}\~ao e do calor latente de
+        vaporiza\c{c}\~ao.
+\end{enumerate}
+\end{questao}
+
+\begin{questao}{5}{\fonte{ENEM 2020 \,\textperiodcentered\, caderno amarelo \,\textperiodcentered\, Q101}}
+Mesmo para peixes de aqu\'ario, como o peixe arco-\'iris, a temperatura da
+\'agua fora da faixa ideal (26 $^\circ$C a 28 $^\circ$C), bem como sua
+varia\c{c}\~ao brusca, pode afetar a sa\'ude do animal. Para manter a
+temperatura da \'agua dentro do aqu\'ario na m\'edia desejada, utilizam-se
+dispositivos de aquecimento com termostato. Por exemplo, para um aqu\'ario
+de 50 L, pode-se utilizar um sistema de aquecimento de 50 W otimizado
+para suprir sua taxa de resfriamento. Essa taxa pode ser considerada
+praticamente constante, j\'a que a temperatura externa ao aqu\'ario \'e
+mantida pelas estufas. Utilize para a \'agua o calor espec\'ifico
+4,0 kJ$\cdot$kg$^{-1}\cdot$K$^{-1}$ e a densidade 1 kg$\cdot$L$^{-1}$.
+
+Se o sistema de aquecimento for desligado por 1 h, qual o valor mais
+pr\'oximo para a redu\c{c}\~ao da temperatura da \'agua do aqu\'ario?
+\begin{enumerate}
+  \item 4,0 $^\circ$C
+  \item 3,6 $^\circ$C
+  \item 0,9 $^\circ$C
+  \item 0,6 $^\circ$C
+  \item 0,3 $^\circ$C
+\end{enumerate}
+\end{questao}
+
+
+% ===================================================================
+\parte{Trabalho e Energia}
+% ===================================================================
+
+\begin{questao}{6}{\fonte{ENEM 2007 \,\textperiodcentered\, prova amarela \,\textperiodcentered\, Q57}}
+\figuraoriginal{0.8\linewidth}{q2007_057_mochila}
+
+Com o projeto de mochila ilustrado acima, pretende-se aproveitar, na
+gera\c{c}\~ao de energia el\'etrica para acionar dispositivos eletr\^onicos
+port\'ateis, parte da energia desperdi\c{c}ada no ato de caminhar. As
+transforma\c{c}\~oes de energia envolvidas na produ\c{c}\~ao de eletricidade
+enquanto uma pessoa caminha com essa mochila podem ser assim
+esquematizadas:
+
+\figuraoriginal{0.5\linewidth}{q2007_057_esquema}
+
+As energias I e II, representadas no esquema acima, podem ser
+identificadas, respectivamente, como
+\begin{enumerate}
+  \item cin\'etica e el\'etrica.
+  \item t\'ermica e cin\'etica.
+  \item t\'ermica e el\'etrica.
+  \item sonora e t\'ermica.
+  \item radiante e el\'etrica.
+\end{enumerate}
+\end{questao}
+
+
+% ===================================================================
+\parte{Leis de Newton}
+% ===================================================================
+
+\begin{questao}{7}{\fonte{ENEM 2023 \,\textperiodcentered\, caderno amarelo \,\textperiodcentered\, Q130}}
+Uma equipe de seguran\c{c}a do transporte de uma empresa avalia o
+comportamento das tens\~oes que aparecem em duas cordas, 1 e 2, usadas para
+prender uma carga de massa $M = 200$ kg na carroceria, conforme a
+ilustra\c{c}\~ao. Quando o caminh\~ao parte do repouso, sua acelera\c{c}\~ao \'e
+constante e igual a 3 m/s$^2$ e, quando ele \'e freado bruscamente, sua
+frenagem \'e constante e igual a 5 m/s$^2$. Em ambas as situa\c{c}\~oes, a
+carga encontra-se na imin\^encia de movimento, e o sentido do movimento do
+caminh\~ao est\'a indicado na figura. O coeficiente de atrito est\'atico entre
+a caixa e o assoalho da carroceria \'e igual a 0,2. Considere a acelera\c{c}\~ao
+da gravidade igual a 10 m/s$^2$, as tens\~oes iniciais nas cordas iguais a
+zero e as duas cordas ideais.
+
+\figuraoriginal{0.62\linewidth}{q2023_130_caminhao}
+
+Nas situa\c{c}\~oes de acelera\c{c}\~ao e frenagem do caminh\~ao, as tens\~oes nas
+cordas 1 e 2, em newton, ser\~ao
+\begin{enumerate}
+  \item acelera\c{c}\~ao: $T_1 = 0$ e $T_2 = 200$; frenagem: $T_1 = 600$ e
+        $T_2 = 0$.
+  \item acelera\c{c}\~ao: $T_1 = 0$ e $T_2 = 200$; frenagem: $T_1 = 1\,400$ e
+        $T_2 = 0$.
+  \item acelera\c{c}\~ao: $T_1 = 0$ e $T_2 = 600$; frenagem: $T_1 = 600$ e
+        $T_2 = 0$.
+  \item acelera\c{c}\~ao: $T_1 = 560$ e $T_2 = 0$; frenagem: $T_1 = 0$ e
+        $T_2 = 960$.
+  \item acelera\c{c}\~ao: $T_1 = 640$ e $T_2 = 0$; frenagem: $T_1 = 0$ e
+        $T_2 = 1\,040$.
+\end{enumerate}
+\end{questao}
+
+% ===================================================================
+\newpage
+\parte{Gabarito}
+% ===================================================================
+
+\begin{center}
+{\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{ccccccc}
+  \toprule
+  1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+  \midrule
+  E & C & C & D & C & A & A \\
+  \bottomrule
+\end{tabular}}
+\end{center}
+\end{document}
